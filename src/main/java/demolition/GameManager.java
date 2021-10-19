@@ -49,7 +49,12 @@ public class GameManager extends App{
     }
 
     public void goToGameOver(){
-        
+
+    }
+
+    public void goToWin(){
+        if (this.currentLevelIndex == levels.size()){
+        }
     }
 
     public boolean hasWon(){
