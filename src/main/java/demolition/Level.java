@@ -2,6 +2,8 @@ package demolition;
 
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.min;
+
 import jogamp.nativewindow.NativeWindowFactoryImpl;
 
 import java.util.ArrayList;
@@ -104,11 +106,31 @@ public class Level {
         GameObjects.addAll(solidWalls);
         GameObjects.addAll(brokenWalls);
         GameObjects.add(goal);
-        GameObjects.addAll(bombs);
-        GameObjects.addAll(enemies);
         GameObjects.addAll(explosionTiles);
-        GameObjects.add(player);
+        GameObjects.addAll(bombs);
         
+        List<GameObject> sorted = new ArrayList<GameObject>();
+        sorted.addAll(enemies);
+        sorted.add(player);
+        
+        int minIndex = 0;
+        int minY = 1000; 
+        while (sorted.size() > 0) {
+            // Find the object with the smallest y;
+            for (int i = 0; i < sorted.size(); i++){
+                GameObject current = sorted.get(i);
+                if (current.yPos < minY){
+                    System.out.println("MIN found");
+                    minY = current.yPos;
+                    minIndex = i;
+                }
+            }
+            GameObjects.add(sorted.get(minIndex));
+            sorted.remove(minIndex);
+            minY = 1000;
+        }
+        
+
         return GameObjects;
     }
 
