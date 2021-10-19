@@ -39,10 +39,17 @@ public class GameManager extends App{
             System.out.println("WON!");
             this.toNextLevel();
         }
-        if (this.currentLevel.getPlayer().collideWithEnemy()){
+
+        Player player = this.currentLevel.getPlayer();
+        if (player.collideWithEnemy() || player.collideWithExplosion()){
             currentLevel.reset();
+            player.setLives(player.getLives()-1);
         }
         removeBrokenWalls();
+    }
+
+    public void goToGameOver(){
+        
     }
 
     public boolean hasWon(){

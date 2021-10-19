@@ -38,15 +38,12 @@ public class Player extends DirectionalObject implements Movable {
         this.lives = lives;
     }
 
+    public int getLives(){
+        return this.lives;
+    }
+
     @Override
     public void tick(int currentTime) {
-
-        if (collideWithEnemy() || collideWithExplosion()) { 
-            this.lives--;
-            System.out.println("You lost a life!");
-            // INSERT automatic restart here
-        }
-
         // Animate the object
         if (currentTime >= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){
             justChangedDirection = false;
