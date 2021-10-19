@@ -2,6 +2,8 @@ package demolition;
 
 import java.util.List;
 
+import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
+
 import org.checkerframework.checker.units.qual.min;
 
 import jogamp.nativewindow.NativeWindowFactoryImpl;
@@ -134,7 +136,27 @@ public class Level {
         return GameObjects;
     }
 
+    public boolean reset(){
+        List<Enemy> enemies = this.enemies;
+        for(Enemy e: enemies){
+            e.isRemoved = false;
+            e.xPos = e.xStarting;
+            e.yPos = e.yStarting;
+        }
 
+        List<BrokenWall> brokenWalls = this.brokenWalls;
+        for(BrokenWall w: brokenWalls){
+            w.isRemoved = false;
+        }
+
+        this.explosionTiles.clear();
+        this.bombs.clear();
+
+        player.xPos = player.getXStarting();
+        player.yPos = player.getYStarting();
+        player.currentAnimation = player.animations.get(Direction.DOWN);
+        return true;
+    }
 
     //public List <Explosion> getExplosions(){}
 }

@@ -39,6 +39,9 @@ public class GameManager extends App{
             System.out.println("WON!");
             this.toNextLevel();
         }
+        if (this.currentLevel.getPlayer().collideWithEnemy()){
+            currentLevel.reset();
+        }
         removeBrokenWalls();
     }
 

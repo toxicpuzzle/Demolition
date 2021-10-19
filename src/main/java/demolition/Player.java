@@ -8,17 +8,26 @@ public class Player extends DirectionalObject implements Movable {
 
     private static int yHeadOffset = 16;
     private int lives;
+    private int xStarting;
+    private int yStarting;
    
-    
     public Player(int lives, int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
         this.lives = lives;
         this.width = 32; // WARNING: Hard code
         this.height = 32;
+        this.xStarting = x;
+        this.yStarting = y;
         // Need to find a way to load all of the animations in
     }
 
-    
+    public int getXStarting(){
+        return this.xStarting;
+    }
+
+    public int getYStarting(){
+        return this.yStarting;
+    }
 
     @Override
     public void draw(PApplet app) {

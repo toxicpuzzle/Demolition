@@ -9,10 +9,14 @@ public abstract class Enemy extends DirectionalObject implements Movable {
     
     protected int lastWalked;
     protected boolean justChangedDirection;
-    protected static int yHeadOffset = 16;
+    protected int yHeadOffset = 16;
+    protected int yStarting;
+    protected int xStarting;
 
     public Enemy(int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
+        this.yStarting = y;
+        this.xStarting = x;
         this.width = 32; // WARNING: Hard code
         this.height = 32;
         // Need to find a way to load all of the animations in
