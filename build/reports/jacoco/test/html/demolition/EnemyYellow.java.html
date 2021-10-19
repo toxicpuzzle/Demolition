@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EnemyYellow.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">EnemyYellow.java</span></div><h1>EnemyYellow.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.HashMap;
+
+public class EnemyYellow extends Enemy {
+
+    
+
+    public EnemyYellow(int x, int y, HashMap&lt;Direction, Animation&gt; animations) {
+<span class="fc" id="L10">        super(x, y, animations);</span>
+<span class="fc" id="L11">    }</span>
+
+    public void walk(){
+        // keep trying random direction until clear path opens up and animation updates
+<span class="fc" id="L15">        int oldX = this.xPos;</span>
+<span class="fc" id="L16">        int oldY = this.yPos;</span>
+<span class="fc" id="L17">        Direction oldDirection = this.direction;</span>
+
+<span class="pc bpc" id="L19" title="4 of 5 branches missed.">        switch(direction){</span>
+            case DOWN: 
+<span class="fc" id="L21">                this.yPos += 32;</span>
+<span class="fc" id="L22">                break;</span>
+            case UP: 
+<span class="nc" id="L24">                this.yPos -= 32;</span>
+<span class="nc" id="L25">                break;</span>
+            case LEFT: 
+<span class="nc" id="L27">                this.xPos -= 32;</span>
+<span class="nc" id="L28">                break;</span>
+            case RIGHT:
+<span class="nc" id="L30">                this.xPos += 32;</span>
+                break; 
+        }
+
+        // TODO: Change it so that this only checks collision with tiles and not hard bodies such as the player -&gt; temp fix
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (collideWithSolid()){</span>
+<span class="nc" id="L36">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="nc" id="L37">            Direction clockDirection = direction.clockwise();</span>
+<span class="nc" id="L38">            this.direction = clockDirection;</span>
+<span class="nc" id="L39">            justChangedDirection = true;</span>
+<span class="nc" id="L40">            walk();</span>
+<span class="nc" id="L41">        } else {</span>
+<span class="fc" id="L42">            updateCurrentAnimation();</span>
+<span class="fc" id="L43">            return;</span>
+        }
+<span class="nc" id="L45">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

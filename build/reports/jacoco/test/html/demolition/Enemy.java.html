@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Enemy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Enemy.java</span></div><h1>Enemy.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.HashMap;
+import java.util.List;
+import processing.core.PApplet;
+
+public abstract class Enemy extends DirectionalObject implements Movable {
+
+    
+    protected int lastWalked;
+    protected boolean justChangedDirection;
+<span class="fc" id="L12">    protected static int yHeadOffset = 16;</span>
+
+    public Enemy(int x, int y, HashMap&lt;Direction, Animation&gt; animations){
+<span class="fc" id="L15">        super(x, y, animations);</span>
+<span class="fc" id="L16">        this.width = 32; // WARNING: Hard code</span>
+<span class="fc" id="L17">        this.height = 32;</span>
+        // Need to find a way to load all of the animations in
+<span class="fc" id="L19">    }</span>
+    @Override
+    
+    public void draw(PApplet app) {
+<span class="fc" id="L23">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
+<span class="fc" id="L24">    }</span>
+
+    @Override
+    public void moveUp() {
+<span class="nc" id="L28">        this.yPos -= 32;</span>
+<span class="nc" id="L29">        this.direction = direction.UP;</span>
+<span class="nc" id="L30">        updateCurrentAnimation();</span>
+<span class="nc" id="L31">    }</span>
+
+    @Override
+    public void moveRight() {
+<span class="nc" id="L35">        this.xPos += 32;</span>
+<span class="nc" id="L36">        this.direction = direction.RIGHT;</span>
+<span class="nc" id="L37">        updateCurrentAnimation();</span>
+<span class="nc" id="L38">    }</span>
+
+    @Override
+    public void moveDown() {
+<span class="nc" id="L42">        this.yPos += 32;</span>
+<span class="nc" id="L43">        this.direction = direction.DOWN;</span>
+<span class="nc" id="L44">        updateCurrentAnimation();</span>
+<span class="nc" id="L45">    }</span>
+
+    @Override
+    public void moveLeft() {
+<span class="nc" id="L49">        this.xPos -= 32;</span>
+<span class="nc" id="L50">        this.direction = direction.LEFT;</span>
+<span class="nc" id="L51">        updateCurrentAnimation();</span>
+<span class="nc" id="L52">    }</span>
+
+    public abstract void walk();
+
+    public boolean collideWithExplosion() {
+<span class="fc" id="L57">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        for (ExplosionTile e: explosions){</span>
+<span class="nc bnc" id="L59" title="All 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="nc" id="L60">                return true;</span>
+            }
+<span class="nc" id="L62">        }</span>
+<span class="fc" id="L63">        return false;</span>
+    } 
+
+    @Override
+    public void tick(int currentTime) {
+        // Duplicate from player : try to refactor
+
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (collideWithExplosion()){</span>
+<span class="nc" id="L71">            this.isRemoved = true;</span>
+        }
+
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (currentTime &gt;= lastWalked + currentAnimation.getFrameDuration()*4){</span>
+<span class="fc" id="L75">            walk();</span>
+<span class="fc" id="L76">            lastWalked = currentTime;</span>
+        }
+
+<span class="pc bpc" id="L79" title="1 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
+<span class="fc" id="L80">            justChangedDirection = false;</span>
+<span class="fc" id="L81">            this.currentFrame = currentAnimation.getNextFrame();</span>
+<span class="fc" id="L82">            lastDisplayedTime = currentTime;</span>
+        }
+
+        
+        
+<span class="fc" id="L87">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

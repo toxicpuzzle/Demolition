@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Sprites.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Sprites.java</span></div><h1>Sprites.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+// Factory enum for all sprites
+<span class="fc" id="L11">public enum Sprites {</span>
+<span class="fc" id="L12">    PLAYER {</span>
+        public Player make(int x, int y, PApplet app) {
+
+            // TODO: Consider loading all of the images during the setup() function of hte app.java file
+<span class="fc" id="L16">            HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+
+            // TODO: Could use some kind of loop to make this shorter but leave for now
+<span class="fc" id="L19">            List&lt;PImage&gt; leftFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L20">            PImage left1 = app.loadImage(&quot;src/main/resources/player/player_left1.png&quot;);</span>
+<span class="fc" id="L21">            PImage left2 = app.loadImage(&quot;src/main/resources/player/player_left2.png&quot;);</span>
+<span class="fc" id="L22">            PImage left3 = app.loadImage(&quot;src/main/resources/player/player_left3.png&quot;);</span>
+<span class="fc" id="L23">            PImage left4 = app.loadImage(&quot;src/main/resources/player/player_left4.png&quot;);</span>
+<span class="fc" id="L24">            leftFrames.add(left1);</span>
+<span class="fc" id="L25">            leftFrames.add(left2);</span>
+<span class="fc" id="L26">            leftFrames.add(left3);</span>
+<span class="fc" id="L27">            leftFrames.add(left4);</span>
+<span class="fc" id="L28">            Animation leftAnimation = new Animation(leftFrames, 4, 200);</span>
+
+<span class="fc" id="L30">            List&lt;PImage&gt; rightFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L31">            PImage right1 = app.loadImage(&quot;src/main/resources/player/player_right1.png&quot;);</span>
+<span class="fc" id="L32">            PImage right2 = app.loadImage(&quot;src/main/resources/player/player_right2.png&quot;);</span>
+<span class="fc" id="L33">            PImage right3 = app.loadImage(&quot;src/main/resources/player/player_right3.png&quot;);</span>
+<span class="fc" id="L34">            PImage right4 = app.loadImage(&quot;src/main/resources/player/player_right4.png&quot;);</span>
+<span class="fc" id="L35">            rightFrames.add(right1);</span>
+<span class="fc" id="L36">            rightFrames.add(right2);</span>
+<span class="fc" id="L37">            rightFrames.add(right3);</span>
+<span class="fc" id="L38">            rightFrames.add(right4);</span>
+<span class="fc" id="L39">            Animation rightAnimation = new Animation(rightFrames, 4, 200);</span>
+
+<span class="fc" id="L41">            List&lt;PImage&gt; upFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L42">            PImage up1 = app.loadImage(&quot;src/main/resources/player/player_up1.png&quot;);</span>
+<span class="fc" id="L43">            PImage up2 = app.loadImage(&quot;src/main/resources/player/player_up2.png&quot;);</span>
+<span class="fc" id="L44">            PImage up3 = app.loadImage(&quot;src/main/resources/player/player_up3.png&quot;);</span>
+<span class="fc" id="L45">            PImage up4 = app.loadImage(&quot;src/main/resources/player/player_up4.png&quot;);</span>
+<span class="fc" id="L46">            upFrames.add(up1);</span>
+<span class="fc" id="L47">            upFrames.add(up2);</span>
+<span class="fc" id="L48">            upFrames.add(up3);</span>
+<span class="fc" id="L49">            upFrames.add(up4);</span>
+<span class="fc" id="L50">            Animation upAnimation = new Animation(upFrames, 4, 200);</span>
+
+<span class="fc" id="L52">            List&lt;PImage&gt; downFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L53">            PImage down1 = app.loadImage(&quot;src/main/resources/player/player1.png&quot;);</span>
+<span class="fc" id="L54">            PImage down2 = app.loadImage(&quot;src/main/resources/player/player2.png&quot;);</span>
+<span class="fc" id="L55">            PImage down3 = app.loadImage(&quot;src/main/resources/player/player3.png&quot;);</span>
+<span class="fc" id="L56">            PImage down4 = app.loadImage(&quot;src/main/resources/player/player4.png&quot;);</span>
+<span class="fc" id="L57">            downFrames.add(down1);</span>
+<span class="fc" id="L58">            downFrames.add(down2);</span>
+<span class="fc" id="L59">            downFrames.add(down3);</span>
+<span class="fc" id="L60">            downFrames.add(down4);</span>
+<span class="fc" id="L61">            Animation downAnimation = new Animation(downFrames, 4, 200);</span>
+
+<span class="fc" id="L63">            animations.put(Direction.DOWN, downAnimation);</span>
+<span class="fc" id="L64">            animations.put(Direction.UP, upAnimation);</span>
+<span class="fc" id="L65">            animations.put(Direction.LEFT, leftAnimation);</span>
+<span class="fc" id="L66">            animations.put(Direction.RIGHT, rightAnimation);</span>
+            
+            // NOTE: x, and y are adjusted to reflect player's head going above cell
+<span class="fc" id="L69">            Player player = new Player(10, x, y, animations); //TODO: Change lives after making. </span>
+<span class="fc" id="L70">            return player;</span>
+        }
+    },
+<span class="fc" id="L73">    WALL_SOLID{</span>
+        public SolidWall make(int x, int y, PApplet app) {
+<span class="fc" id="L75">            PImage tileImage = app.loadImage(&quot;src/main/resources/wall/solid.png&quot;);</span>
+<span class="fc" id="L76">            SolidWall tile = new SolidWall(x, y, tileImage);</span>
+<span class="fc" id="L77">            return tile;</span>
+        }
+    },
+<span class="fc" id="L80">    WALL_BROKEN{</span>
+        public BrokenWall make(int x, int y, PApplet app) {
+<span class="fc" id="L82">            PImage tileImage = app.loadImage(&quot;src/main/resources/broken/broken.png&quot;);</span>
+<span class="fc" id="L83">            BrokenWall tile = new BrokenWall(x, y, tileImage);</span>
+<span class="fc" id="L84">            return tile;</span>
+        }
+    },
+<span class="fc" id="L87">    TILE_GOAL{</span>
+        public Goal make(int x, int y, PApplet app) {
+<span class="fc" id="L89">            PImage tileImage = app.loadImage(&quot;src/main/resources/goal/goal.png&quot;);</span>
+<span class="fc" id="L90">            Goal tile = new Goal(x, y, tileImage);</span>
+<span class="fc" id="L91">            return tile;</span>
+        }
+    },
+<span class="fc" id="L94">    TILE_EMPTY{</span>
+        public Empty make(int x, int y, PApplet app) {
+<span class="fc" id="L96">            PImage tileImage = app.loadImage(&quot;src/main/resources/empty/empty.png&quot;);</span>
+<span class="fc" id="L97">            Empty tile = new Empty(x, y, tileImage);</span>
+<span class="fc" id="L98">            return tile;</span>
+        }
+    },
+
+    // Dummies for now
+<span class="fc" id="L103">    ENEMY_YELLOW{</span>
+        public EnemyYellow make(int x, int y, PApplet app) {
+<span class="fc" id="L105">            HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+
+            // TODO: Could use some kind of loop to make this shorter but leave for now
+<span class="fc" id="L108">            List&lt;PImage&gt; leftFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L109">            PImage left1 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left1.png&quot;);</span>
+<span class="fc" id="L110">            PImage left2 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left2.png&quot;);</span>
+<span class="fc" id="L111">            PImage left3 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left3.png&quot;);</span>
+<span class="fc" id="L112">            PImage left4 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left4.png&quot;);</span>
+<span class="fc" id="L113">            leftFrames.add(left1);</span>
+<span class="fc" id="L114">            leftFrames.add(left2);</span>
+<span class="fc" id="L115">            leftFrames.add(left3);</span>
+<span class="fc" id="L116">            leftFrames.add(left4);</span>
+<span class="fc" id="L117">            Animation leftAnimation = new Animation(leftFrames, 4, 200);</span>
+
+<span class="fc" id="L119">            List&lt;PImage&gt; rightFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L120">            PImage right1 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right1.png&quot;);</span>
+<span class="fc" id="L121">            PImage right2 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right2.png&quot;);</span>
+<span class="fc" id="L122">            PImage right3 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right3.png&quot;);</span>
+<span class="fc" id="L123">            PImage right4 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right4.png&quot;);</span>
+<span class="fc" id="L124">            rightFrames.add(right1);</span>
+<span class="fc" id="L125">            rightFrames.add(right2);</span>
+<span class="fc" id="L126">            rightFrames.add(right3);</span>
+<span class="fc" id="L127">            rightFrames.add(right4);</span>
+<span class="fc" id="L128">            Animation rightAnimation = new Animation(rightFrames, 4, 200);</span>
+
+<span class="fc" id="L130">            List&lt;PImage&gt; upFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L131">            PImage up1 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up1.png&quot;);</span>
+<span class="fc" id="L132">            PImage up2 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up2.png&quot;);</span>
+<span class="fc" id="L133">            PImage up3 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up3.png&quot;);</span>
+<span class="fc" id="L134">            PImage up4 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up4.png&quot;);</span>
+<span class="fc" id="L135">            upFrames.add(up1);</span>
+<span class="fc" id="L136">            upFrames.add(up2);</span>
+<span class="fc" id="L137">            upFrames.add(up3);</span>
+<span class="fc" id="L138">            upFrames.add(up4);</span>
+<span class="fc" id="L139">            Animation upAnimation = new Animation(upFrames, 4, 200);</span>
+
+<span class="fc" id="L141">            List&lt;PImage&gt; downFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L142">            PImage down1 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down1.png&quot;);</span>
+<span class="fc" id="L143">            PImage down2 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down2.png&quot;);</span>
+<span class="fc" id="L144">            PImage down3 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down3.png&quot;);</span>
+<span class="fc" id="L145">            PImage down4 = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down4.png&quot;);</span>
+<span class="fc" id="L146">            downFrames.add(down1);</span>
+<span class="fc" id="L147">            downFrames.add(down2);</span>
+<span class="fc" id="L148">            downFrames.add(down3);</span>
+<span class="fc" id="L149">            downFrames.add(down4);</span>
+<span class="fc" id="L150">            Animation downAnimation = new Animation(downFrames, 4, 200);</span>
+
+<span class="fc" id="L152">            animations.put(Direction.DOWN, downAnimation);</span>
+<span class="fc" id="L153">            animations.put(Direction.UP, upAnimation);</span>
+<span class="fc" id="L154">            animations.put(Direction.LEFT, leftAnimation);</span>
+<span class="fc" id="L155">            animations.put(Direction.RIGHT, rightAnimation);</span>
+<span class="fc" id="L156">            EnemyYellow e = new EnemyYellow(x, y, animations);</span>
+<span class="fc" id="L157">            return e;</span>
+        }
+    },
+<span class="fc" id="L160">    ENEMY_RED{</span>
+        public Enemy make(int x, int y, PApplet app) {
+<span class="fc" id="L162">            HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+
+            // TODO: Could use some kind of loop to make this shorter but leave for now
+<span class="fc" id="L165">            List&lt;PImage&gt; leftFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L166">            PImage left1 = app.loadImage(&quot;src/main/resources/red_enemy/red_left1.png&quot;);</span>
+<span class="fc" id="L167">            PImage left2 = app.loadImage(&quot;src/main/resources/red_enemy/red_left2.png&quot;);</span>
+<span class="fc" id="L168">            PImage left3 = app.loadImage(&quot;src/main/resources/red_enemy/red_left3.png&quot;);</span>
+<span class="fc" id="L169">            PImage left4 = app.loadImage(&quot;src/main/resources/red_enemy/red_left4.png&quot;);</span>
+<span class="fc" id="L170">            leftFrames.add(left1);</span>
+<span class="fc" id="L171">            leftFrames.add(left2);</span>
+<span class="fc" id="L172">            leftFrames.add(left3);</span>
+<span class="fc" id="L173">            leftFrames.add(left4);</span>
+<span class="fc" id="L174">            Animation leftAnimation = new Animation(leftFrames, 4, 200);</span>
+
+<span class="fc" id="L176">            List&lt;PImage&gt; rightFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L177">            PImage right1 = app.loadImage(&quot;src/main/resources/red_enemy/red_right1.png&quot;);</span>
+<span class="fc" id="L178">            PImage right2 = app.loadImage(&quot;src/main/resources/red_enemy/red_right2.png&quot;);</span>
+<span class="fc" id="L179">            PImage right3 = app.loadImage(&quot;src/main/resources/red_enemy/red_right3.png&quot;);</span>
+<span class="fc" id="L180">            PImage right4 = app.loadImage(&quot;src/main/resources/red_enemy/red_right4.png&quot;);</span>
+<span class="fc" id="L181">            rightFrames.add(right1);</span>
+<span class="fc" id="L182">            rightFrames.add(right2);</span>
+<span class="fc" id="L183">            rightFrames.add(right3);</span>
+<span class="fc" id="L184">            rightFrames.add(right4);</span>
+<span class="fc" id="L185">            Animation rightAnimation = new Animation(rightFrames, 4, 200);</span>
+
+<span class="fc" id="L187">            List&lt;PImage&gt; upFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L188">            PImage up1 = app.loadImage(&quot;src/main/resources/red_enemy/red_up1.png&quot;);</span>
+<span class="fc" id="L189">            PImage up2 = app.loadImage(&quot;src/main/resources/red_enemy/red_up2.png&quot;);</span>
+<span class="fc" id="L190">            PImage up3 = app.loadImage(&quot;src/main/resources/red_enemy/red_up3.png&quot;);</span>
+<span class="fc" id="L191">            PImage up4 = app.loadImage(&quot;src/main/resources/red_enemy/red_up4.png&quot;);</span>
+<span class="fc" id="L192">            upFrames.add(up1);</span>
+<span class="fc" id="L193">            upFrames.add(up2);</span>
+<span class="fc" id="L194">            upFrames.add(up3);</span>
+<span class="fc" id="L195">            upFrames.add(up4);</span>
+<span class="fc" id="L196">            Animation upAnimation = new Animation(upFrames, 4, 200);</span>
+
+<span class="fc" id="L198">            List&lt;PImage&gt; downFrames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L199">            PImage down1 = app.loadImage(&quot;src/main/resources/red_enemy/red_down1.png&quot;);</span>
+<span class="fc" id="L200">            PImage down2 = app.loadImage(&quot;src/main/resources/red_enemy/red_down2.png&quot;);</span>
+<span class="fc" id="L201">            PImage down3 = app.loadImage(&quot;src/main/resources/red_enemy/red_down3.png&quot;);</span>
+<span class="fc" id="L202">            PImage down4 = app.loadImage(&quot;src/main/resources/red_enemy/red_down4.png&quot;);</span>
+<span class="fc" id="L203">            downFrames.add(down1);</span>
+<span class="fc" id="L204">            downFrames.add(down2);</span>
+<span class="fc" id="L205">            downFrames.add(down3);</span>
+<span class="fc" id="L206">            downFrames.add(down4);</span>
+<span class="fc" id="L207">            Animation downAnimation = new Animation(downFrames, 4, 200);</span>
+
+<span class="fc" id="L209">            animations.put(Direction.DOWN, downAnimation);</span>
+<span class="fc" id="L210">            animations.put(Direction.UP, upAnimation);</span>
+<span class="fc" id="L211">            animations.put(Direction.LEFT, leftAnimation);</span>
+<span class="fc" id="L212">            animations.put(Direction.RIGHT, rightAnimation);</span>
+<span class="fc" id="L213">            EnemyRed e = new EnemyRed(x, y, animations);</span>
+<span class="fc" id="L214">            return e;</span>
+        }
+<span class="fc" id="L216">    }, BOMB {</span>
+        @Override
+        public Bomb make(int x, int y, PApplet app) {
+<span class="fc" id="L219">            HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+
+            // TODO: Could use some kind of loop to make this shorter but leave for now
+<span class="fc" id="L222">            List&lt;PImage&gt; frames = new ArrayList&lt;PImage&gt;();</span>
+<span class="fc" id="L223">            PImage frame1 = app.loadImage(&quot;src/main/resources/bomb/bomb1.png&quot;);</span>
+<span class="fc" id="L224">            PImage frame2 = app.loadImage(&quot;src/main/resources/bomb/bomb2.png&quot;);</span>
+<span class="fc" id="L225">            PImage frame3 = app.loadImage(&quot;src/main/resources/bomb/bomb3.png&quot;);</span>
+<span class="fc" id="L226">            PImage frame4 = app.loadImage(&quot;src/main/resources/bomb/bomb4.png&quot;);</span>
+<span class="fc" id="L227">            PImage frame5 = app.loadImage(&quot;src/main/resources/bomb/bomb5.png&quot;);</span>
+<span class="fc" id="L228">            PImage frame6 = app.loadImage(&quot;src/main/resources/bomb/bomb6.png&quot;);</span>
+<span class="fc" id="L229">            PImage frame7 = app.loadImage(&quot;src/main/resources/bomb/bomb7.png&quot;);</span>
+<span class="fc" id="L230">            PImage frame8 = app.loadImage(&quot;src/main/resources/bomb/bomb8.png&quot;);</span>
+<span class="fc" id="L231">            frames.add(frame1);</span>
+<span class="fc" id="L232">            frames.add(frame2);</span>
+<span class="fc" id="L233">            frames.add(frame3);</span>
+<span class="fc" id="L234">            frames.add(frame4);</span>
+<span class="fc" id="L235">            frames.add(frame5);</span>
+<span class="fc" id="L236">            frames.add(frame6);</span>
+<span class="fc" id="L237">            frames.add(frame7);</span>
+<span class="fc" id="L238">            frames.add(frame8);</span>
+<span class="fc" id="L239">            Animation detonate = new Animation(frames, 4, 250);</span>
+
+<span class="fc" id="L241">            animations.put(Direction.DOWN, detonate);</span>
+<span class="fc" id="L242">            Bomb b = new Bomb(x, y, animations, app.millis());</span>
+<span class="fc" id="L243">            return b;</span>
+        }
+<span class="fc" id="L245">    }, EXPLOSION_TOP{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L249">            PImage image = app.loadImage(&quot;src/main/resources/explosion/end_top.png&quot;);</span>
+<span class="nc" id="L250">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L251">            return tile;</span>
+        }
+        
+<span class="fc" id="L254">    }, EXPLOSION_BOTTOM{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L258">            PImage image = app.loadImage(&quot;src/main/resources/explosion/end_bottom.png&quot;);</span>
+<span class="nc" id="L259">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L260">            return tile;</span>
+        }
+
+<span class="fc" id="L263">    }, EXPLOSION_LEFT{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L267">            PImage image = app.loadImage(&quot;src/main/resources/explosion/end_left.png&quot;);</span>
+<span class="nc" id="L268">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L269">            return tile;</span>
+        }
+
+<span class="fc" id="L272">    }, EXPLOSION_RIGHT{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L276">            PImage image = app.loadImage(&quot;src/main/resources/explosion/end_right.png&quot;);</span>
+<span class="nc" id="L277">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L278">            return tile;</span>
+        }
+
+<span class="fc" id="L281">    }, EXPLOSION_HORIZONTAL{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L285">            PImage image = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
+<span class="nc" id="L286">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L287">            return tile;</span>
+        }
+
+<span class="fc" id="L290">    }, EXPLOSION_VERTICAL{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L294">            PImage image = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
+<span class="nc" id="L295">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L296">            return tile;</span>
+        }
+
+<span class="fc" id="L299">    }, EXPLOSION_CENTRE{</span>
+        @Override
+        public ExplosionTile make(int x, int y, PApplet app) {
+            // TODO Auto-generated method stub
+<span class="nc" id="L303">            PImage image = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
+<span class="nc" id="L304">            ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L305">            return tile;</span>
+        }
+    };
+
+    public abstract GameObject make(int x, int y, PApplet app);
+
+    public static GameObject makeByChar(char c, int x, int y, PApplet app){
+<span class="pc bpc" id="L312" title="1 of 8 branches missed.">        switch(c){</span>
+<span class="fc" id="L313">            case 'W' : return WALL_SOLID.make(x, y, app);</span>
+<span class="fc" id="L314">            case 'B' : return WALL_BROKEN.make(x, y, app);</span>
+<span class="fc" id="L315">            case ' ' : return TILE_EMPTY.make(x, y, app);</span>
+<span class="fc" id="L316">            case 'G' : return TILE_GOAL.make(x, y, app);</span>
+<span class="fc" id="L317">            case 'P' : return PLAYER.make(x, y, app);</span>
+<span class="fc" id="L318">            case 'Y' : return ENEMY_YELLOW.make(x, y, app);</span>
+<span class="fc" id="L319">            case 'R' : return ENEMY_RED.make(x, y, app);</span>
+        }
+<span class="nc" id="L321">        return TILE_EMPTY.make(x, y, app); // return empty tile if cannot find specified char</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

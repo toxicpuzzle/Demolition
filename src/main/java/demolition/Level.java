@@ -17,6 +17,7 @@ public class Level {
     private Goal goal;
     private Player player;
     private List<ExplosionTile> explosionTiles;
+    
     //Add bombs and explosions later
 
     public Level(){
@@ -120,7 +121,6 @@ public class Level {
             for (int i = 0; i < sorted.size(); i++){
                 GameObject current = sorted.get(i);
                 if (current.yPos < minY){
-                    System.out.println("MIN found");
                     minY = current.yPos;
                     minIndex = i;
                 }

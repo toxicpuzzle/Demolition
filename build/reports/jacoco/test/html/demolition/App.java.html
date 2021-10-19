@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package demolition;
+
+import processing.core.PApplet;
+import processing.event.KeyEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class App extends PApplet {
+
+    public static final int WIDTH = 480;
+    public static final int HEIGHT = 480;
+    public static final int FPS = 60;
+<span class="fc" id="L14">    public static String configFileName = &quot;config.json&quot;;</span>
+    // public int test;
+<span class="fc" id="L16">    public boolean alreadyPressed = false;</span>
+
+    public GameManager game;
+
+<span class="fc" id="L20">    public App() {</span>
+        
+<span class="fc" id="L22">    }</span>
+
+    public void settings() {
+<span class="fc" id="L25">        size(WIDTH, HEIGHT);</span>
+<span class="fc" id="L26">    }</span>
+
+    public void setup() {
+<span class="fc" id="L29">        frameRate(FPS); // Nullpointerexception when I try to run this in test suite, but works when I do gradle run</span>
+        // test = 2; // ERROR: You need to automati
+<span class="fc" id="L31">        this.game = new GameManager(Loader.loadAllFiles(this, configFileName));</span>
+        
+<span class="fc" id="L33">    }</span>
+
+    public void setConfig(String name){
+<span class="nc" id="L36">        configFileName = name;</span>
+<span class="nc" id="L37">    }</span>
+
+    public void draw() {
+<span class="fc" id="L40">        background(255, 200, 0);</span>
+<span class="fc" id="L41">        Level currentLevel = game.getCurrentLevel();</span>
+<span class="fc" id="L42">        int m = millis();</span>
+        
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for(GameObject object: currentLevel.getGameObjects()){</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">            if (!object.isRemoved){</span>
+<span class="fc" id="L46">                object.draw(this);</span>
+<span class="fc" id="L47">                object.tick(m);</span>
+            }   
+<span class="fc" id="L49">        }</span>
+
+<span class="fc" id="L51">        game.tick();</span>
+        
+        
+<span class="fc" id="L54">    }   </span>
+
+    @Override
+    public void keyReleased() {
+<span class="nc" id="L58">        alreadyPressed = false;</span>
+<span class="nc" id="L59">    }</span>
+
+    @Override
+    public void keyPressed() {
+<span class="nc" id="L63">        Level currentLevel = game.getCurrentLevel();</span>
+<span class="nc" id="L64">        Player p = currentLevel.getPlayer();</span>
+    
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!alreadyPressed){</span>
+<span class="nc bnc" id="L67" title="All 7 branches missed.">            switch (keyCode){</span>
+                case DOWN: 
+<span class="nc" id="L69">                    p.moveDown(); </span>
+<span class="nc" id="L70">                    break;</span>
+                case UP: 
+<span class="nc" id="L72">                    p.moveUp(); </span>
+<span class="nc" id="L73">                    break;</span>
+                case RIGHT: 
+<span class="nc" id="L75">                    p.moveRight(); </span>
+<span class="nc" id="L76">                    break;</span>
+                case LEFT: 
+<span class="nc" id="L78">                    p.moveLeft();    </span>
+<span class="nc" id="L79">                    break;</span>
+                case 32:
+<span class="nc" id="L81">                    p.placeBomb(this);</span>
+<span class="nc" id="L82">                    break;</span>
+                case ENTER:
+<span class="nc" id="L84">                    game.toNextLevel();</span>
+                    break;
+            }
+        }
+<span class="nc" id="L88">        alreadyPressed = true;</span>
+        
+<span class="nc" id="L90">    }</span>
+    public static void main(String[] args) {
+<span class="fc" id="L92">        PApplet.main(&quot;demolition.App&quot;);</span>
+<span class="fc" id="L93">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

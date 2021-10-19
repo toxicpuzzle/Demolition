@@ -18,11 +18,11 @@ public class Loader {
         // System.out.println(allLevels.size());
     }
 
-    public static List<Level> loadAllFiles(PApplet app){
+    public static List<Level> loadAllFiles(PApplet app, String configFileName){
         List<Level> allLevels = new ArrayList<Level>();
 
         // Get the config file
-        File f = new File("config.json"); //Issue with directories files -> Needs to refer to config file in the same folder
+        File f = new File(configFileName); //Issue with directories files -> Needs to refer to config file in the same folder
         Scanner scan;
         try{
             scan = new Scanner(f);

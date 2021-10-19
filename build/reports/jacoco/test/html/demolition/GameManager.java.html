@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">GameManager.java</span></div><h1>GameManager.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.List;;
+
+
+public class GameManager extends App{
+    private int currentLevelIndex;
+    private List&lt;Level&gt; levels;
+    // private Level currentLevelCopy;
+    private Level currentLevel;
+    private Level template;
+
+<span class="fc" id="L13">    public GameManager(List&lt;Level&gt; levels){</span>
+<span class="fc" id="L14">        this.levels = levels;</span>
+<span class="fc" id="L15">        this.currentLevelIndex = 0;</span>
+<span class="fc" id="L16">        this.currentLevel = levels.get(currentLevelIndex);</span>
+<span class="fc" id="L17">        this.template = currentLevel;</span>
+         //TODO: Implement copying mecahnism
+<span class="fc" id="L19">        setup();</span>
+<span class="fc" id="L20">    }</span>
+
+    public Level copyOf(Level level){
+<span class="nc" id="L23">        return null;</span>
+    }
+
+    public void removeBrokenWalls(){
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (GameObject object: currentLevel.getBrokenWalls()){</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            for (GameObject explosion: currentLevel.getExplosionTiles()){</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                if (object.collisionWith(explosion)){</span>
+                    // System.out.println(&quot;hit!&quot;);
+<span class="nc" id="L31">                    object.remove();</span>
+                }
+<span class="nc" id="L33">            }</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">    }</span>
+
+    public void tick() {
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (this.hasWon()){</span>
+<span class="nc" id="L39">            System.out.println(&quot;WON!&quot;);</span>
+<span class="nc" id="L40">            this.toNextLevel();</span>
+        }
+<span class="fc" id="L42">        removeBrokenWalls();</span>
+<span class="fc" id="L43">    }</span>
+
+    public boolean hasWon(){
+<span class="fc" id="L46">        Player p = currentLevel.getPlayer();</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (p.collisionWith(currentLevel.getGoal())){</span>
+<span class="nc" id="L48">            return true;</span>
+        }
+<span class="fc" id="L50">        return false;</span>
+    }
+
+    public boolean hasDied(){
+<span class="nc" id="L54">        return false;</span>
+    }
+
+    //Setup current/futurelevel level (Fully intialise enemies and players)
+    public void setup(){
+<span class="fc" id="L59">        List&lt;Enemy&gt; enemies = currentLevel.getEnemies();</span>
+<span class="fc" id="L60">        Player p = currentLevel.getPlayer();</span>
+        
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
+<span class="fc" id="L63">            e.setCurrentLevel(currentLevel);</span>
+<span class="fc" id="L64">        }</span>
+<span class="fc" id="L65">        p.setCurrentLevel(currentLevel);</span>
+<span class="fc" id="L66">    }</span>
+
+    public Level getCurrentLevel(){
+<span class="fc" id="L69">        return this.currentLevel;</span>
+    }
+
+    public void toNextLevel(){
+<span class="nc" id="L73">        this.currentLevelIndex++;</span>
+<span class="nc" id="L74">        this.currentLevel = levels.get(currentLevelIndex);</span>
+<span class="nc" id="L75">        setup();</span>
+<span class="nc" id="L76">    }</span>
+
+    public void restartLevel(){
+        // TODO: Find way to copy the start level
+<span class="nc" id="L80">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

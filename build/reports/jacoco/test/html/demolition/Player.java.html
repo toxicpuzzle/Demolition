@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Player.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Player.java</span></div><h1>Player.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.List;
+import processing.core.PApplet;
+import java.util.HashMap;
+
+public class Player extends DirectionalObject implements Movable {
+
+<span class="fc" id="L9">    private static int yHeadOffset = 16;</span>
+    private int lives;
+   
+    
+    public Player(int lives, int x, int y, HashMap&lt;Direction, Animation&gt; animations){
+<span class="fc" id="L14">        super(x, y, animations);</span>
+<span class="fc" id="L15">        this.lives = lives;</span>
+<span class="fc" id="L16">        this.width = 32; // WARNING: Hard code</span>
+<span class="fc" id="L17">        this.height = 32;</span>
+        // Need to find a way to load all of the animations in
+<span class="fc" id="L19">    }</span>
+
+    
+
+    @Override
+    public void draw(PApplet app) {
+<span class="fc" id="L25">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
+<span class="fc" id="L26">    }</span>
+
+    public void setLives(int lives){
+<span class="nc" id="L29">        this.lives = lives;</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public void tick(int currentTime) {
+
+<span class="pc bpc" id="L35" title="2 of 4 branches missed.">        if (collideWithEnemy() || collideWithExplosion()) { </span>
+<span class="nc" id="L36">            this.lives--;</span>
+<span class="nc" id="L37">            System.out.println(&quot;You lost a life!&quot;);</span>
+            // INSERT automatic restart here
+        }
+
+        // Animate the object
+<span class="pc bpc" id="L42" title="1 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
+<span class="fc" id="L43">            justChangedDirection = false;</span>
+<span class="fc" id="L44">            this.currentFrame = currentAnimation.getNextFrame();</span>
+<span class="fc" id="L45">            lastDisplayedTime = currentTime;</span>
+        } 
+<span class="fc" id="L47">    }</span>
+    
+    public boolean collideWithEnemy() {
+<span class="fc" id="L50">        List&lt;Enemy&gt; enemies = this.currentLevel.getEnemies();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
+<span class="pc bpc" id="L52" title="3 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="nc" id="L53">                return true;</span>
+            }
+<span class="fc" id="L55">        }</span>
+<span class="fc" id="L56">        return false;</span>
+    } 
+
+    public boolean collideWithExplosion() {
+<span class="fc" id="L60">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        for (ExplosionTile e: explosions){</span>
+<span class="nc bnc" id="L62" title="All 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="nc" id="L63">                return true;</span>
+            }
+<span class="nc" id="L65">        }</span>
+<span class="fc" id="L66">        return false;</span>
+    } 
+
+    public void placeBomb(PApplet app){
+<span class="nc" id="L70">        Bomb bomb = (Bomb) Sprites.BOMB.make(this.xPos, this.yPos, app);</span>
+<span class="nc" id="L71">        bomb.setCurrentLevel(this.currentLevel);</span>
+<span class="nc" id="L72">        bomb.setApp(app);</span>
+<span class="nc" id="L73">        currentLevel.addObject(bomb);</span>
+<span class="nc" id="L74">    }</span>
+    
+    @Override
+    public void moveUp() {
+<span class="nc" id="L78">        int oldY = this.yPos;</span>
+<span class="nc" id="L79">        int oldX = this.xPos;</span>
+<span class="nc" id="L80">        Direction oldDirection = this.direction;</span>
+        
+<span class="nc" id="L82">        this.yPos -= 32;</span>
+    
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (collideWithSolid()){</span>
+<span class="nc" id="L85">            resetPosition(oldX, oldY, oldDirection);</span>
+        } else {
+<span class="nc" id="L87">            this.direction = direction.UP;</span>
+<span class="nc" id="L88">            justChangedDirection = true;</span>
+        }
+
+<span class="nc" id="L91">        updateCurrentAnimation();</span>
+<span class="nc" id="L92">    }</span>
+
+    @Override
+    public void moveRight() {
+<span class="nc" id="L96">        int oldY = this.yPos;</span>
+<span class="nc" id="L97">        int oldX = this.xPos;</span>
+<span class="nc" id="L98">        Direction oldDirection = this.direction;</span>
+        
+<span class="nc" id="L100">        this.xPos += 32;</span>
+
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (collideWithSolid()){</span>
+<span class="nc" id="L103">            resetPosition(oldX, oldY, oldDirection);</span>
+        } else {
+<span class="nc" id="L105">            this.direction = direction.RIGHT;</span>
+<span class="nc" id="L106">            justChangedDirection = true;</span>
+        }
+
+<span class="nc" id="L109">        updateCurrentAnimation();</span>
+<span class="nc" id="L110">    }</span>
+
+    @Override
+    public void moveDown() {
+<span class="nc" id="L114">        int oldY = this.yPos;</span>
+<span class="nc" id="L115">        int oldX = this.xPos;</span>
+<span class="nc" id="L116">        Direction oldDirection = this.direction;</span>
+        
+<span class="nc" id="L118">        this.yPos += 32;</span>
+
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (collideWithSolid()){</span>
+<span class="nc" id="L121">            resetPosition(oldX, oldY, oldDirection);</span>
+        } else {
+<span class="nc" id="L123">            this.direction = direction.DOWN;</span>
+<span class="nc" id="L124">            justChangedDirection = true;</span>
+        }
+
+<span class="nc" id="L127">        updateCurrentAnimation();</span>
+<span class="nc" id="L128">    }</span>
+
+    @Override
+    public void moveLeft() {
+<span class="nc" id="L132">        int oldY = this.yPos;</span>
+<span class="nc" id="L133">        int oldX = this.xPos;</span>
+<span class="nc" id="L134">        Direction oldDirection = this.direction;</span>
+        
+<span class="nc" id="L136">        this.xPos -= 32;</span>
+<span class="nc" id="L137">        this.direction = direction.LEFT;</span>
+
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (collideWithSolid()) {</span>
+<span class="nc" id="L140">            resetPosition(oldX, oldY, oldDirection);</span>
+        } else {
+<span class="nc" id="L142">            justChangedDirection = true;</span>
+        }
+        
+<span class="nc" id="L145">        updateCurrentAnimation();</span>
+<span class="nc" id="L146">    }</span>
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

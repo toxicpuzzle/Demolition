@@ -11,6 +11,7 @@ public class App extends PApplet {
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
     public static final int FPS = 60;
+    public static String configFileName = "config.json";
     // public int test;
     public boolean alreadyPressed = false;
 
@@ -27,8 +28,12 @@ public class App extends PApplet {
     public void setup() {
         frameRate(FPS); // Nullpointerexception when I try to run this in test suite, but works when I do gradle run
         // test = 2; // ERROR: You need to automati
-        this.game = new GameManager(Loader.loadAllFiles(this));
+        this.game = new GameManager(Loader.loadAllFiles(this, configFileName));
         
+    }
+
+    public void setConfig(String name){
+        configFileName = name;
     }
 
     public void draw() {

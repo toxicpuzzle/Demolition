@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Explosion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Explosion.java</span></div><h1>Explosion.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.List;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+import java.util.ArrayList;
+
+public class Explosion{
+    private List&lt;ExplosionTile&gt; left;
+    private List&lt;ExplosionTile&gt; right;
+    private List&lt;ExplosionTile&gt; up;
+    private List&lt;ExplosionTile&gt; down;
+    private Level currentLevel;
+    private ExplosionTile centre;
+    private int explosionStart;
+
+    // New explosion will be made by the bomb class.
+    // NOTE: Explosion is a collection of explosiontiles
+    // NB: Pimage is dummy var to avoid nullpointer right now
+<span class="nc" id="L22">    public Explosion(int x, int y, Level level, PApplet app) {</span>
+<span class="nc" id="L23">        this.centre = (ExplosionTile) Sprites.EXPLOSION_CENTRE.make(x, y, app);</span>
+<span class="nc" id="L24">        this.left = new ArrayList&lt;ExplosionTile&gt;();</span>
+<span class="nc" id="L25">        this.right = new ArrayList&lt;ExplosionTile&gt;();</span>
+<span class="nc" id="L26">        this.up = new ArrayList&lt;ExplosionTile&gt;();</span>
+<span class="nc" id="L27">        this.down = new ArrayList&lt;ExplosionTile&gt;();</span>
+<span class="nc" id="L28">        this.currentLevel = level;</span>
+<span class="nc" id="L29">        centre.setCurrentLevel(this.currentLevel);</span>
+        
+        
+        //TODO: COde repetition here - Could make separate collission functions for different types of walls.
+        //Check if new tile collides, and check if broken tile. 
+
+        // Add the current level to all explosion tiles that were made
+<span class="nc" id="L36">        makeInDirection(Direction.LEFT, app);</span>
+<span class="nc" id="L37">        makeInDirection(Direction.RIGHT, app);</span>
+<span class="nc" id="L38">        makeInDirection(Direction.UP, app);</span>
+<span class="nc" id="L39">        makeInDirection(Direction.DOWN, app);</span>
+
+<span class="nc" id="L41">        this.explosionStart = app.millis(); </span>
+<span class="nc" id="L42">        this.setAllExplosionTimes();</span>
+<span class="nc" id="L43">        System.out.println(this.getExplosionTiles().size());</span>
+<span class="nc" id="L44">    }</span>
+
+    private void setAllExplosionTimes(){
+<span class="nc" id="L47">        List&lt;ExplosionTile&gt; tiles = new ArrayList&lt;ExplosionTile&gt;();</span>
+        
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (GameObject tile: this.getExplosionTiles()){</span>
+<span class="nc" id="L50">            tiles.add((ExplosionTile) tile);</span>
+<span class="nc" id="L51">        }</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        for (ExplosionTile tile: tiles){</span>
+<span class="nc" id="L53">            tile.setExplosionTime(this.explosionStart);</span>
+<span class="nc" id="L54">        }</span>
+<span class="nc" id="L55">    }</span>
+
+    // Helper function for constructor
+    private void makeInDirection(Direction direction, PApplet app){
+<span class="nc" id="L59">        int xCurrent = this.centre.getX();</span>
+<span class="nc" id="L60">        int yCurrent = this.centre.getY();</span>
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for (int i = 0; i &lt; 2; i++) {</span>
+<span class="nc" id="L63">            int xPrevious = xCurrent;</span>
+<span class="nc" id="L64">            int yPrevious = yCurrent;</span>
+            
+<span class="nc" id="L66">            ExplosionTile currentTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xCurrent, yCurrent, app);</span>
+            
+            //Add tile depending on direction
+<span class="nc bnc" id="L69" title="All 5 branches missed.">            switch(direction){</span>
+                case UP: 
+<span class="nc" id="L71">                    yCurrent -= 32;</span>
+<span class="nc" id="L72">                    currentTile = (ExplosionTile) Sprites.EXPLOSION_VERTICAL.make(xCurrent, yCurrent, app);</span>
+<span class="nc" id="L73">                    this.up.add(currentTile);</span>
+<span class="nc" id="L74">                    break;</span>
+                case DOWN: 
+<span class="nc" id="L76">                    yCurrent += 32;</span>
+<span class="nc" id="L77">                    currentTile = (ExplosionTile) Sprites.EXPLOSION_VERTICAL.make(xCurrent, yCurrent, app);</span>
+<span class="nc" id="L78">                    this.down.add(currentTile);</span>
+<span class="nc" id="L79">                    break;</span>
+                case LEFT: 
+<span class="nc" id="L81">                    xCurrent -= 32;</span>
+<span class="nc" id="L82">                    currentTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xCurrent, yCurrent, app);</span>
+<span class="nc" id="L83">                    this.left.add(currentTile);</span>
+<span class="nc" id="L84">                    break;</span>
+                case RIGHT: 
+<span class="nc" id="L86">                    xCurrent += 32;</span>
+<span class="nc" id="L87">                    currentTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xCurrent, yCurrent, app);</span>
+<span class="nc" id="L88">                    this.right.add(currentTile);</span>
+                    break;
+            }
+
+<span class="nc" id="L92">            currentTile.setCurrentLevel(currentLevel);</span>
+
+            // Remove the last two if this tile collides with any solid object, and add a endie tile (replaces previous tile)
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (currentTile.collideWithSolid()){</span>
+<span class="nc" id="L96">                currentTile.remove(); // TODO: Redundant, you're not even passing this to the attribute/list so this is not used</span>
+                // ExplosionTile endTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xPrevious, yPrevious, app);
+                // endTile.setCurrentLevel(currentLevel);
+                // switch(direction){
+                //     case UP: 
+
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_TOP.make(xPrevious, yPrevious, app);
+                        
+                //         if (up.size() == 1){
+                //             up.remove(0);
+                //         } else {
+                //             up.remove(up.size()-1);
+                //             up.remove(up.size()-1);
+                //             up.add(endTile);
+                //         }
+                //         break;
+                //     case DOWN: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_BOTTOM.make(xPrevious, yPrevious, app);
+                            
+                //         if (down.size() == 1){
+                //             down.remove(0);
+                //         } else {
+                //             down.remove(down.size()-1);
+                //             down.remove(down.size()-1);
+                //             down.add(endTile);
+                //         }
+                //         break;
+                //     case LEFT: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_LEFT.make(xPrevious, yPrevious, app);
+                            
+                //         if (left.size() == 1){
+                //             left.remove(0);
+                //         } else {
+                //             left.remove(left.size()-1);
+                //             left.remove(left.size()-1);
+                //             left.add(endTile);
+                //         }
+                //         break;
+                //     case RIGHT: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_RIGHT.make(xPrevious, yPrevious, app);
+                            
+                //         if (right.size() == 1){
+                //             right.remove(0);
+                //         } else {
+                //             right.remove(right.size()-1);
+                //             right.remove(right.size()-1);
+                //             right.add(endTile);
+                //         }
+                //         break;
+                //     } 
+<span class="nc" id="L146">                    break;</span>
+
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            } else if (currentTile.collideWithBroken()) {</span>
+                // System.out.println(&quot;borken&quot;);
+<span class="nc" id="L150">                break;</span>
+                // ExplosionTile endTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xPrevious, yPrevious, app);
+                // endTile.setCurrentLevel(currentLevel);
+                // switch(direction){
+                //     case UP: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_TOP.make(xPrevious, yPrevious, app);
+                //         if (up.size() == 1){
+                //             up.remove(0);
+                //         } else {
+                //             up.remove(up.size()-1);
+                //         }
+                //         up.add(endTile);
+                //         break;
+                //     case DOWN: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_BOTTOM.make(xPrevious, yPrevious, app);
+                //         if (down.size() == 1){
+                //             down.remove(0);
+                //         } else {
+                //             down.remove(down.size()-1);
+                //         }
+                //         down.add(endTile);
+                //         break;
+                //     case LEFT: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_LEFT.make(xPrevious, yPrevious, app);
+                //         if (left.size() == 1){
+                //             left.remove(0);
+                //         } else {
+                //             left.remove(left.size()-1);
+                //         }
+                //         left.add(endTile);
+                //         break;
+                //     case RIGHT: 
+                //         endTile = (ExplosionTile) Sprites.EXPLOSION_RIGHT.make(xPrevious, yPrevious, app);
+                //         if (right.size() == 1){
+                //             right.remove(0);
+                //         } else {
+                //             right.remove(right.size()-1);
+                //         }
+                //         right.add(endTile);
+                //         break;
+                //     } 
+                
+            }
+        } 
+<span class="nc" id="L194">    }</span>
+
+    public List&lt;GameObject&gt; getExplosionTiles(){
+<span class="nc" id="L197">        List&lt;GameObject&gt; gameObjects = new ArrayList&lt;GameObject&gt;();</span>
+<span class="nc" id="L198">        gameObjects.addAll(this.left);</span>
+<span class="nc" id="L199">        gameObjects.addAll(this.right);</span>
+<span class="nc" id="L200">        gameObjects.addAll(this.up);</span>
+<span class="nc" id="L201">        gameObjects.addAll(this.down);</span>
+<span class="nc" id="L202">        gameObjects.add(this.centre);</span>
+<span class="nc" id="L203">        return gameObjects;</span>
+    }
+
+    public void addAllExpTiles(){
+<span class="nc" id="L207">        List&lt;GameObject&gt; tiles = this.getExplosionTiles();</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        for (GameObject object: tiles){</span>
+<span class="nc" id="L209">            currentLevel.addObject(object);</span>
+<span class="nc" id="L210">        }</span>
+<span class="nc" id="L211">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
