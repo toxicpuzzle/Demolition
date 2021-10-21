@@ -10,6 +10,7 @@ import processing.core.PImage;
 // Factory enum for all sprites
 public enum Sprites {
     PLAYER {
+        //! Change from enum to factory class -> cant modify methods for each sprite type
         public Player make(int x, int y, PApplet app) {
 
             // TODO: Consider loading all of the images during the setup() function of hte app.java file
@@ -66,7 +67,7 @@ public enum Sprites {
             animations.put(Direction.RIGHT, rightAnimation);
             
             // NOTE: x, and y are adjusted to reflect player's head going above cell
-            Player player = new Player(10, x, y, animations); //TODO: Change lives after making. 
+            Player player = new Player(1, x, y, animations); //TODO: Change lives after making. 
             return player;
         }
     },

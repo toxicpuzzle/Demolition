@@ -1,13 +1,6 @@
 package demolition;
 
 import java.util.List;
-
-import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
-
-import org.checkerframework.checker.units.qual.min;
-
-import jogamp.nativewindow.NativeWindowFactoryImpl;
-
 import java.util.ArrayList;
 
 public class Level {
@@ -19,6 +12,7 @@ public class Level {
     private Goal goal;
     private Player player;
     private List<ExplosionTile> explosionTiles;
+    // TODO: Add time left to level object
     
     //Add bombs and explosions later
 
@@ -134,6 +128,17 @@ public class Level {
         
 
         return GameObjects;
+    }
+
+    public boolean removeAllObjects(){
+        List<GameObject> gameObjects = getGameObjects();
+        if (gameObjects == null || gameObjects.size() < 0){
+            return false;
+        }
+        for (GameObject object: gameObjects){
+            object.isRemoved = true;
+        }
+        return true;
     }
 
     public boolean reset(){

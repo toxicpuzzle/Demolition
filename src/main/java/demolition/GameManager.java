@@ -1,22 +1,27 @@
 package demolition;
 
-import java.util.List;;
-
-
+import java.util.List;
+import processing.core.PApplet;
+import processing.core.PFont;
 public class GameManager extends App{
     private int currentLevelIndex;
     private List<Level> levels;
-    // private Level currentLevelCopy;
+    private boolean won;
+    private boolean gameOver;
     private Level currentLevel;
-    private Level template;
 
     public GameManager(List<Level> levels){
         this.levels = levels;
         this.currentLevelIndex = 0;
         this.currentLevel = levels.get(currentLevelIndex);
-        this.template = currentLevel;
+        
          //TODO: Implement copying mecahnism
         setup();
+    }
+
+    // TODO: Add icons along with Papplet the ability to display the time and also lives for current player.
+    public boolean addIcons(Icon icons){
+        return true;
     }
 
     public Level copyOf(Level level){
@@ -36,7 +41,10 @@ public class GameManager extends App{
 
     public void tick() {
         if (this.hasWon()){
-            System.out.println("WON!");
+            if (currentLevelIndex == this.levels.size()-1){
+                goToWin();
+                return;
+            }
             this.toNextLevel();
         }
 
@@ -44,17 +52,22 @@ public class GameManager extends App{
         if (player.collideWithEnemy() || player.collideWithExplosion()){
             currentLevel.reset();
             player.setLives(player.getLives()-1);
+            if (player.getLives() <= 0){
+                goToGameOver();
+                return;
+            }
         }
         removeBrokenWalls();
     }
 
     public void goToGameOver(){
-
+        this.currentLevel.removeAllObjects();
+        this.gameOver = true;
     }
 
     public void goToWin(){
-        if (this.currentLevelIndex == levels.size()){
-        }
+        this.currentLevel.removeAllObjects();
+        this.won = true;
     }
 
     public boolean hasWon(){
@@ -65,6 +78,14 @@ public class GameManager extends App{
         return false;
     }
 
+    public boolean hasWonAll(){
+        return this.won;
+    }
+
+    public boolean hasGameOver(){
+        return this.gameOver;
+    }
+    
     public boolean hasDied(){
         return false;
     }

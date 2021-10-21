@@ -2,17 +2,15 @@ package demolition;
 
 import processing.core.PApplet;
 import processing.event.KeyEvent;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import processing.core.PFont;
 public class App extends PApplet {
 
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
     public static final int FPS = 60;
     public static String configFileName = "config.json";
-    // public int test;
     public boolean alreadyPressed = false;
 
     public GameManager game;
@@ -36,19 +34,34 @@ public class App extends PApplet {
         configFileName = name;
     }
 
+    public void drawText(String word, int x, int y, int size){
+        PFont text = createFont("src/main/resources/PressStart2P-Regular.ttf", 16);
+        textFont(text, size);
+        textAlign(CENTER);
+        fill(0,0,0);
+        text(word, x, y);
+    }
+
     public void draw() {
         background(255, 200, 0);
         Level currentLevel = game.getCurrentLevel();
         int m = millis();
         
-        for(GameObject object: currentLevel.getGameObjects()){
-            if (!object.isRemoved){
-                object.draw(this);
-                object.tick(m);
-            }   
+        if (!game.hasWonAll() && !game.hasGameOver()){
+            for(GameObject object: currentLevel.getGameObjects()){
+                if (!object.isRemoved){
+                    object.draw(this);
+                    object.tick(m);
+                }   
+            }
+            game.tick();
         }
-
-        game.tick();
+    
+        if (game.hasWonAll()){
+            drawText("YOU WON", width/2, height/2, 30);
+        } else if (game.hasGameOver()){
+            drawText("GAME OVER", width/2, height/2, 30);
+        }
         
         
     }   
@@ -79,9 +92,6 @@ public class App extends PApplet {
                     break;
                 case 32:
                     p.placeBomb(this);
-                    break;
-                case ENTER:
-                    game.toNextLevel();
                     break;
             }
         }
