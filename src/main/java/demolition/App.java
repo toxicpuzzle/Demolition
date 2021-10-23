@@ -5,6 +5,8 @@ import processing.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import processing.core.PFont;
+import processing.core.PImage;
+
 public class App extends PApplet {
 
     public static final int WIDTH = 480;
@@ -12,8 +14,10 @@ public class App extends PApplet {
     public static final int FPS = 60;
     public static String configFileName = "config.json";
     public boolean alreadyPressed = false;
-
     public GameManager game;
+    public PImage player;
+    public PImage timer;
+
 
     public App() {
         
@@ -24,10 +28,11 @@ public class App extends PApplet {
     }
 
     public void setup() {
-        frameRate(FPS); // Nullpointerexception when I try to run this in test suite, but works when I do gradle run
-        // test = 2; // ERROR: You need to automati
-        this.game = new GameManager(Loader.loadAllFiles(this, configFileName));
-        
+        frameRate(FPS); 
+        List<Level> levels = Loader.loadAllFiles(this, configFileName);
+        this.game = new GameManager(levels);
+        this.player = loadImage("src/main/resources/icons/player.png");
+        this.timer = loadImage("src/main/resources/icons/clock.png");
     }
 
     public void setConfig(String name){
@@ -43,7 +48,7 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        background(255, 200, 0);
+        background(255, 128, 0);
         Level currentLevel = game.getCurrentLevel();
         int m = millis();
         
@@ -54,6 +59,12 @@ public class App extends PApplet {
                     object.tick(m);
                 }   
             }
+
+            image(timer, 260, 18);
+            image(player, 100, 18);
+            drawText(String.valueOf(currentLevel.getTimeLeft()), 330, 45, 20);
+            drawText(String.valueOf(currentLevel.getPlayer().getLives()), 165, 45, 20);
+            currentLevel.tick(m);
             game.tick();
         }
     

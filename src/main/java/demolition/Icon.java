@@ -10,7 +10,7 @@ public class Icon extends GameObject {
 
     @Override
     public void tick(int currentTime) {
-        
+        return;
     }
     
 }

@@ -14,13 +14,12 @@ public class GameManager extends App{
         this.levels = levels;
         this.currentLevelIndex = 0;
         this.currentLevel = levels.get(currentLevelIndex);
-        
-         //TODO: Implement copying mecahnism
+
         setup();
     }
 
     // TODO: Add icons along with Papplet the ability to display the time and also lives for current player.
-    public boolean addIcons(Icon icons){
+    public boolean addIcons(Icon lives, Icon timer){
         return true;
     }
 
@@ -57,6 +56,11 @@ public class GameManager extends App{
                 return;
             }
         }
+
+        if (currentLevel.getTimeLeft() <= 0){
+            goToGameOver();
+        }
+
         removeBrokenWalls();
     }
 
@@ -107,12 +111,11 @@ public class GameManager extends App{
 
     public void toNextLevel(){
         this.currentLevelIndex++;
+        int lives = currentLevel.getPlayer().getLives();
         this.currentLevel = levels.get(currentLevelIndex);
+        currentLevel.getPlayer().setLives(lives);
         setup();
     }
 
-    public void restartLevel(){
-        // TODO: Find way to copy the start level
-    }
 
 }

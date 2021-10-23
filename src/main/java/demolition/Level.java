@@ -12,6 +12,8 @@ public class Level {
     private Goal goal;
     private Player player;
     private List<ExplosionTile> explosionTiles;
+    private int timeLeft;
+    private int lastDrawn;
     // TODO: Add time left to level object
     
     //Add bombs and explosions later
@@ -44,6 +46,24 @@ public class Level {
         } else if (object instanceof ExplosionTile){
             this.explosionTiles.add((ExplosionTile) object);
         }
+    }
+
+    public void setTimeLeft(int seconds){
+        this.timeLeft = seconds;
+    }
+
+    public int getTimeLeft(){
+        return this.timeLeft;
+    }
+
+    // Ensure player does not die after winning if timer lapses out
+    public int tick(int millis){
+        int oneSecond = 1000;
+        if (millis >= this.lastDrawn + oneSecond){
+            this.timeLeft -= 1;
+            this.lastDrawn = millis;
+        }
+        return this.timeLeft;
     }
 
     public GameObject getObjectAt(int x, int y){
@@ -163,33 +183,5 @@ public class Level {
         return true;
     }
 
-    //public List <Explosion> getExplosions(){}
 }
 
-// T = new type, K = old type;
-class Converter<T extends K, K> {
-    private List<K> oldList;
-    private Class newType;
-
-    public Converter(List<K> oldList, Class newType){
-        this.oldList = oldList;
-        this.newType = newType;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<T> toNewType(){
-        List<T> newList = new ArrayList<T>();
-        for (K element: oldList){
-            if (element.getClass().getName().equals(newType.getName())){
-                newList.add((T) element);
-            }
-        }
-        return newList;
-    }
-
-
-
-    
-
-
-}

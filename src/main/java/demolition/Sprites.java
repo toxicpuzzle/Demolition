@@ -67,7 +67,7 @@ public enum Sprites {
             animations.put(Direction.RIGHT, rightAnimation);
             
             // NOTE: x, and y are adjusted to reflect player's head going above cell
-            Player player = new Player(1, x, y, animations); //TODO: Change lives after making. 
+            Player player = new Player(10, x, y, animations); //TODO: Change lives after making. 
             return player;
         }
     },

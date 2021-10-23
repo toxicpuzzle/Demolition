@@ -60,10 +60,6 @@ public class Loader {
 
             allLevels.add(newLevel);
         }
-
-        
-
-        
         return allLevels;
 
     }
@@ -114,7 +110,7 @@ public class Loader {
             }
 
             // Check for width dimension of line 
-            if (line.length() != 15){return null;}
+            // if (line.length() != 15){return null;}
 
             lines.add(line);
         }
@@ -153,6 +149,11 @@ public class Loader {
             y += 32;
             x = 0;
         }
+
+        // Add level time from config file
+        newLevel.setTimeLeft(time);
+        newLevel.getPlayer().setLives(lives);
+
         return newLevel;
     }
 }
