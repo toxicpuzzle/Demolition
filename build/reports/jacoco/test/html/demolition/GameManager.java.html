@@ -1,83 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">GameManager.java</span></div><h1>GameManager.java</h1><pre class="source lang-java linenums">package demolition;
 
-import java.util.List;;
-
-
+import java.util.List;
+import processing.core.PApplet;
+import processing.core.PFont;
 public class GameManager extends App{
     private int currentLevelIndex;
     private List&lt;Level&gt; levels;
-    // private Level currentLevelCopy;
+    private boolean won;
+    private boolean gameOver;
     private Level currentLevel;
-    private Level template;
 
 <span class="fc" id="L13">    public GameManager(List&lt;Level&gt; levels){</span>
 <span class="fc" id="L14">        this.levels = levels;</span>
 <span class="fc" id="L15">        this.currentLevelIndex = 0;</span>
 <span class="fc" id="L16">        this.currentLevel = levels.get(currentLevelIndex);</span>
-<span class="fc" id="L17">        this.template = currentLevel;</span>
-         //TODO: Implement copying mecahnism
-<span class="fc" id="L19">        setup();</span>
-<span class="fc" id="L20">    }</span>
+
+<span class="fc" id="L18">        setup();</span>
+<span class="fc" id="L19">    }</span>
 
     public Level copyOf(Level level){
-<span class="nc" id="L23">        return null;</span>
+<span class="nc" id="L22">        return null;</span>
     }
 
     public void removeBrokenWalls(){
-<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (GameObject object: currentLevel.getBrokenWalls()){</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            for (GameObject explosion: currentLevel.getExplosionTiles()){</span>
-<span class="nc bnc" id="L29" title="All 2 branches missed.">                if (object.collisionWith(explosion)){</span>
-                    // System.out.println(&quot;hit!&quot;);
-<span class="nc" id="L31">                    object.remove();</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (GameObject object: currentLevel.getBrokenWalls()){</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">            for (GameObject explosion: currentLevel.getExplosionTiles()){</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                if (object.collisionWith(explosion)){</span>
+<span class="nc" id="L29">                    object.remove();</span>
                 }
-<span class="nc" id="L33">            }</span>
-<span class="fc" id="L34">        }</span>
-<span class="fc" id="L35">    }</span>
+<span class="nc" id="L31">            }</span>
+<span class="fc" id="L32">        }</span>
+<span class="fc" id="L33">    }</span>
 
     public void tick() {
-<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (this.hasWon()){</span>
-<span class="nc" id="L39">            System.out.println(&quot;WON!&quot;);</span>
-<span class="nc" id="L40">            this.toNextLevel();</span>
+
+<span class="fc" id="L37">        Player player = this.currentLevel.getPlayer();</span>
+<span class="pc bpc" id="L38" title="2 of 4 branches missed.">        if (player.collideWithEnemy() || player.collideWithExplosion()){</span>
+<span class="nc" id="L39">            currentLevel.reset();</span>
+<span class="nc" id="L40">            player.setLives(player.getLives()-1);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if (player.getLives() &lt;= 0){</span>
+<span class="nc" id="L42">                goToGameOver();</span>
+<span class="nc" id="L43">                return;</span>
+            }
         }
-<span class="fc" id="L42">        removeBrokenWalls();</span>
-<span class="fc" id="L43">    }</span>
+
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (this.hasWon()){</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (currentLevelIndex == this.levels.size()-1){</span>
+<span class="nc" id="L49">                goToWin();</span>
+<span class="nc" id="L50">                return;</span>
+            }
+<span class="nc" id="L52">            this.toNextLevel();</span>
+        }
+
+        
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (currentLevel.getTimeLeft() &lt;= 0){</span>
+<span class="nc" id="L57">            goToGameOver();</span>
+        }
+
+<span class="fc" id="L60">        removeBrokenWalls();</span>
+<span class="fc" id="L61">    }</span>
+
+    public void goToGameOver(){
+<span class="nc" id="L64">        this.currentLevel.removeAllObjects();</span>
+<span class="nc" id="L65">        this.gameOver = true;</span>
+<span class="nc" id="L66">    }</span>
+
+    public void goToWin(){
+<span class="nc" id="L69">        this.currentLevel.removeAllObjects();</span>
+<span class="nc" id="L70">        this.won = true;</span>
+<span class="nc" id="L71">    }</span>
 
     public boolean hasWon(){
-<span class="fc" id="L46">        Player p = currentLevel.getPlayer();</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (p.collisionWith(currentLevel.getGoal())){</span>
-<span class="nc" id="L48">            return true;</span>
+<span class="fc" id="L74">        Player p = currentLevel.getPlayer();</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (p.collisionWith(currentLevel.getGoal())){</span>
+<span class="nc" id="L76">            return true;</span>
         }
-<span class="fc" id="L50">        return false;</span>
+<span class="fc" id="L78">        return false;</span>
     }
 
+    public boolean hasWonAll(){
+<span class="fc" id="L82">        return this.won;</span>
+    }
+
+    public boolean hasGameOver(){
+<span class="fc" id="L86">        return this.gameOver;</span>
+    }
+    
     public boolean hasDied(){
-<span class="nc" id="L54">        return false;</span>
+<span class="nc" id="L90">        return false;</span>
     }
 
     //Setup current/futurelevel level (Fully intialise enemies and players)
     public void setup(){
-<span class="fc" id="L59">        List&lt;Enemy&gt; enemies = currentLevel.getEnemies();</span>
-<span class="fc" id="L60">        Player p = currentLevel.getPlayer();</span>
+<span class="fc" id="L95">        List&lt;Enemy&gt; enemies = currentLevel.getEnemies();</span>
+<span class="fc" id="L96">        Player p = currentLevel.getPlayer();</span>
         
-<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
-<span class="fc" id="L63">            e.setCurrentLevel(currentLevel);</span>
-<span class="fc" id="L64">        }</span>
-<span class="fc" id="L65">        p.setCurrentLevel(currentLevel);</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
+<span class="fc" id="L99">            e.setCurrentLevel(currentLevel);</span>
+<span class="fc" id="L100">        }</span>
+<span class="fc" id="L101">        p.setCurrentLevel(currentLevel);</span>
+<span class="fc" id="L102">    }</span>
 
     public Level getCurrentLevel(){
-<span class="fc" id="L69">        return this.currentLevel;</span>
+<span class="fc" id="L105">        return this.currentLevel;</span>
     }
 
     public void toNextLevel(){
-<span class="nc" id="L73">        this.currentLevelIndex++;</span>
-<span class="nc" id="L74">        this.currentLevel = levels.get(currentLevelIndex);</span>
-<span class="nc" id="L75">        setup();</span>
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L109">        this.currentLevelIndex++;</span>
+<span class="nc" id="L110">        int lives = currentLevel.getPlayer().getLives();</span>
+<span class="nc" id="L111">        this.currentLevel = levels.get(currentLevelIndex);</span>
+<span class="nc" id="L112">        currentLevel.getPlayer().setLives(lives);</span>
+<span class="nc" id="L113">        setup();</span>
+<span class="nc" id="L114">    }</span>
 
-    public void restartLevel(){
-        // TODO: Find way to copy the start level
-<span class="nc" id="L80">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

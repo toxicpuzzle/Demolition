@@ -19,8 +19,7 @@ public class AppTester {
     }
 
     @AfterEach 
-    public void teardown(){
+    public void tearDown(){
         app.exitCalled();
-
     }
 }

@@ -28,7 +28,6 @@ public abstract class MovingObject extends GameObject{
         otherObjects.remove(this);
         for (GameObject object: otherObjects){
             if (this.collisionWith(object) && !object.isRemoved && object.isSolid){
-                // System.out.println(object.getClass());
                 return true;
             }
         }
@@ -54,4 +53,3 @@ public abstract class MovingObject extends GameObject{
     }
 }
 
-// Maybe just remove directional object altogether

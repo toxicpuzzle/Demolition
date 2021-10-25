@@ -2,94 +2,115 @@
 
 import processing.core.PApplet;
 import processing.event.KeyEvent;
-
 import java.util.ArrayList;
 import java.util.List;
+import processing.core.PFont;
+import processing.core.PImage;
 
 public class App extends PApplet {
 
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
     public static final int FPS = 60;
-<span class="fc" id="L14">    public static String configFileName = &quot;config.json&quot;;</span>
-    // public int test;
+<span class="fc" id="L15">    public static String configFileName = &quot;config.json&quot;;</span>
 <span class="fc" id="L16">    public boolean alreadyPressed = false;</span>
-
     public GameManager game;
+    public PImage player;
+    public PImage timer;
 
-<span class="fc" id="L20">    public App() {</span>
+
+<span class="fc" id="L22">    public App() {</span>
         
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L24">    }</span>
 
     public void settings() {
-<span class="fc" id="L25">        size(WIDTH, HEIGHT);</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L27">        size(WIDTH, HEIGHT);</span>
+<span class="fc" id="L28">    }</span>
 
     public void setup() {
-<span class="fc" id="L29">        frameRate(FPS); // Nullpointerexception when I try to run this in test suite, but works when I do gradle run</span>
-        // test = 2; // ERROR: You need to automati
-<span class="fc" id="L31">        this.game = new GameManager(Loader.loadAllFiles(this, configFileName));</span>
-        
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L31">        frameRate(FPS); </span>
+<span class="fc" id="L32">        List&lt;Level&gt; levels = Loader.loadAllFiles(this, configFileName);</span>
+<span class="fc" id="L33">        this.game = new GameManager(levels);</span>
+<span class="fc" id="L34">        this.player = loadImage(&quot;src/main/resources/icons/player.png&quot;);</span>
+<span class="fc" id="L35">        this.timer = loadImage(&quot;src/main/resources/icons/clock.png&quot;);</span>
+<span class="fc" id="L36">    }</span>
 
     public void setConfig(String name){
-<span class="nc" id="L36">        configFileName = name;</span>
-<span class="nc" id="L37">    }</span>
+<span class="fc" id="L39">        configFileName = name;</span>
+<span class="fc" id="L40">    }</span>
+
+    public void drawText(String word, int x, int y, int size){
+<span class="fc" id="L43">        PFont text = createFont(&quot;src/main/resources/PressStart2P-Regular.ttf&quot;, 16);</span>
+<span class="fc" id="L44">        textFont(text, size);</span>
+<span class="fc" id="L45">        textAlign(CENTER);</span>
+<span class="fc" id="L46">        fill(0,0,0);</span>
+<span class="fc" id="L47">        text(word, x, y);</span>
+<span class="fc" id="L48">    }</span>
 
     public void draw() {
-<span class="fc" id="L40">        background(255, 200, 0);</span>
-<span class="fc" id="L41">        Level currentLevel = game.getCurrentLevel();</span>
-<span class="fc" id="L42">        int m = millis();</span>
+<span class="fc" id="L51">        background(255, 128, 0);</span>
+<span class="fc" id="L52">        Level currentLevel = game.getCurrentLevel();</span>
+<span class="fc" id="L53">        int m = millis();</span>
         
-<span class="fc bfc" id="L44" title="All 2 branches covered.">        for(GameObject object: currentLevel.getGameObjects()){</span>
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">            if (!object.isRemoved){</span>
-<span class="fc" id="L46">                object.draw(this);</span>
-<span class="fc" id="L47">                object.tick(m);</span>
-            }   
-<span class="fc" id="L49">        }</span>
+<span class="pc bpc" id="L55" title="2 of 4 branches missed.">        if (!game.hasWonAll() &amp;&amp; !game.hasGameOver()){</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            for(GameObject object: currentLevel.getGameObjects()){</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">                if (!object.isRemoved){</span>
+<span class="fc" id="L58">                    object.draw(this);</span>
+<span class="fc" id="L59">                    object.tick(m);</span>
+                }   
+<span class="fc" id="L61">            }</span>
 
-<span class="fc" id="L51">        game.tick();</span>
+<span class="fc" id="L63">            image(timer, 260, 18);</span>
+<span class="fc" id="L64">            image(player, 100, 18);</span>
+<span class="fc" id="L65">            drawText(String.valueOf(currentLevel.getTimeLeft()), 330, 45, 20);</span>
+<span class="fc" id="L66">            drawText(String.valueOf(currentLevel.getPlayer().getLives()), 165, 45, 20);</span>
+<span class="fc" id="L67">            currentLevel.tick(m);</span>
+<span class="fc" id="L68">            game.tick();</span>
+        }
+    
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (game.hasWonAll()){</span>
+<span class="nc" id="L72">            drawText(&quot;YOU WON&quot;, width/2, height/2, 30);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        } else if (game.hasGameOver()){</span>
+<span class="nc" id="L74">            drawText(&quot;GAME OVER&quot;, width/2, height/2, 30);</span>
+        }
         
         
-<span class="fc" id="L54">    }   </span>
+<span class="fc" id="L78">    }   </span>
 
     @Override
     public void keyReleased() {
-<span class="nc" id="L58">        alreadyPressed = false;</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L82">        alreadyPressed = false;</span>
+<span class="nc" id="L83">    }</span>
 
     @Override
     public void keyPressed() {
-<span class="nc" id="L63">        Level currentLevel = game.getCurrentLevel();</span>
-<span class="nc" id="L64">        Player p = currentLevel.getPlayer();</span>
+<span class="nc" id="L87">        Level currentLevel = game.getCurrentLevel();</span>
+<span class="nc" id="L88">        Player p = currentLevel.getPlayer();</span>
     
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!alreadyPressed){</span>
-<span class="nc bnc" id="L67" title="All 7 branches missed.">            switch (keyCode){</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (!alreadyPressed){</span>
+<span class="nc bnc" id="L91" title="All 6 branches missed.">            switch (keyCode){</span>
                 case DOWN: 
-<span class="nc" id="L69">                    p.moveDown(); </span>
-<span class="nc" id="L70">                    break;</span>
+<span class="nc" id="L93">                    p.moveDown(); </span>
+<span class="nc" id="L94">                    break;</span>
                 case UP: 
-<span class="nc" id="L72">                    p.moveUp(); </span>
-<span class="nc" id="L73">                    break;</span>
+<span class="nc" id="L96">                    p.moveUp(); </span>
+<span class="nc" id="L97">                    break;</span>
                 case RIGHT: 
-<span class="nc" id="L75">                    p.moveRight(); </span>
-<span class="nc" id="L76">                    break;</span>
+<span class="nc" id="L99">                    p.moveRight(); </span>
+<span class="nc" id="L100">                    break;</span>
                 case LEFT: 
-<span class="nc" id="L78">                    p.moveLeft();    </span>
-<span class="nc" id="L79">                    break;</span>
+<span class="nc" id="L102">                    p.moveLeft();    </span>
+<span class="nc" id="L103">                    break;</span>
                 case 32:
-<span class="nc" id="L81">                    p.placeBomb(this);</span>
-<span class="nc" id="L82">                    break;</span>
-                case ENTER:
-<span class="nc" id="L84">                    game.toNextLevel();</span>
+<span class="nc" id="L105">                    p.placeBomb(this);</span>
                     break;
             }
         }
-<span class="nc" id="L88">        alreadyPressed = true;</span>
+<span class="nc" id="L109">        alreadyPressed = true;</span>
         
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L111">    }</span>
     public static void main(String[] args) {
-<span class="fc" id="L92">        PApplet.main(&quot;demolition.App&quot;);</span>
-<span class="fc" id="L93">    }</span>
+<span class="nc" id="L113">        PApplet.main(&quot;demolition.App&quot;);</span>
+<span class="nc" id="L114">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

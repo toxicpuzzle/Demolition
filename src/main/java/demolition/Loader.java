@@ -12,12 +12,6 @@ import java.util.ArrayList;
 
 public class Loader {
 
-    public static void main(String[] args) {
-        // App app = new App();
-        // List<Level> allLevels = loadAllFiles(app);
-        // System.out.println(allLevels.size());
-    }
-
     public static List<Level> loadAllFiles(PApplet app, String configFileName){
         List<Level> allLevels = new ArrayList<Level>();
 

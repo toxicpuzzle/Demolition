@@ -15,18 +15,18 @@ public class EnemyRed extends Enemy {
 <span class="fc" id="L15">        int oldY = this.yPos;</span>
 <span class="fc" id="L16">        Direction oldDirection = this.direction;</span>
 
-<span class="pc bpc" id="L18" title="3 of 5 branches missed.">        switch(direction){</span>
+<span class="pc bpc" id="L18" title="2 of 5 branches missed.">        switch(direction){</span>
             case DOWN: 
 <span class="fc" id="L20">                this.yPos += 32;</span>
 <span class="fc" id="L21">                break;</span>
             case UP: 
-<span class="nc" id="L23">                this.yPos -= 32;</span>
-<span class="nc" id="L24">                break;</span>
+<span class="fc" id="L23">                this.yPos -= 32;</span>
+<span class="fc" id="L24">                break;</span>
             case LEFT: 
-<span class="nc" id="L26">                this.xPos -= 32;</span>
-<span class="nc" id="L27">                break;</span>
+<span class="fc" id="L26">                this.xPos -= 32;</span>
+<span class="fc" id="L27">                break;</span>
             case RIGHT:
-<span class="fc" id="L29">                this.xPos += 32;</span>
+<span class="nc" id="L29">                this.xPos += 32;</span>
                 break; 
         }
 
