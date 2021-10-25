@@ -4,7 +4,7 @@ import java.util.List;
 import processing.core.PApplet;
 import java.util.HashMap;
 
-public class Player extends DirectionalObject implements Movable {
+public class Player extends MovingObject implements Movable {
 
     private static int yHeadOffset = 16;
     private int lives;

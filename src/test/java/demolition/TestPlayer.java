@@ -1,8 +1,14 @@
 package demolition;
 
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import demolition.App;
+import demolition.GameObject;
+import demolition.Sprites;
+
 import org.junit.jupiter.api.BeforeEach;
 import processing.core.PApplet;
 

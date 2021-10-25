@@ -5,7 +5,7 @@ import java.util.List;
 
 import processing.core.PApplet;
 
-public class Bomb extends DirectionalObject{
+public class Bomb extends MovingObject{
     private int timePlaced;
     private PApplet app; // TEMP
 

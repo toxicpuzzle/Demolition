@@ -1,64 +1,63 @@
 package demolition;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import processing.core.PApplet;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-public class TestLoader {
+public class TestLoader extends AppTester {
+
+    @Test
+    // Check that levels is empty if config file is empty 
+    public void loadAllLevelsNoConfigFile() {
+        List<Level> levels = Loader.loadAllFiles(app, "src/test/resources/configs.json");
+        assertNotNull(levels);
+        assert(levels.size() == 0);
+    }
+
+    @Test
+    // Check that all levels from config file are loaded 
+    public void loadAllLevelsCorrectSize() {
+        List<Level> levels = Loader.loadAllFiles(app, "src/test/resources/config.json");
+        assertNotNull(levels);
+        assert(levels.size() == 2);
+    }
+
+    @Test
+    // Test loading single valid file, check that the file is not null
+    public void loadSingleLevelNotNull() {
+        Level level = Loader.loadFromFile("src/test/resources/level1.txt", 10, 10, app);
+        assertNotNull(level);
+    }
+
+    @Test
+    // Check that a valid level loaded contains the right items of every type
+    public void loadSingleLevelCorrectItems1() {
+        Level level = Loader.loadFromFile("src/test/resources/level1.txt", 10, 10, app);
+        assert(level.getBombs().size() == 0);
+        assert(level.getBrokenWalls().size() == 23);
+        assert(level.getEnemies().size() == 2);
+        assert(level.getExplosionTiles().size() == 0);
+        assertNotNull(level.getGoal());
+        assertNotNull(level.getPlayer());
+    }
     
     @Test
-    public void simpleTest() {
-        assertEquals(480, App.HEIGHT);
+    // Check that a valid level loaded contains the right items of every type
+    public void loadSingleLevelCorrectItems2() {
+        Level level = Loader.loadFromFile("src/test/resources/level2.txt", 10, 10, app);
+        assert(level.getBombs().size() == 0);
+        assert(level.getBrokenWalls().size() == 1);
+        assert(level.getEnemies().size() == 0);
+        assert(level.getExplosionTiles().size() == 0);
+        assertNotNull(level.getGoal());
+        assertNotNull(level.getPlayer());
     }
 
-    @Test
-    public void checkFrameRate(){
-        // How can I create an applet here?
-        assertEquals(App.FPS, 60);
-    }
+    
 
-    @Test
-    public void testLoadingFile() {
-        App.main((String[]) null);
 
-        // int size = app.allLevels.size(); // 
-        // assertEquals(size, 3);
-    }
-
-    @Test 
-    public void checkBombValid() {
-        // Create an instance of your application
-        App app = new App();
-
-        // Set the program to not loop automatically
-        app.noLoop();
-
-        // Set the path of the config file to use
-        // app.setConfig("src/test/resources/config.json");
-
-        // Tell PApplet to create the worker threads for the program
-        PApplet.runSketch(new String[] {"App"}, app);
-
-        // Call App.setup() to load in sprites
-        app.setup();
-
-        // Set a 1 second delay to ensure all resources are loaded
-        app.delay(1000);
-
-        GameObject sprite = Sprites.BOMB.make(100, 100, app);
-        System.out.println(sprite);
-        assertNotNull(sprite);
-
-        // Call draw to update the program.
-        app.draw();
-
-        // Call keyPressed() or similar
-
-        // Call draw again to move onto the next frame
-        app.draw();
-
-        // Verify the new state of the program with assertions
-    }
 }

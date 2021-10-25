@@ -18,11 +18,6 @@ public class GameManager extends App{
         setup();
     }
 
-    // TODO: Add icons along with Papplet the ability to display the time and also lives for current player.
-    public boolean addIcons(Icon lives, Icon timer){
-        return true;
-    }
-
     public Level copyOf(Level level){
         return null;
     }
@@ -31,7 +26,6 @@ public class GameManager extends App{
         for (GameObject object: currentLevel.getBrokenWalls()){
             for (GameObject explosion: currentLevel.getExplosionTiles()){
                 if (object.collisionWith(explosion)){
-                    // System.out.println("hit!");
                     object.remove();
                 }
             }
@@ -39,13 +33,6 @@ public class GameManager extends App{
     }
 
     public void tick() {
-        if (this.hasWon()){
-            if (currentLevelIndex == this.levels.size()-1){
-                goToWin();
-                return;
-            }
-            this.toNextLevel();
-        }
 
         Player player = this.currentLevel.getPlayer();
         if (player.collideWithEnemy() || player.collideWithExplosion()){
@@ -57,6 +44,15 @@ public class GameManager extends App{
             }
         }
 
+        if (this.hasWon()){
+            if (currentLevelIndex == this.levels.size()-1){
+                goToWin();
+                return;
+            }
+            this.toNextLevel();
+        }
+
+        
         if (currentLevel.getTimeLeft() <= 0){
             goToGameOver();
         }

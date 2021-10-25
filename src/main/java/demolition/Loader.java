@@ -27,7 +27,7 @@ public class Loader {
         try{
             scan = new Scanner(f);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             return allLevels;
         }
         
@@ -74,7 +74,6 @@ public class Loader {
         try{
             scan = new Scanner(f);
         } catch (FileNotFoundException e){
-            e.printStackTrace();
             return null;
         }
 

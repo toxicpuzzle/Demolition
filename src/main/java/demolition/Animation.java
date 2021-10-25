@@ -41,7 +41,7 @@ public class Animation {
     }
 
     // Or create seperate animator class 
-    public static void animate(DirectionalObject GameObject){
+    public static void animate(MovingObject GameObject){
         //Passes in a movable object and animates the object by getting the selecting the animation
         
     }

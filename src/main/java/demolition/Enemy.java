@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import processing.core.PApplet;
 
-public abstract class Enemy extends DirectionalObject implements Movable {
+public abstract class Enemy extends MovingObject implements Movable {
 
     
     protected int lastWalked;

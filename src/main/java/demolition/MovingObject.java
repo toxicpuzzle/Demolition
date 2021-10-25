@@ -5,14 +5,14 @@ import processing.core.PApplet;
 import processing.core.PImage; 
 import java.util.HashMap;
 
-public abstract class DirectionalObject extends GameObject{
+public abstract class MovingObject extends GameObject{
     protected HashMap<Direction, Animation> animations; 
     protected Animation currentAnimation;
     protected Direction direction;
     protected boolean justChangedDirection;
     protected Level currentLevel;
     
-    public DirectionalObject(int x, int y, HashMap<Direction, Animation> animations){
+    public MovingObject(int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, false, animations.get(Direction.DOWN).getNextFrame()); 
         this.animations = animations;
         this.direction = Direction.DOWN;
