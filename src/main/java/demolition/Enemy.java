@@ -132,7 +132,7 @@ public abstract class Enemy extends MovingObject implements Movable {
             if (justChangedDirection){
                 this.currentFrame = this.currentAnimation.getFrameAtIndex(0); 
             }
-            // ! Moves before updating frame
+            // ERROR: Moves before updating frame -> Fixed
             walkTimer = 0;
         }
 

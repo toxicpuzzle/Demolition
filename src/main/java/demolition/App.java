@@ -47,7 +47,7 @@ public class App extends PApplet {
         text(word, x, y);
     }
     public void draw(){
-
+        this.tick();
     }
     public void tick() {
         background(255, 128, 0);
@@ -75,8 +75,7 @@ public class App extends PApplet {
         } else if (game.hasGameOver()){
             drawText("GAME OVER", width/2, height/2, 30);
         }
-        
-        
+           
     }   
 
     @Override
@@ -95,7 +94,7 @@ public class App extends PApplet {
             else if (keyCode == RIGHT) {p.moveRight(); }
             else if (keyCode == LEFT) {p.moveLeft(); }
             else if (keyCode == 32) {p.placeBomb(this);}
-            else if (keyCode == ENTER) {this.tick();}
+            // else if (keyCode == ENTER) {this.tick();}
         }
         alreadyPressed = true;
         

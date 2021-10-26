@@ -24,7 +24,7 @@ public abstract class MovingObject extends GameObject{
         this.timer++;
         // Animate the object
         float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
-        if ((this.timer > (secondsBetweenFrames * App.FPS))){
+        if ((this.timer >= (secondsBetweenFrames * App.FPS))){
             this.currentFrame = currentAnimation.getNextFrame();
             this.timer = 0;
         } 
