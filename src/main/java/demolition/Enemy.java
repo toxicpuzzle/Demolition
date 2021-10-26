@@ -12,6 +12,7 @@ public abstract class Enemy extends MovingObject implements Movable {
     protected int yHeadOffset = 16;
     protected int yStarting;
     protected int xStarting;
+    protected int walkTimer;
 
     public Enemy(int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
@@ -96,22 +97,20 @@ public abstract class Enemy extends MovingObject implements Movable {
 
     @Override
     public void tick(int currentTime) {
-        // Duplicate from player : try to refactor
+        walkTimer++;
 
         if (collideWithExplosion()){
             this.isRemoved = true;
         }
 
-        if (currentTime >= lastWalked + currentAnimation.getFrameDuration()*4){
+        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
+        if (this.walkTimer >= secondsBetweenFrames*App.FPS*4){
             walk();
-            lastWalked = currentTime;
+            this.currentFrame = currentAnimation.getFrameAtIndex(0);
+            walkTimer = 0;
         }
 
-        if (currentTime >= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){
-            justChangedDirection = false;
-            this.currentFrame = currentAnimation.getNextFrame();
-            lastDisplayedTime = currentTime;
-        }
+        super.tick();
     }
     
 }

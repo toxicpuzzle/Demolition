@@ -51,7 +51,7 @@ public class App extends PApplet {
         background(255, 128, 0);
         Level currentLevel = game.getCurrentLevel();
         int m = millis();
-        
+        // System.out.println(frameRate);
         if (!game.hasWonAll() && !game.hasGameOver()){
             for(GameObject object: currentLevel.getGameObjects()){
                 if (!object.isRemoved){
@@ -88,29 +88,16 @@ public class App extends PApplet {
         Player p = currentLevel.getPlayer();
     
         if (!alreadyPressed){
-            switch (keyCode){
-                case DOWN: 
-                    p.moveDown(); 
-                    break;
-                case UP: 
-                    p.moveUp(); 
-                    break;
-                case RIGHT: 
-                    p.moveRight(); 
-                    break;
-                case LEFT: 
-                    p.moveLeft();    
-                    break;
-                case 32:
-                    p.placeBomb(this);
-                    break;
-            }
+            if (keyCode == DOWN) {p.moveDown(); }
+            else if (keyCode == UP) {p.moveUp(); }
+            else if (keyCode == RIGHT) {p.moveRight(); }
+            else if (keyCode == LEFT) {p.moveLeft(); }
+            else if (keyCode == 32) {p.placeBomb(this);}
         }
         alreadyPressed = true;
         
     }
     public static void main(String[] args) {
         PApplet.main("demolition.App");
-        
     }
 }

@@ -6,13 +6,11 @@ import java.util.List;
 import processing.core.PApplet;
 
 public class Bomb extends MovingObject{
-    private int timePlaced;
+    private int timeSincePlaced;
     private PApplet app; // TEMP
 
     public Bomb(int x, int y, HashMap<Direction, Animation> animations, int timePlaced){
         super(x, y, animations);
-        this.timePlaced = timePlaced;
-        lastDisplayedTime = timePlaced;
     }
 
     public void setApp(PApplet app){
@@ -34,19 +32,17 @@ public class Bomb extends MovingObject{
         if (this.isRemoved){
             return;
         }
+        System.out.println(this.currentAnimation.getFrameNumber());
+        timeSincePlaced++;
 
-        if (currentTime >= timePlaced + currentAnimation.getFrameDuration()*8){
+        float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;
+        if (timeSincePlaced >= secondsBetweenFrames*App.FPS*8){
             Explosion explosion = new Explosion(this.xPos, this.yPos, this.currentLevel, app);
             explosion.addAllExpTiles();
             this.isRemoved = true;
         }
 
-        if (currentTime >= lastDisplayedTime + currentAnimation.getFrameDuration()){
-            this.currentFrame = currentAnimation.getNextFrame();
-            lastDisplayedTime = currentTime;
-        }
-
-        
+        super.tick();        
     }
     
 }

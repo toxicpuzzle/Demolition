@@ -11,7 +11,7 @@ import java.io.FilenameFilter;
 
 public class SpriteFactory {
 
-    public static final int frameDuration = 200;
+    public static final int frameDuration = 200; //In milliseconds
 
     public static List<String> getSpriteImageDirectories(String spriteName, String filePrefix){
         List<String> images = new ArrayList<String>();

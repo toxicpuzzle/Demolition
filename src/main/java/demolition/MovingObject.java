@@ -11,12 +11,28 @@ public abstract class MovingObject extends GameObject{
     protected Direction direction;
     protected boolean justChangedDirection;
     protected Level currentLevel;
+    protected int timer;
     
     public MovingObject(int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, false, animations.get(Direction.DOWN).getNextFrame()); 
         this.animations = animations;
         this.direction = Direction.DOWN;
         updateCurrentAnimation();
+    }
+
+    public void tick(){
+        this.timer++;
+        // Animate the object
+        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
+        if ((this.timer > (secondsBetweenFrames * App.FPS))){
+            this.currentFrame = currentAnimation.getNextFrame();
+            this.timer = 0;
+        } 
+
+        if (this.justChangedDirection){
+            this.currentFrame = currentAnimation.getFrameAtIndex(0);
+            this.justChangedDirection = false;            
+        }
     }
 
     public void setCurrentLevel(Level currentLevel){
@@ -48,8 +64,9 @@ public abstract class MovingObject extends GameObject{
         this.currentAnimation = this.animations.get(direction);
     }
 
-    public Animation getCurrenAnimation(){
+    public Animation getCurrentAnimation(){
         return this.currentAnimation;
     }
+
 }
 

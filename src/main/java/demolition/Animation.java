@@ -32,6 +32,14 @@ public class Animation {
         return animationFrames.get(currFrameIndex++%frameLength);
     }
 
+    public PImage getFrameAtIndex(int index){
+        if (index > frameLength){
+            return null;
+        } else{
+            return this.animationFrames.get(index);
+        }
+    }
+
     public Direction getDirection(){
         return this.direction;
     }

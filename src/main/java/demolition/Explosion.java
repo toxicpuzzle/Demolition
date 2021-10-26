@@ -14,7 +14,6 @@ public class Explosion{
     private List<ExplosionTile> down;
     private Level currentLevel;
     private ExplosionTile centre;
-    private int explosionStart;
 
     // New explosion will be made by the bomb class.
     // NOTE: Explosion is a collection of explosiontiles
@@ -27,10 +26,6 @@ public class Explosion{
         this.down = new ArrayList<ExplosionTile>();
         this.currentLevel = level;
         centre.setCurrentLevel(this.currentLevel);
-        
-        
-        //TODO: COde repetition here - Could make separate collission functions for different types of walls.
-        //Check if new tile collides, and check if broken tile. 
 
         // Add the current level to all explosion tiles that were made
         makeInDirection(Direction.LEFT, app);
@@ -38,20 +33,6 @@ public class Explosion{
         makeInDirection(Direction.UP, app);
         makeInDirection(Direction.DOWN, app);
 
-        this.explosionStart = app.millis(); 
-        this.setAllExplosionTimes();
-        // System.out.println(this.getExplosionTiles().size());
-    }
-
-    private void setAllExplosionTimes(){
-        List<ExplosionTile> tiles = new ArrayList<ExplosionTile>();
-        
-        for (GameObject tile: this.getExplosionTiles()){
-            tiles.add((ExplosionTile) tile);
-        }
-        for (ExplosionTile tile: tiles){
-            tile.setExplosionTime(this.explosionStart);
-        }
     }
 
     // Helper function for constructor
@@ -60,8 +41,6 @@ public class Explosion{
         int yCurrent = this.centre.getY();
 
         for (int i = 0; i < 2; i++) {
-            int xPrevious = xCurrent;
-            int yPrevious = yCurrent;
             
             ExplosionTile currentTile = SpriteFactory.makeExplosionHorizontal(xCurrent, yCurrent, app);
             

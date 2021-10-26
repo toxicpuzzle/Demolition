@@ -5,16 +5,14 @@ import java.util.List;
 
 public class ExplosionTile extends GameObject {
     private Level currentLevel;
-    private int explosionTime;
     private static final int duration = 500;
+    private int timeSinceExplosion;
+
+
     public ExplosionTile(int x, int y, PImage startingImage){
         super(x, y, false, startingImage);
        
     } 
-
-    public void setExplosionTime(int time){
-        this.explosionTime = time;
-    }
 
     // TODO: Remove duplicate code
     public boolean collideWithBroken(){
@@ -47,8 +45,9 @@ public class ExplosionTile extends GameObject {
 
     @Override
     public void tick(int currentTime) {
-        // TODO Auto-generated method stub
-        if (currentTime >= explosionTime + duration){
+        timeSinceExplosion++;
+        float secondsLasted = (float) duration/1000;
+        if (timeSinceExplosion >= secondsLasted*App.FPS){
             this.remove();
         } 
     }

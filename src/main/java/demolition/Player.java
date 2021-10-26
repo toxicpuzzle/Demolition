@@ -10,6 +10,7 @@ public class Player extends MovingObject implements Movable {
     private int lives;
     private int xStarting;
     private int yStarting;
+    private int timer; 
    
     public Player(int lives, int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
@@ -44,11 +45,13 @@ public class Player extends MovingObject implements Movable {
 
     @Override
     public void tick(int currentTime) {
+        this.timer++;
         // Animate the object
-        if (currentTime >= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){
+        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
+        if ((this.timer > (secondsBetweenFrames * App.FPS)) || justChangedDirection){
             justChangedDirection = false;
-            this.currentFrame = currentAnimation.getNextFrame();
-            lastDisplayedTime = currentTime;
+            this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.
+            this.timer = 0;
         } 
     }
     
@@ -91,7 +94,7 @@ public class Player extends MovingObject implements Movable {
             resetPosition(oldX, oldY, oldDirection);
         } else {
             this.direction = direction.UP;
-            justChangedDirection = true;
+            justChangedDirection = !(this.direction == oldDirection);
         }
 
         updateCurrentAnimation();
@@ -109,7 +112,7 @@ public class Player extends MovingObject implements Movable {
             resetPosition(oldX, oldY, oldDirection);
         } else {
             this.direction = direction.RIGHT;
-            justChangedDirection = true;
+            justChangedDirection = !(this.direction == oldDirection);
         }
 
         updateCurrentAnimation();
@@ -127,7 +130,7 @@ public class Player extends MovingObject implements Movable {
             resetPosition(oldX, oldY, oldDirection);
         } else {
             this.direction = direction.DOWN;
-            justChangedDirection = true;
+            justChangedDirection = !(this.direction == oldDirection);
         }
 
         updateCurrentAnimation();
@@ -145,7 +148,7 @@ public class Player extends MovingObject implements Movable {
         if (collideWithSolid()) {
             resetPosition(oldX, oldY, oldDirection);
         } else {
-            justChangedDirection = true;
+            justChangedDirection = !(this.direction == oldDirection);
         }
         
         updateCurrentAnimation();
