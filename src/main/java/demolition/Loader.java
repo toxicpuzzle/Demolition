@@ -125,16 +125,15 @@ public class Loader {
             char[] charArray = line.toCharArray();
             for (char c: charArray){
                 GameObject objectAdded, backGround; 
-                objectAdded = Sprites.makeByChar(c, x, y, app);
+                objectAdded = SpriteFactory.makeByChar(c, x, y, app);
                 newLevel.addObject(objectAdded);
 
                 // Deal with special case of breakable wall -> add background behind it
 
                 // Deal with special case of player or enemy or breakable tile
                 if (c == 'P' || c == 'R' || c == 'Y' || c == 'B'){
-                    backGround = Sprites.TILE_EMPTY.make(x, y, app);
+                    backGround = SpriteFactory.makeEmpty(x, y, app);
                     newLevel.addObject(backGround);
-                    // System.out.println("ENEMY ADDED");
                 }
                 
                 x += 32;

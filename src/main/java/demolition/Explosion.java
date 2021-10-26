@@ -20,7 +20,7 @@ public class Explosion{
     // NOTE: Explosion is a collection of explosiontiles
     // NB: Pimage is dummy var to avoid nullpointer right now
     public Explosion(int x, int y, Level level, PApplet app) {
-        this.centre = (ExplosionTile) Sprites.EXPLOSION_CENTRE.make(x, y, app);
+        this.centre = (ExplosionTile) SpriteFactory.makeExplosionCentre(x, y, app);
         this.left = new ArrayList<ExplosionTile>();
         this.right = new ArrayList<ExplosionTile>();
         this.up = new ArrayList<ExplosionTile>();
@@ -63,28 +63,28 @@ public class Explosion{
             int xPrevious = xCurrent;
             int yPrevious = yCurrent;
             
-            ExplosionTile currentTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xCurrent, yCurrent, app);
+            ExplosionTile currentTile = SpriteFactory.makeExplosionHorizontal(xCurrent, yCurrent, app);
             
             //Add tile depending on direction
             switch(direction){
                 case UP: 
                     yCurrent -= 32;
-                    currentTile = (ExplosionTile) Sprites.EXPLOSION_VERTICAL.make(xCurrent, yCurrent, app);
+                    currentTile = SpriteFactory.makeExplosionVertical(xCurrent, yCurrent, app);
                     this.up.add(currentTile);
                     break;
                 case DOWN: 
                     yCurrent += 32;
-                    currentTile = (ExplosionTile) Sprites.EXPLOSION_VERTICAL.make(xCurrent, yCurrent, app);
+                    currentTile = SpriteFactory.makeExplosionVertical(xCurrent, yCurrent, app);
                     this.down.add(currentTile);
                     break;
                 case LEFT: 
                     xCurrent -= 32;
-                    currentTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xCurrent, yCurrent, app);
+                    currentTile = SpriteFactory.makeExplosionHorizontal(xCurrent, yCurrent, app);
                     this.left.add(currentTile);
                     break;
                 case RIGHT: 
                     xCurrent += 32;
-                    currentTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xCurrent, yCurrent, app);
+                    currentTile = SpriteFactory.makeExplosionHorizontal(xCurrent, yCurrent, app);
                     this.right.add(currentTile);
                     break;
             }
@@ -93,102 +93,10 @@ public class Explosion{
 
             // Remove the last two if this tile collides with any solid object, and add a endie tile (replaces previous tile)
             if (currentTile.collideWithSolid()){
-                currentTile.remove(); // TODO: Redundant, you're not even passing this to the attribute/list so this is not used
-                // ExplosionTile endTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xPrevious, yPrevious, app);
-                // endTile.setCurrentLevel(currentLevel);
-                // switch(direction){
-                //     case UP: 
-
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_TOP.make(xPrevious, yPrevious, app);
-                        
-                //         if (up.size() == 1){
-                //             up.remove(0);
-                //         } else {
-                //             up.remove(up.size()-1);
-                //             up.remove(up.size()-1);
-                //             up.add(endTile);
-                //         }
-                //         break;
-                //     case DOWN: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_BOTTOM.make(xPrevious, yPrevious, app);
-                            
-                //         if (down.size() == 1){
-                //             down.remove(0);
-                //         } else {
-                //             down.remove(down.size()-1);
-                //             down.remove(down.size()-1);
-                //             down.add(endTile);
-                //         }
-                //         break;
-                //     case LEFT: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_LEFT.make(xPrevious, yPrevious, app);
-                            
-                //         if (left.size() == 1){
-                //             left.remove(0);
-                //         } else {
-                //             left.remove(left.size()-1);
-                //             left.remove(left.size()-1);
-                //             left.add(endTile);
-                //         }
-                //         break;
-                //     case RIGHT: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_RIGHT.make(xPrevious, yPrevious, app);
-                            
-                //         if (right.size() == 1){
-                //             right.remove(0);
-                //         } else {
-                //             right.remove(right.size()-1);
-                //             right.remove(right.size()-1);
-                //             right.add(endTile);
-                //         }
-                //         break;
-                //     } 
-                    break;
-
-            } else if (currentTile.collideWithBroken()) {
-                // System.out.println("borken");
+                currentTile.remove();
                 break;
-                // ExplosionTile endTile = (ExplosionTile) Sprites.EXPLOSION_HORIZONTAL.make(xPrevious, yPrevious, app);
-                // endTile.setCurrentLevel(currentLevel);
-                // switch(direction){
-                //     case UP: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_TOP.make(xPrevious, yPrevious, app);
-                //         if (up.size() == 1){
-                //             up.remove(0);
-                //         } else {
-                //             up.remove(up.size()-1);
-                //         }
-                //         up.add(endTile);
-                //         break;
-                //     case DOWN: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_BOTTOM.make(xPrevious, yPrevious, app);
-                //         if (down.size() == 1){
-                //             down.remove(0);
-                //         } else {
-                //             down.remove(down.size()-1);
-                //         }
-                //         down.add(endTile);
-                //         break;
-                //     case LEFT: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_LEFT.make(xPrevious, yPrevious, app);
-                //         if (left.size() == 1){
-                //             left.remove(0);
-                //         } else {
-                //             left.remove(left.size()-1);
-                //         }
-                //         left.add(endTile);
-                //         break;
-                //     case RIGHT: 
-                //         endTile = (ExplosionTile) Sprites.EXPLOSION_RIGHT.make(xPrevious, yPrevious, app);
-                //         if (right.size() == 1){
-                //             right.remove(0);
-                //         } else {
-                //             right.remove(right.size()-1);
-                //         }
-                //         right.add(endTile);
-                //         break;
-                //     } 
-                
+            } else if (currentTile.collideWithBroken()) {
+                break;
             }
         } 
     }

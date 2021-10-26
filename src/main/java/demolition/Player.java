@@ -73,7 +73,7 @@ public class Player extends MovingObject implements Movable {
     } 
 
     public void placeBomb(PApplet app){
-        Bomb bomb = (Bomb) Sprites.BOMB.make(this.xPos, this.yPos, app);
+        Bomb bomb = SpriteFactory.makeBomb(this.xPos, this.yPos, app);
         bomb.setCurrentLevel(this.currentLevel);
         bomb.setApp(app);
         currentLevel.addObject(bomb);

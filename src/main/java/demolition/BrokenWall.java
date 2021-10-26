@@ -10,7 +10,5 @@ public class BrokenWall extends GameObject {
 
     @Override
     public void tick(int currentTime) {
-        // TODO Auto-generated method stub
-        
     }
 }

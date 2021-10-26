@@ -40,12 +40,4 @@ public class Animation {
         return this.currFrameIndex;
     }
 
-    // Or create seperate animator class 
-    public static void animate(MovingObject GameObject){
-        //Passes in a movable object and animates the object by getting the selecting the animation
-        
-    }
-    public static void Animate(Movable gameObject){
-        //Passes in a movable object and animates the object by getting the selecting the animation
-    }
 }

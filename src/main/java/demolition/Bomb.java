@@ -26,21 +26,16 @@ public class Bomb extends MovingObject{
 
     @Override
     public void draw(PApplet app) {
-        // TODO Auto-generated method stub
         super.draw(app);
-        // System.out.println("Currently drawing bomb's frame: " + this.currentAnimation.getFrameNumber());
     }
 
     @Override
     public void tick(int currentTime) {
-        // TODO Auto-generated method stub
         if (this.isRemoved){
             return;
         }
 
         if (currentTime >= timePlaced + currentAnimation.getFrameDuration()*8){
-            // this.currentFrame = currentAnimation.getNextFrame();
-            // lastDisplayedTime = currentTime;
             Explosion explosion = new Explosion(this.xPos, this.yPos, this.currentLevel, app);
             explosion.addAllExpTiles();
             this.isRemoved = true;

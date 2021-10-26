@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import demolition.App;
 import demolition.GameObject;
-import demolition.Sprites;
 
 import org.junit.jupiter.api.BeforeEach;
 import processing.core.PApplet;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class TestPlayer extends AppTester {
 
@@ -22,7 +22,7 @@ public class TestPlayer extends AppTester {
 
     @BeforeEach
     public void makePlayer(){ //! Don't implicitly override parent method      
-        this.player = (Player) Sprites.PLAYER.make(0, 0, app); 
+        this.player = SpriteFactory.makePlayer(0, 0, app); 
         this.level = Loader.loadFromFile("src/test/resources/level1.txt", 10, 10, app);
         player.setCurrentLevel(level);
     }
@@ -40,28 +40,34 @@ public class TestPlayer extends AppTester {
     }
 
     @Test
-    // Check moveleft without obstacles
+    // Check moveleft without obstacles, coords are right and that the player has changed directions
     public void checkMoveLeftNoObstacles(){
         player.moveLeft();
         assertEquals(player.getX(), -32);
+        assertEquals(player.justChangedDirection, true);
     } 
 
     @Test
     public void checkMoveRightNoObstacles(){
         player.moveRight();
         assertEquals(player.getX(), 32);
+        assertEquals(player.justChangedDirection, true);
+
     }
 
     @Test
     public void checkMoveUpNoObstacles(){
         player.moveUp();
         assertEquals(player.getY(), -32);
+        assertEquals(player.justChangedDirection, true);
+
     }
 
     @Test
     public void checkMoveRightObstacles(){
         player.moveDown();
         assertEquals(player.getY(), 32);
+        assertEquals(player.justChangedDirection, true);
     }
 
     // Test movements with obstacles
@@ -86,20 +92,48 @@ public class TestPlayer extends AppTester {
     @Test 
     // Test if player can place a bomb, and that the bomb placed in the level is not null;
     public void testPlaceBomb(){
-
+        this.player.placeBomb(app);
+        List<Bomb> bombs = level.getBombs();
+        assertEquals(1, bombs.size());
     }
 
     @Test
-    //Check that the player dies and their position resets if it hits an explosion tile;
+    //Check that the collision with explosion returns true if player collides with explosion
     public void checkCollisionWithExplosion(){
+        List<Level> levels = new ArrayList<Level>();
+        levels.add(this.level);
         GameManager manager = new GameManager(levels);
-        GameObject eTile = Sprites.EXPLOSION_BOTTOM.make(this.player.getX() + 32, player.getY(), app);
         this.player = this.level.getPlayer();
+        GameObject eTile = SpriteFactory.makeExplosionCentre(this.player.getX() + 32, player.getY(), app);
         this.player.setCurrentLevel(this.level); // Gamemanager does this automatically
         this.level.addObject(eTile);
-        player.moveRight();
-        assertEquals(player.getLives(), 9);
-        assertEquals(player.getX(), player.getXStarting());
-        assertEquals(player.getY(), player.getYStarting());
+        player.moveRight();     
+        assertEquals(true, player.collideWithExplosion());
     }
+
+    @Test
+    //Check that the collision with explosion returns false if player does not collides with explosion if it has already expired
+    public void checkCollisionWithExplosionNegative(){
+        List<Level> levels = new ArrayList<Level>();
+        levels.add(this.level);
+        this.player = this.level.getPlayer();
+        GameObject eTile = SpriteFactory.makeExplosionCentre(this.player.getX() + 32, player.getY(), app);
+        eTile.remove();
+        this.player.setCurrentLevel(this.level); // Gamemanager does this automatically
+        this.level.addObject(eTile);
+        assertEquals(false, player.collideWithExplosion());
+    }
+
+    @Test
+    //Check that the collision with explosion returns false if player does not collides with explosion if the player is not standing on explosion tile
+    public void checkCollisionWithExplosionNegativeNoExplosion(){
+        List<Level> levels = new ArrayList<Level>();
+        levels.add(this.level);
+        this.player = this.level.getPlayer();
+        this.player.setCurrentLevel(this.level); // Gamemanager does this automatically
+        assertEquals(false, player.collideWithExplosion());
+    }
+
+    
+
 }
