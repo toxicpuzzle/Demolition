@@ -28,11 +28,11 @@ public class Bomb extends MovingObject{
     }
 
     @Override
-    public void tick(int currentTime) {
+    public void tick() {
         if (this.isRemoved){
             return;
         }
-        System.out.println(this.currentAnimation.getFrameNumber());
+        // System.out.println(this.currentAnimation.getFrameNumber());
         timeSincePlaced++;
 
         float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;

@@ -12,83 +12,108 @@ public abstract class Enemy extends MovingObject implements Movable {
 <span class="fc" id="L12">    protected int yHeadOffset = 16;</span>
     protected int yStarting;
     protected int xStarting;
+    protected int walkTimer;
 
     public Enemy(int x, int y, HashMap&lt;Direction, Animation&gt; animations){
-<span class="fc" id="L17">        super(x, y, animations);</span>
-<span class="fc" id="L18">        this.yStarting = y;</span>
-<span class="fc" id="L19">        this.xStarting = x;</span>
-<span class="fc" id="L20">        this.width = 32; // WARNING: Hard code</span>
-<span class="fc" id="L21">        this.height = 32;</span>
+<span class="fc" id="L18">        super(x, y, animations);</span>
+<span class="fc" id="L19">        this.yStarting = y;</span>
+<span class="fc" id="L20">        this.xStarting = x;</span>
+<span class="fc" id="L21">        this.width = 32; // WARNING: Hard code</span>
+<span class="fc" id="L22">        this.height = 32;</span>
         // Need to find a way to load all of the animations in
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L24">    }</span>
     @Override
     
     public void draw(PApplet app) {
-<span class="fc" id="L27">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L28">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
+<span class="fc" id="L29">    }</span>
 
     @Override
     public void moveUp() {
-<span class="nc" id="L32">        this.yPos -= 32;</span>
-<span class="nc" id="L33">        this.direction = direction.UP;</span>
-<span class="nc" id="L34">        updateCurrentAnimation();</span>
-<span class="nc" id="L35">    }</span>
-
-    @Override
-    public void moveRight() {
-<span class="nc" id="L39">        this.xPos += 32;</span>
-<span class="nc" id="L40">        this.direction = direction.RIGHT;</span>
-<span class="nc" id="L41">        updateCurrentAnimation();</span>
-<span class="nc" id="L42">    }</span>
+<span class="fc" id="L33">        this.yPos -= 32;</span>
+<span class="fc" id="L34">    }</span>
 
     @Override
     public void moveDown() {
-<span class="nc" id="L46">        this.yPos += 32;</span>
-<span class="nc" id="L47">        this.direction = direction.DOWN;</span>
-<span class="nc" id="L48">        updateCurrentAnimation();</span>
-<span class="nc" id="L49">    }</span>
+<span class="fc" id="L38">        this.yPos += 32;</span>
+<span class="fc" id="L39">    }</span>
+    
+
+    @Override
+    public void moveRight() {
+<span class="fc" id="L44">        this.xPos += 32;</span>
+<span class="fc" id="L45">    }</span>
 
     @Override
     public void moveLeft() {
-<span class="nc" id="L53">        this.xPos -= 32;</span>
-<span class="nc" id="L54">        this.direction = direction.LEFT;</span>
-<span class="nc" id="L55">        updateCurrentAnimation();</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L49">        this.xPos -= 32;</span>
+<span class="nc" id="L50">    }</span>
 
-    public abstract void walk();
+    protected void walk(){
+        // keep trying random direction until clear path opens up and animation updates
+<span class="fc" id="L54">        int oldX = this.xPos;</span>
+<span class="fc" id="L55">        int oldY = this.yPos;</span>
+<span class="fc" id="L56">        Direction oldDirection = this.direction;</span>
+
+<span class="pc bpc" id="L58" title="2 of 5 branches missed.">        switch(direction){</span>
+            case DOWN: 
+<span class="fc" id="L60">                moveDown();</span>
+<span class="fc" id="L61">                break;</span>
+            case UP: 
+<span class="fc" id="L63">                moveUp();</span>
+<span class="fc" id="L64">                break;</span>
+            case LEFT: 
+<span class="nc" id="L66">                moveLeft();</span>
+<span class="nc" id="L67">                break;</span>
+            case RIGHT:
+<span class="fc" id="L69">                moveRight();</span>
+                break; 
+        }
+
+        // TODO: Change it so that this only checks collision with tiles and not hard bodies such as the player -&gt; temp fix
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (collideWithSolid()){</span>
+<span class="fc" id="L75">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="fc" id="L76">            Direction newDirection = getDirectionStrategy();</span>
+<span class="fc" id="L77">            this.direction = newDirection;</span>
+<span class="fc" id="L78">            justChangedDirection = true;</span>
+<span class="fc" id="L79">            walk();</span>
+<span class="fc" id="L80">        } else {</span>
+<span class="fc" id="L81">            updateCurrentAnimation();</span>
+<span class="fc" id="L82">            return;</span>
+        }
+<span class="fc" id="L84">    }</span>
+
+    public abstract Direction getDirectionStrategy();
 
     public boolean collideWithExplosion() {
-<span class="fc" id="L61">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
-<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        for (ExplosionTile e: explosions){</span>
-<span class="nc bnc" id="L63" title="All 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
-<span class="nc" id="L64">                return true;</span>
+<span class="fc" id="L89">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        for (ExplosionTile e: explosions){</span>
+<span class="pc bpc" id="L91" title="2 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="fc" id="L92">                return true;</span>
             }
-<span class="nc" id="L66">        }</span>
-<span class="fc" id="L67">        return false;</span>
+<span class="nc" id="L94">        }</span>
+<span class="fc" id="L95">        return false;</span>
     } 
 
     @Override
-    public void tick(int currentTime) {
-        // Duplicate from player : try to refactor
+    public void tick() {
+<span class="fc" id="L100">        walkTimer++;</span>
 
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (collideWithExplosion()){</span>
-<span class="nc" id="L75">            this.isRemoved = true;</span>
+        // System.out.println(this.currentAnimation.getFrameNumber());
+
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (collideWithExplosion()){</span>
+<span class="fc" id="L105">            this.isRemoved = true;</span>
         }
 
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (currentTime &gt;= lastWalked + currentAnimation.getFrameDuration()*4){</span>
-<span class="fc" id="L79">            walk();</span>
-<span class="fc" id="L80">            lastWalked = currentTime;</span>
+<span class="fc" id="L108">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (this.walkTimer &gt;= secondsBetweenFrames*App.FPS*4){</span>
+<span class="fc" id="L110">            walk();</span>
+<span class="fc" id="L111">            this.currentFrame = currentAnimation.getFrameAtIndex(0);</span>
+<span class="fc" id="L112">            walkTimer = 0;</span>
         }
 
-<span class="pc bpc" id="L83" title="1 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
-<span class="fc" id="L84">            justChangedDirection = false;</span>
-<span class="fc" id="L85">            this.currentFrame = currentAnimation.getNextFrame();</span>
-<span class="fc" id="L86">            lastDisplayedTime = currentTime;</span>
-        }
-
-        
-        
-<span class="fc" id="L91">    }</span>
+<span class="fc" id="L115">        super.tick();</span>
+<span class="fc" id="L116">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

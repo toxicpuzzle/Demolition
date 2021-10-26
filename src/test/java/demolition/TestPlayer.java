@@ -42,7 +42,7 @@ public class TestPlayer extends AppTester {
         assertEquals(player.getX(), -32);
         assertEquals(player.justChangedDirection, true);
         app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.LEFT));
+        assertEquals(player.animations.get(Direction.LEFT), player.currentAnimation);
     } 
 
     @Test
@@ -52,7 +52,7 @@ public class TestPlayer extends AppTester {
         assertEquals(player.getX(), 32);
         assertEquals(player.justChangedDirection, true);
         app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.RIGHT));
+        assertEquals( player.animations.get(Direction.RIGHT), player.currentAnimation);
     }
 
     @Test
@@ -60,9 +60,9 @@ public class TestPlayer extends AppTester {
     public void checkMoveUpNoObstacles(){
         player.moveUp();
         assertEquals(player.getY(), -32);
-        assertEquals(player.justChangedDirection, true);
+        assertEquals(true, player.justChangedDirection);
         app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.UP));
+        assertEquals(player.animations.get(Direction.UP), player.currentAnimation);
     }
 
     @Test
@@ -70,9 +70,9 @@ public class TestPlayer extends AppTester {
     public void checkMoveDownNoObstacles(){
         player.moveDown();
         assertEquals(player.getY(), 32);
-        assertEquals(player.justChangedDirection, true);
+        assertEquals(false, player.justChangedDirection);
         app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.DOWN));
+        assertEquals(player.animations.get(Direction.DOWN), player.currentAnimation);
     }
 
     // Test movements with obstacles
@@ -91,7 +91,7 @@ public class TestPlayer extends AppTester {
         assertEquals(player.getX(), 32);
         assertEquals(player.getY(), 32*3);
         app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.DOWN));
+        assertEquals(player.animations.get(Direction.DOWN), player.currentAnimation);
     }
 
     // Test placing bombs and colliding with explosions
@@ -167,7 +167,7 @@ public class TestPlayer extends AppTester {
 
     // Test animation cycle is changing at correct pace.
     public void checkAnimationCycle(){
-        // TODO: implement framerate counting method of checking speed rather than relying on millis();
+        // TODO: implement framerate counting method of checking speed rather than relying on millis(); -> DOne
     }
 
 

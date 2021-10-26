@@ -27,8 +27,7 @@ public abstract class GameObject {
         app.image(currentFrame, xPos, yPos);
     }
 
-    public abstract void tick(int currenTime);
-
+    public void tick(){};
 
     public void remove() {
         this.isRemoved = true;

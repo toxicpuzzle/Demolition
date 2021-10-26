@@ -56,7 +56,7 @@ public class App extends PApplet {
             for(GameObject object: currentLevel.getGameObjects()){
                 if (!object.isRemoved){
                     object.draw(this);
-                    object.tick(m);
+                    object.tick();
                 }   
             }
 

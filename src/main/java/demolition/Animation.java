@@ -45,7 +45,7 @@ public class Animation {
     }
 
     public int getFrameNumber(){
-        return this.currFrameIndex;
+        return this.currFrameIndex%frameLength;
     }
 
 }

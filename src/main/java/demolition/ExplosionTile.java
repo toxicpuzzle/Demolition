@@ -44,7 +44,7 @@ public class ExplosionTile extends GameObject {
     }
 
     @Override
-    public void tick(int currentTime) {
+    public void tick() {
         timeSinceExplosion++;
         float secondsLasted = (float) duration/1000;
         if (timeSinceExplosion >= secondsLasted*App.FPS){

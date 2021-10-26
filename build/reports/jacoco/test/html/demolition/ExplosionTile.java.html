@@ -5,53 +5,52 @@ import java.util.List;
 
 public class ExplosionTile extends GameObject {
     private Level currentLevel;
-    private int explosionTime;
     private static final int duration = 500;
-    public ExplosionTile(int x, int y, PImage startingImage){
-<span class="fc" id="L11">        super(x, y, false, startingImage);</span>
-       
-<span class="fc" id="L13">    } </span>
+    private int timeSinceExplosion;
 
-    public void setExplosionTime(int time){
-<span class="nc" id="L16">        this.explosionTime = time;</span>
-<span class="nc" id="L17">    }</span>
+
+    public ExplosionTile(int x, int y, PImage startingImage){
+<span class="fc" id="L13">        super(x, y, false, startingImage);</span>
+       
+<span class="fc" id="L15">    } </span>
 
     // TODO: Remove duplicate code
     public boolean collideWithBroken(){
-<span class="nc" id="L21">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (GameObject object: brokenWalls){</span>
-<span class="nc bnc" id="L23" title="All 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
-<span class="nc" id="L24">                return true;</span>
+<span class="nc" id="L19">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        for (GameObject object: brokenWalls){</span>
+<span class="nc bnc" id="L21" title="All 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
+<span class="nc" id="L22">                return true;</span>
             }
-<span class="nc" id="L26">        }</span>
-<span class="nc" id="L27">        return false;</span>
+<span class="nc" id="L24">        }</span>
+<span class="nc" id="L25">        return false;</span>
     }
 
     public boolean collideWithSolid(){
-<span class="nc" id="L31">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        for (GameObject object: solidWalls){</span>
-<span class="nc bnc" id="L33" title="All 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
-<span class="nc" id="L34">                return true;</span>
+<span class="nc" id="L29">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        for (GameObject object: solidWalls){</span>
+<span class="nc bnc" id="L31" title="All 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
+<span class="nc" id="L32">                return true;</span>
             }
-<span class="nc" id="L36">        }</span>
-<span class="nc" id="L37">        return false;</span>
+<span class="nc" id="L34">        }</span>
+<span class="nc" id="L35">        return false;</span>
     }
 
     public Level getCurrentLevel(){
-<span class="nc" id="L41">        return this.currentLevel;</span>
+<span class="nc" id="L39">        return this.currentLevel;</span>
     }
 
     public void setCurrentLevel(Level level){
-<span class="nc" id="L45">        this.currentLevel = level;</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L43">        this.currentLevel = level;</span>
+<span class="nc" id="L44">    }</span>
 
     @Override
-    public void tick(int currentTime) {
-        // TODO Auto-generated method stub
-<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (currentTime &gt;= explosionTime + duration){</span>
-<span class="nc" id="L52">            this.remove();</span>
+    public void tick() {
+<span class="nc" id="L48">        timeSinceExplosion++;</span>
+<span class="nc" id="L49">        float secondsLasted = (float) duration/1000;</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
+<span class="nc" id="L51">            this.remove();</span>
         } 
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L53">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

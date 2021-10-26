@@ -11,46 +11,63 @@ public abstract class MovingObject extends GameObject{
     protected Direction direction;
     protected boolean justChangedDirection;
     protected Level currentLevel;
+    protected int timer;
     
     public MovingObject(int x, int y, HashMap&lt;Direction, Animation&gt; animations){
-<span class="fc" id="L16">        super(x, y, false, animations.get(Direction.DOWN).getNextFrame()); </span>
-<span class="fc" id="L17">        this.animations = animations;</span>
-<span class="fc" id="L18">        this.direction = Direction.DOWN;</span>
-<span class="fc" id="L19">        updateCurrentAnimation();</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L17">        super(x, y, false, animations.get(Direction.DOWN).getNextFrame()); </span>
+<span class="fc" id="L18">        this.animations = animations;</span>
+<span class="fc" id="L19">        this.direction = Direction.DOWN;</span>
+<span class="fc" id="L20">        updateCurrentAnimation();</span>
+<span class="fc" id="L21">    }</span>
+
+    public void tick(){
+<span class="fc" id="L24">        this.timer++;</span>
+        // Animate the object
+<span class="fc" id="L26">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if ((this.timer &gt; (secondsBetweenFrames * App.FPS))){</span>
+<span class="fc" id="L28">            this.currentFrame = currentAnimation.getNextFrame();</span>
+<span class="fc" id="L29">            this.timer = 0;</span>
+        } 
+
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (this.justChangedDirection){</span>
+<span class="nc" id="L33">            this.currentFrame = currentAnimation.getFrameAtIndex(0);</span>
+<span class="nc" id="L34">            this.justChangedDirection = false;            </span>
+        }
+<span class="fc" id="L36">    }</span>
 
     public void setCurrentLevel(Level currentLevel){
-<span class="fc" id="L23">        this.currentLevel = currentLevel;</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L39">        this.currentLevel = currentLevel;</span>
+<span class="fc" id="L40">    }</span>
     
     public boolean collideWithSolid(){
-<span class="fc" id="L27">        List&lt;GameObject&gt; otherObjects = currentLevel.getGameObjects();</span>
-<span class="fc" id="L28">        otherObjects.remove(this);</span>
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        for (GameObject object: otherObjects){</span>
-<span class="pc bpc" id="L30" title="1 of 6 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved &amp;&amp; object.isSolid){</span>
-<span class="fc" id="L31">                return true;</span>
+<span class="fc" id="L43">        List&lt;GameObject&gt; otherObjects = currentLevel.getGameObjects();</span>
+<span class="fc" id="L44">        otherObjects.remove(this);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for (GameObject object: otherObjects){</span>
+<span class="pc bpc" id="L46" title="1 of 6 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved &amp;&amp; object.isSolid){</span>
+<span class="fc" id="L47">                return true;</span>
             }
-<span class="fc" id="L33">        }</span>
-<span class="fc" id="L34">        return false;</span>
+<span class="fc" id="L49">        }</span>
+<span class="fc" id="L50">        return false;</span>
     }
 
     public void resetPosition(int oldX, int oldY, Direction oldDirection){
-<span class="fc" id="L38">        this.xPos = oldX;</span>
-<span class="fc" id="L39">        this.yPos = oldY;</span>
-<span class="fc" id="L40">        this.direction = oldDirection;</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L54">        this.xPos = oldX;</span>
+<span class="fc" id="L55">        this.yPos = oldY;</span>
+<span class="fc" id="L56">        this.direction = oldDirection;</span>
+<span class="fc" id="L57">    }</span>
 
-<span class="nc" id="L43">    public Direction getDirection() { return this.direction;}</span>
+<span class="nc" id="L59">    public Direction getDirection() { return this.direction;}</span>
 
     
     // Check animation has changed as a result of direction
     public void updateCurrentAnimation() {
-<span class="fc" id="L48">        this.currentAnimation = this.animations.get(direction);</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L64">        this.currentAnimation = this.animations.get(direction);</span>
+<span class="fc" id="L65">    }</span>
 
-    public Animation getCurrenAnimation(){
-<span class="nc" id="L52">        return this.currentAnimation;</span>
+    public Animation getCurrentAnimation(){
+<span class="nc" id="L68">        return this.currentAnimation;</span>
     }
+
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

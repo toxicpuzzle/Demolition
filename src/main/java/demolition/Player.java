@@ -44,7 +44,7 @@ public class Player extends MovingObject implements Movable {
     }
 
     @Override
-    public void tick(int currentTime) {
+    public void tick() {
         this.timer++;
         // Animate the object
         float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;

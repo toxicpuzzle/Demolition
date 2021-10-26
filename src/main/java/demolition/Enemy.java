@@ -96,8 +96,10 @@ public abstract class Enemy extends MovingObject implements Movable {
     } 
 
     @Override
-    public void tick(int currentTime) {
+    public void tick() {
         walkTimer++;
+
+        // System.out.println(this.currentAnimation.getFrameNumber());
 
         if (collideWithExplosion()){
             this.isRemoved = true;

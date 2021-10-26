@@ -32,12 +32,20 @@ public class Animation {
 <span class="fc" id="L32">        return animationFrames.get(currFrameIndex++%frameLength);</span>
     }
 
+    public PImage getFrameAtIndex(int index){
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (index &gt; frameLength){</span>
+<span class="nc" id="L37">            return null;</span>
+        } else{
+<span class="fc" id="L39">            return this.animationFrames.get(index);</span>
+        }
+    }
+
     public Direction getDirection(){
-<span class="nc" id="L36">        return this.direction;</span>
+<span class="nc" id="L44">        return this.direction;</span>
     }
 
     public int getFrameNumber(){
-<span class="nc" id="L40">        return this.currFrameIndex;</span>
+<span class="nc" id="L48">        return this.currFrameIndex%frameLength;</span>
     }
 
 }

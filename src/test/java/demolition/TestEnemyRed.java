@@ -13,18 +13,22 @@ import processing.core.PApplet;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
+
+
 import java.util.ArrayList;
 
 public class TestEnemyRed extends AppTester {
 
+    private final static double SECONDS_TO_WALK = 0.8;
     private EnemyRed enemy;
     private Level level;
 
     @BeforeEach
     public void getEnemy(){ //! Don't implicitly override parent method      
-        this.enemy = SpriteFactory.makeEnemyRed(0, 0, app); 
-        this.level = new Level();
+        this.enemy = SpriteFactory.makeEnemyRed(32, 32*3, app); 
+        this.level = Loader.loadFromFile("src/test/resources/empty.txt", 100, 100, app);
         level.addObject(enemy);
+        enemy.setCurrentLevel(this.level);
     }
 
     @Test
@@ -41,130 +45,60 @@ public class TestEnemyRed extends AppTester {
     } 
 
     @Test
-    // Check that the player's coords have moved right and that the correct animation cycle is being played post movement
-    public void checkMoveRightNoObstacles(){
-        enemy.moveRight();
-        assertEquals(player.getX(), 32);
-        assertEquals(player.justChangedDirection, true);
-        app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.RIGHT));
-    }
-
-    @Test
-    // Check that the player's coords have moved up and that the correct animation cycle is being played post movement
-    public void checkMoveUpNoObstacles(){
-        player.moveUp();
-        assertEquals(player.getY(), -32);
-        assertEquals(player.justChangedDirection, true);
-        app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.UP));
-    }
-
-    @Test
-    // Check that the player's coords have moved down and that the correct animation cycle is being played post movement
+    // Check that the enemy's coords have moved down and that the correct animation cycle is being played post movement
     public void checkMoveDownNoObstacles(){
-        player.moveDown();
-        assertEquals(player.getY(), 32);
-        assertEquals(player.justChangedDirection, true);
-        app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.DOWN));
+        for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
+            this.enemy.tick();
+        }
+        assertEquals(128, enemy.yPos);
+        assertEquals(enemy.animations.get(Direction.DOWN), enemy.currentAnimation);
     }
 
-    // Test movements with obstacles
+    // Test movement against obstacles (solid wall acts as placeholder for all solid objects)
 
     @Test
-    // Check that the player does not move in any direction if there is a obstacle in that direction, and that the animation cycle does not change after the attempts
-    public void moveLeftRightUpDownObstacles(){
-        this.level = Loader.loadFromFile("src/test/resources/allwalls.txt", 10, 10, app);
-        player.setY(32*3);
-        player.setX(32);
-        player.setCurrentLevel(level);
-        player.moveLeft();
-        player.moveRight();
-        player.moveUp();
-        player.moveDown();
-        assertEquals(player.getX(), 32);
-        assertEquals(player.getY(), 32*3);
-        app.draw();
-        assertEquals(player.currentAnimation, player.animations.get(Direction.DOWN));
-    }
-
-    // Test placing bombs and colliding with explosions
-
-    @Test 
-    // Test if player can place a bomb, and that the bomb placed in the level is not null;
-    public void testPlaceBomb(){
-        this.player.placeBomb(app);
-        List<Bomb> bombs = level.getBombs();
-        assertEquals(1, bombs.size());
+    // Check that the enemy changes direction after hitting obstacle (case that enemy can only go right because every other direction is blocked)
+    public void checkMoveDownWithObstaclesAllSides(){
+        level.addObject(SpriteFactory.makeSolidWall(32, 32*4, app));
+        for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
+            this.enemy.tick();
+        }
+        assertEquals(32*3, enemy.yPos);
+        assertEquals(32*2, enemy.xPos);
+        assertEquals(enemy.animations.get(Direction.RIGHT), enemy.currentAnimation);
     }
 
     @Test
-    //Check that the collision with explosion returns true if player collides with explosion
+    // Check that the enemy changes direction after hitting obstacle (case where all enemyred could either go back up, left or right)
+    public void checkMoveDownWithObstacles(){
+        level.addObject(SpriteFactory.makeSolidWall(32*2, 32*4, app));
+        enemy.moveRight();
+        for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
+            this.enemy.tick();
+        }
+        assertNotEquals(enemy.animations.get(Direction.DOWN), enemy.currentAnimation);
+    }
+
+    // Collission with explosions
+
+    @Test
+    //Check that the collision with explosion returns true if enemy collides with explosion and is removed from the game on the next tick
     public void checkCollisionWithExplosion(){
         List<Level> levels = new ArrayList<Level>();
         levels.add(this.level);
         GameManager manager = new GameManager(levels);
-        this.player = this.level.getPlayer();
-        GameObject eTile = SpriteFactory.makeExplosionCentre(this.player.getX() + 32, player.getY(), app);
-        this.player.setCurrentLevel(this.level); 
+        GameObject eTile = SpriteFactory.makeExplosionCentre(this.enemy.getX() + 32, this.enemy.getY(), app); 
         this.level.addObject(eTile);
-        player.moveRight();     
-        assertEquals(true, player.collideWithExplosion());
-    }
-
-    // Test colliding with enemies
-
-    @Test
-    //Check that the collision with explosion returns false if player does not collides with explosion if it has already expired
-    public void checkCollisionWithExplosionNegative(){
-        List<Level> levels = new ArrayList<Level>();
-        levels.add(this.level);
-        this.player = this.level.getPlayer();
-        GameObject eTile = SpriteFactory.makeExplosionCentre(this.player.getX() + 32, player.getY(), app);
-        eTile.remove();
-        this.player.setCurrentLevel(this.level); 
-        this.level.addObject(eTile);
-        assertEquals(false, player.collideWithExplosion());
+        enemy.moveRight();
+        assertEquals(true, enemy.collideWithExplosion());
+        this.enemy.tick();
+        assertEquals(true, this.enemy.isRemoved);
     }
 
     @Test
-    //Check that the collision with explosion returns false if player does not collides with explosion if the player is not standing on explosion tile
-    public void checkCollisionWithExplosionNegativeNoExplosion(){
-        List<Level> levels = new ArrayList<Level>();
-        levels.add(this.level);
-        this.player = this.level.getPlayer();
-        this.player.setCurrentLevel(this.level); 
-        assertEquals(false, player.collideWithExplosion());
+    // Check that the enemy does not move at all if it is stuck
+    public void checkStuck(){
+        //!  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls.
     }
-
-    @Test
-    //Check that the player is not colliding with any enemies in a level with enemies
-    public void checkCollisionWithEnemyNegative(){
-        List<Level> levels = new ArrayList<Level>();
-        levels.add(this.level);
-        this.player = this.level.getPlayer();
-        this.player.setCurrentLevel(this.level); 
-        assertEquals(false, player.collideWithEnemy());
-    }
-
-    @Test
-    //Check that the player is colliding with an enemy when it moves into an enemy
-    public void checkCollisionWithEnemyPositive(){
-        List<Level> levels = new ArrayList<Level>();
-        levels.add(this.level);
-        this.player = this.level.getPlayer();
-        this.player.setCurrentLevel(this.level); 
-        level.addObject(SpriteFactory.makeEnemyRed(player.getX()+32, player.getY(), app));
-        player.moveRight();
-        assertEquals(true, player.collideWithEnemy());
-    }
-
-    // Test animation cycle is changing at correct pace.
-    public void checkAnimationCycle(){
-        // TODO: implement framerate counting method of checking speed rather than relying on millis();
-    }
-
-
 
 }
