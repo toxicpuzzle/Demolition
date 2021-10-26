@@ -3,7 +3,7 @@ package demolition;
 import java.util.HashMap;
 import java.util.List;
 import processing.core.PApplet;
-
+import java.util.ArrayList;
 public abstract class Enemy extends MovingObject implements Movable {
 
     
@@ -13,6 +13,7 @@ public abstract class Enemy extends MovingObject implements Movable {
     protected int yStarting;
     protected int xStarting;
     protected int walkTimer;
+    protected List<Direction> directionsTried;
 
     public Enemy(int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
@@ -20,6 +21,7 @@ public abstract class Enemy extends MovingObject implements Movable {
         this.xStarting = x;
         this.width = 32; // WARNING: Hard code
         this.height = 32;
+        this.directionsTried = new ArrayList<Direction>();
         // Need to find a way to load all of the animations in
     }
     @Override
@@ -71,13 +73,31 @@ public abstract class Enemy extends MovingObject implements Movable {
         }
 
         // TODO: Change it so that this only checks collision with tiles and not hard bodies such as the player -> temp fix
+
         if (collideWithSolid()){
+
+            // Add the current direction tried to the failed list
+            if (!directionsTried.contains(oldDirection)){ directionsTried.add(direction);} //Won't need .equals() for enums since ther is only one instance
             resetPosition(oldX, oldY, oldDirection);
+            
+            if (directionsTried.size() >= 4){
+                justChangedDirection = false;
+                directionsTried.clear();
+                return;
+            }
+
+            // Ensures the new direction is one that has not yet tried
             Direction newDirection = getDirectionStrategy();
+            while (directionsTried.contains(newDirection)){
+                newDirection = getDirectionStrategy();
+            }
+
+            // Set the object's direction to the new direction chosen and try walking in that direction;
             this.direction = newDirection;
             justChangedDirection = true;
             walk();
         } else {
+            directionsTried.clear();
             updateCurrentAnimation();
             return;
         }
@@ -98,7 +118,8 @@ public abstract class Enemy extends MovingObject implements Movable {
     @Override
     public void tick() {
         walkTimer++;
-
+        
+        
         // System.out.println(this.currentAnimation.getFrameNumber());
 
         if (collideWithExplosion()){
@@ -108,7 +129,10 @@ public abstract class Enemy extends MovingObject implements Movable {
         float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
         if (this.walkTimer >= secondsBetweenFrames*App.FPS*4){
             walk();
-            this.currentFrame = currentAnimation.getFrameAtIndex(0);
+            if (justChangedDirection){
+                this.currentFrame = this.currentAnimation.getFrameAtIndex(0); 
+            }
+            // ! Moves before updating frame
             walkTimer = 0;
         }
 

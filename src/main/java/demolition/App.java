@@ -46,8 +46,10 @@ public class App extends PApplet {
         fill(0,0,0);
         text(word, x, y);
     }
+    public void draw(){
 
-    public void draw() {
+    }
+    public void tick() {
         background(255, 128, 0);
         Level currentLevel = game.getCurrentLevel();
         int m = millis();
@@ -93,6 +95,7 @@ public class App extends PApplet {
             else if (keyCode == RIGHT) {p.moveRight(); }
             else if (keyCode == LEFT) {p.moveLeft(); }
             else if (keyCode == 32) {p.placeBomb(this);}
+            else if (keyCode == ENTER) {this.tick();}
         }
         alreadyPressed = true;
         
