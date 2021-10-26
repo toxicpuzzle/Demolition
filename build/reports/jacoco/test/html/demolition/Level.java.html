@@ -39,12 +39,12 @@ public class Level {
 <span class="fc" id="L39">            this.empty.add((Empty) object);</span>
 <span class="fc bfc" id="L40" title="All 2 branches covered.">        } else if (object instanceof Goal){</span>
 <span class="fc" id="L41">            this.goal = (Goal) object;</span>
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        } else if (object instanceof Player){</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        } else if (object instanceof Player){</span>
 <span class="fc" id="L43">            this.player = (Player) object;</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        } else if (object instanceof Bomb){</span>
-<span class="nc" id="L45">            this.bombs.add((Bomb) object);</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        } else if (object instanceof ExplosionTile){</span>
-<span class="nc" id="L47">            this.explosionTiles.add((ExplosionTile) object);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        } else if (object instanceof Bomb){</span>
+<span class="fc" id="L45">            this.bombs.add((Bomb) object);</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        } else if (object instanceof ExplosionTile){</span>
+<span class="fc" id="L47">            this.explosionTiles.add((ExplosionTile) object);</span>
         }
 <span class="fc" id="L49">    }</span>
 
@@ -59,9 +59,9 @@ public class Level {
     // Ensure player does not die after winning if timer lapses out
     public int tick(int millis){
 <span class="fc" id="L61">        int oneSecond = 1000;</span>
-<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (millis &gt;= this.lastDrawn + oneSecond){</span>
-<span class="nc" id="L63">            this.timeLeft -= 1;</span>
-<span class="nc" id="L64">            this.lastDrawn = millis;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (millis &gt;= this.lastDrawn + oneSecond){</span>
+<span class="fc" id="L63">            this.timeLeft -= 1;</span>
+<span class="fc" id="L64">            this.lastDrawn = millis;</span>
         }
 <span class="fc" id="L66">        return this.timeLeft;</span>
     }
@@ -107,11 +107,11 @@ public class Level {
     public List&lt;ExplosionTile&gt; getExplosionTiles(){
 <span class="fc" id="L108">        List&lt;ExplosionTile&gt; explosionTiles = this.explosionTiles;</span>
 <span class="fc" id="L109">        List&lt;ExplosionTile&gt; newList = new ArrayList&lt;ExplosionTile&gt;();</span>
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        for (ExplosionTile tile: explosionTiles){</span>
-<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (!tile.isRemoved){</span>
-<span class="nc" id="L112">                newList.add(tile);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        for (ExplosionTile tile: explosionTiles){</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            if (!tile.isRemoved){</span>
+<span class="fc" id="L112">                newList.add(tile);</span>
             }
-<span class="nc" id="L114">        }</span>
+<span class="fc" id="L114">        }</span>
 <span class="fc" id="L115">        this.explosionTiles = newList;</span>
 <span class="fc" id="L116">        return this.explosionTiles;</span>
     }

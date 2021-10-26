@@ -80,7 +80,7 @@ public abstract class Enemy extends MovingObject implements Movable {
 <span class="fc" id="L80">            lastWalked = currentTime;</span>
         }
 
-<span class="pc bpc" id="L83" title="3 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
+<span class="pc bpc" id="L83" title="1 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
 <span class="fc" id="L84">            justChangedDirection = false;</span>
 <span class="fc" id="L85">            this.currentFrame = currentAnimation.getNextFrame();</span>
 <span class="fc" id="L86">            lastDisplayedTime = currentTime;</span>

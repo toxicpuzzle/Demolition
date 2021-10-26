@@ -67,8 +67,8 @@ import java.util.ArrayList;
         
         try{
 <span class="fc" id="L69">            scan = new Scanner(f);</span>
-<span class="nc" id="L70">        } catch (FileNotFoundException e){</span>
-<span class="nc" id="L71">            return null;</span>
+<span class="fc" id="L70">        } catch (FileNotFoundException e){</span>
+<span class="fc" id="L71">            return null;</span>
 <span class="fc" id="L72">        }</span>
 
         // Check if file characters are valid
@@ -88,13 +88,13 @@ import java.util.ArrayList;
 <span class="fc" id="L88">                        isValidChar = true;</span>
                     
 <span class="fc bfc" id="L90" title="All 2 branches covered.">                        if (c == 'G'){</span>
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                            if (!containsGoal) {containsGoal = true;}</span>
-<span class="nc" id="L92">                            else {return null;}</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">                            if (!containsGoal) {containsGoal = true;}</span>
+<span class="fc" id="L92">                            else {return null;}</span>
                         }
 
 <span class="fc bfc" id="L95" title="All 2 branches covered.">                        if (c == 'P'){</span>
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">                            if (!containsStart) {containsStart = true;}</span>
-<span class="nc" id="L97">                            else {return null;}</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                            if (!containsStart) {containsStart = true;}</span>
+<span class="fc" id="L97">                            else {return null;}</span>
                         }
                     }
                 }
@@ -111,10 +111,10 @@ import java.util.ArrayList;
 <span class="fc" id="L111">        scan.close();</span>
 
         // Check for starting location and goal tile
-<span class="pc bpc" id="L114" title="2 of 4 branches missed.">        if (!containsGoal || !containsStart) {return null;}</span>
+<span class="pc bpc" id="L114" title="1 of 4 branches missed.">        if (!containsGoal || !containsStart) {return null;}</span>
         
         // Check for height of map
-<span class="pc bpc" id="L117" title="1 of 2 branches missed.">        if (lines.size() != 13){return null;}</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (lines.size() != 13){return null;}</span>
         
         // Removed check for bounds as it is optional
 
@@ -125,29 +125,28 @@ import java.util.ArrayList;
 <span class="fc" id="L125">            char[] charArray = line.toCharArray();</span>
 <span class="fc bfc" id="L126" title="All 2 branches covered.">            for (char c: charArray){</span>
                 GameObject objectAdded, backGround; 
-<span class="fc" id="L128">                objectAdded = Sprites.makeByChar(c, x, y, app);</span>
+<span class="fc" id="L128">                objectAdded = SpriteFactory.makeByChar(c, x, y, app);</span>
 <span class="fc" id="L129">                newLevel.addObject(objectAdded);</span>
 
                 // Deal with special case of breakable wall -&gt; add background behind it
 
                 // Deal with special case of player or enemy or breakable tile
 <span class="fc bfc" id="L134" title="All 8 branches covered.">                if (c == 'P' || c == 'R' || c == 'Y' || c == 'B'){</span>
-<span class="fc" id="L135">                    backGround = Sprites.TILE_EMPTY.make(x, y, app);</span>
+<span class="fc" id="L135">                    backGround = SpriteFactory.makeEmpty(x, y, app);</span>
 <span class="fc" id="L136">                    newLevel.addObject(backGround);</span>
-                    // System.out.println(&quot;ENEMY ADDED&quot;);
                 }
                 
-<span class="fc" id="L140">                x += 32;</span>
+<span class="fc" id="L139">                x += 32;</span>
             }
-<span class="fc" id="L142">            y += 32;</span>
-<span class="fc" id="L143">            x = 0;</span>
-<span class="fc" id="L144">        }</span>
+<span class="fc" id="L141">            y += 32;</span>
+<span class="fc" id="L142">            x = 0;</span>
+<span class="fc" id="L143">        }</span>
 
         // Add level time from config file
-<span class="fc" id="L147">        newLevel.setTimeLeft(time);</span>
-<span class="fc" id="L148">        newLevel.getPlayer().setLives(lives);</span>
+<span class="fc" id="L146">        newLevel.setTimeLeft(time);</span>
+<span class="fc" id="L147">        newLevel.getPlayer().setLives(lives);</span>
 
-<span class="fc" id="L150">        return newLevel;</span>
+<span class="fc" id="L149">        return newLevel;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

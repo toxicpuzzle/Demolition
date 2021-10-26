@@ -2,32 +2,136 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.File;
+
+import processing.core.PApplet;
 import processing.core.PImage;
 import java.io.FilenameFilter;
 
-<span class="nc" id="L9">public class SpriteFactory {</span>
-    public List&lt;String&gt; getSpriteImageDirectories(String filePrefix){
-<span class="nc" id="L11">        List&lt;String&gt; images = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L12">public class SpriteFactory {</span>
 
-<span class="nc" id="L13">        File directory = new File(&quot;/src/main/resources&quot;);</span>
-<span class="nc" id="L14">        File[] filesFound = directory.listFiles(new FilenameFilter() {</span>
+    public static final int frameDuration = 200;
+
+    public static List&lt;String&gt; getSpriteImageDirectories(String spriteName, String filePrefix){
+<span class="fc" id="L17">        List&lt;String&gt; images = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc" id="L19">        File directory = new File(&quot;src/main/resources/&quot; + spriteName);</span>
+<span class="fc" id="L20">        File[] filesFound = directory.listFiles(new FilenameFilter() {</span>
+            @Override
             public boolean accept(File directory, String name) {
-<span class="nc bnc" id="L16" title="All 4 branches missed.">                return name.startsWith(filePrefix) &amp;&amp; name.endsWith(&quot;.png&quot;);</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">                return name.startsWith(filePrefix) &amp;&amp; name.endsWith(&quot;.png&quot;);</span>
             }
         }); 
 
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        for (File file: filesFound){</span>
-<span class="nc" id="L21">            images.add(file.getPath());</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (File file: filesFound){</span>
+<span class="fc" id="L28">            images.add(file.getPath());</span>
         }
         
-<span class="nc" id="L24">        return images;</span>
+<span class="fc" id="L31">        return images;</span>
     }
 
-    public static void main(String[] args) {
-<span class="nc" id="L28">        SpriteFactory sf = new SpriteFactory();</span>
-<span class="nc" id="L29">        List&lt;String&gt; strings = sf.getSpriteImageDirectories(&quot;player&quot;);</span>
-<span class="nc" id="L30">        System.out.print(strings);</span>
-<span class="nc" id="L31">    }</span>
+    public static List&lt;PImage&gt; convertPathsToPImages(List&lt;String&gt; paths, PApplet app){
+<span class="fc" id="L35">        List&lt;PImage&gt; images = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        for(String path: paths) { images.add(app.loadImage(path)); }</span>
+<span class="fc" id="L37">        return images;</span>
+    }
+
+    public static Animation createAnimation(String spriteName, String animationName, PApplet app){
+<span class="fc" id="L41">        List&lt;String&gt; directories = getSpriteImageDirectories(spriteName, animationName);</span>
+<span class="fc" id="L42">        List&lt;PImage&gt; frames = convertPathsToPImages(directories, app);</span>
+<span class="fc" id="L43">        Animation animation = new Animation(frames, frames.size(), frameDuration);</span>
+<span class="fc" id="L44">        return animation;</span>
+    }   
+
+    /** @return Returns animations for movable objects like enemies and the player */
+    public static HashMap&lt;Direction, Animation&gt; createAnimationsForMovable(String spriteName, PApplet app){
+<span class="fc" id="L49">        HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+<span class="fc" id="L50">        animations.put(Direction.DOWN, createAnimation(spriteName, spriteName + &quot;_down&quot;, app));</span>
+<span class="fc" id="L51">        animations.put(Direction.UP, createAnimation(spriteName, spriteName + &quot;_up&quot;, app));</span>
+<span class="fc" id="L52">        animations.put(Direction.LEFT, createAnimation(spriteName, spriteName + &quot;_left&quot;, app));</span>
+<span class="fc" id="L53">        animations.put(Direction.RIGHT, createAnimation(spriteName, spriteName + &quot;_right&quot;, app));</span>
+<span class="fc" id="L54">        return animations;</span>
+    }
+
+    public static Player makePlayer(int x, int y, PApplet app){
+<span class="fc" id="L58">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;player&quot;, app);</span>
+<span class="fc" id="L59">        Player player = new Player(10, x, y, animations);</span>
+<span class="fc" id="L60">        return player;</span>
+    }
+
+    public static EnemyRed makeEnemyRed(int x, int y, PApplet app){
+<span class="fc" id="L64">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;red_enemy&quot;, app);</span>
+<span class="fc" id="L65">        EnemyRed enemy = new EnemyRed(x, y, animations);</span>
+<span class="fc" id="L66">        return enemy;</span>
+    }
+
+    public static EnemyYellow makeEnemyYellow(int x, int y, PApplet app){
+<span class="fc" id="L70">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;yellow_enemy&quot;, app);</span>
+<span class="fc" id="L71">        EnemyYellow enemy = new EnemyYellow(x, y, animations);</span>
+<span class="fc" id="L72">        return enemy;</span>
+    }
+
+    public static Bomb makeBomb(int x, int y, PApplet app){
+<span class="fc" id="L76">        HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+<span class="fc" id="L77">        animations.put(Direction.DOWN,createAnimation(&quot;bomb&quot;, &quot;bomb&quot;, app));</span>
+<span class="fc" id="L78">        Bomb bomb = new Bomb(x, y, animations, app.millis());</span>
+<span class="fc" id="L79">        return bomb;</span>
+    }
+
+    public static SolidWall makeSolidWall(int x, int y, PApplet app){
+<span class="fc" id="L83">        PImage tileImage = app.loadImage(&quot;src/main/resources/wall/solid.png&quot;);</span>
+<span class="fc" id="L84">        SolidWall tile = new SolidWall(x, y, tileImage);</span>
+<span class="fc" id="L85">        return tile;</span>
+    }
+
+    public static BrokenWall makeBrokenWall(int x, int y, PApplet app){
+<span class="fc" id="L89">        PImage tileImage = app.loadImage(&quot;src/main/resources/broken/broken.png&quot;);</span>
+<span class="fc" id="L90">        BrokenWall tile = new BrokenWall(x, y, tileImage);</span>
+<span class="fc" id="L91">        return tile;</span>
+    }
+
+    public static Goal makeGoal(int x, int y, PApplet app){
+<span class="fc" id="L95">        PImage tileImage = app.loadImage(&quot;src/main/resources/goal/goal.png&quot;);</span>
+<span class="fc" id="L96">        Goal tile = new Goal(x, y, tileImage);</span>
+<span class="fc" id="L97">        return tile;</span>
+    }
+
+    public static Empty makeEmpty(int x, int y, PApplet app){
+<span class="fc" id="L101">        PImage tileImage = app.loadImage(&quot;src/main/resources/empty/empty.png&quot;);</span>
+<span class="fc" id="L102">        Empty tile = new Empty(x, y, tileImage);</span>
+<span class="fc" id="L103">        return tile;</span>
+    }
+
+    public static ExplosionTile makeExplosionCentre(int x, int y, PApplet app){
+<span class="fc" id="L107">        PImage image = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
+<span class="fc" id="L108">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="fc" id="L109">        return tile;</span>
+    }
+
+    public static ExplosionTile makeExplosionHorizontal(int x, int y, PApplet app){
+<span class="nc" id="L113">        PImage image = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
+<span class="nc" id="L114">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L115">        return tile;</span>
+    }
+
+    public static ExplosionTile makeExplosionVertical(int x, int y, PApplet app){
+<span class="nc" id="L119">        PImage image = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
+<span class="nc" id="L120">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="nc" id="L121">        return tile;</span>
+    }
+
+    public static GameObject makeByChar(char c, int x, int y, PApplet app){
+<span class="pc bpc" id="L125" title="1 of 8 branches missed.">        switch(c){</span>
+<span class="fc" id="L126">            case 'W' : return makeSolidWall(x, y, app);</span>
+<span class="fc" id="L127">            case 'B' : return makeBrokenWall(x, y, app);</span>
+<span class="fc" id="L128">            case ' ' : return makeEmpty(x, y, app);</span>
+<span class="fc" id="L129">            case 'G' : return makeGoal(x, y, app);</span>
+<span class="fc" id="L130">            case 'P' : return makePlayer(x, y, app);</span>
+<span class="fc" id="L131">            case 'Y' : return makeEnemyYellow(x, y, app);</span>
+<span class="fc" id="L132">            case 'R' : return makeEnemyRed(x, y, app);</span>
+        }
+<span class="nc" id="L134">        return makeEmpty(x, y, app); // return empty tile if cannot find specified char</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

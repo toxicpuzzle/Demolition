@@ -19,6 +19,56 @@ public class TestLoader extends AppTester {
     }
 
     @Test
+    // Check that level without valid filename is not loaded i.e. null object returened
+    public void loadInvalidLevelDoesNotExist() {
+        Level level = Loader.loadFromFile("src/test/resources/donnotexist", 200, 10, app);
+        assertNull(level);
+    }
+
+    @Test
+    // Check that loader returns a null level if level file has two goal tiles
+    public void loadInvalidLevelTwoGoals(){
+        Level level = Loader.loadFromFile("src/test/resources/twogoals.txt", 200, 10, app);
+        assertNull(level);
+    }
+
+    @Test
+    // Check that loader returns a null level if level file has invalid tile
+    public void loadInvalidLevelInvalidTile(){
+        Level level = Loader.loadFromFile("src/test/resources/invalidtile.txt", 200, 10, app);
+        assertNull(level);
+    }
+
+    @Test
+    // Check that loader returns a null level if level file has an invalid height
+    public void loadInvalidLevelInvalidHeight(){
+        Level level = Loader.loadFromFile("src/test/resources/invalidheight.txt", 200, 10, app);
+        assertNull(level);
+    }
+
+    @Test
+    // Check that loader returns a null level if level file has an invalid height
+    public void loadInvalidLevelNoGoal(){
+        Level level = Loader.loadFromFile("src/test/resources/nogoal.txt", 200, 10, app);
+        assertNull(level);
+    }
+
+    @Test
+    // Check that loader returns a null level if level file has an invalid height
+    public void loadInvalidLevelNoPlayer(){
+        Level level = Loader.loadFromFile("src/test/resources/noplayer.txt", 200, 10, app);
+        assertNull(level);
+    }
+
+
+    @Test
+    // Check that loader returns a null level if level file has two starting locations 
+    public void loadInvalidLevelTwoStartingLocations(){
+        Level level = Loader.loadFromFile("src/test/resources/twoplayers.txt", 200, 10, app);
+        assertNull(level);
+    }
+
+    @Test
     // Check that all levels from config file are loaded 
     public void loadAllLevelsCorrectSize() {
         List<Level> levels = Loader.loadAllFiles(app, "src/test/resources/config.json");
@@ -46,7 +96,7 @@ public class TestLoader extends AppTester {
     }
     
     @Test
-    // Check that a valid level loaded contains the right items of every type
+    // Check that another valid level loaded contains the right items of every type
     public void loadSingleLevelCorrectItems2() {
         Level level = Loader.loadFromFile("src/test/resources/level2.txt", 10, 10, app);
         assert(level.getBombs().size() == 0);
@@ -56,8 +106,5 @@ public class TestLoader extends AppTester {
         assertNotNull(level.getGoal());
         assertNotNull(level.getPlayer());
     }
-
-    
-
 
 }

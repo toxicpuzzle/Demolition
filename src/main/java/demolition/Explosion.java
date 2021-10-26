@@ -40,7 +40,7 @@ public class Explosion{
 
         this.explosionStart = app.millis(); 
         this.setAllExplosionTimes();
-        System.out.println(this.getExplosionTiles().size());
+        // System.out.println(this.getExplosionTiles().size());
     }
 
     private void setAllExplosionTimes(){

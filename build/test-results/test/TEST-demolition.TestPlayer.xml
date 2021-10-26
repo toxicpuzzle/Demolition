@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestPlayer" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-10-26T07:07:28" hostname="DESKTOP-DBK8A4Q" time="12.931">
+<testsuite name="demolition.TestPlayer" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-10-26T07:49:59" hostname="DESKTOP-DBK8A4Q" time="20.846">
   <properties/>
-  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestPlayer" time="1.264"/>
-  <testcase name="testPlaceBomb()" classname="demolition.TestPlayer" time="1.297"/>
-  <testcase name="checkMoveUpNoObstacles()" classname="demolition.TestPlayer" time="1.288"/>
-  <testcase name="checkMoveRightObstacles()" classname="demolition.TestPlayer" time="1.284"/>
-  <testcase name="moveLeftRightUpDownObstacles()" classname="demolition.TestPlayer" time="1.349"/>
-  <testcase name="checkCollisionWithExplosionNegativeNoExplosion()" classname="demolition.TestPlayer" time="1.304"/>
-  <testcase name="checkMoveRightNoObstacles()" classname="demolition.TestPlayer" time="1.292"/>
-  <testcase name="checkCollisionWithExplosionNegative()" classname="demolition.TestPlayer" time="1.28"/>
-  <testcase name="checkMoveLeftNoObstacles()" classname="demolition.TestPlayer" time="1.282"/>
-  <testcase name="notNull()" classname="demolition.TestPlayer" time="1.288"/>
+  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestPlayer" time="1.286"/>
+  <testcase name="testPlaceBomb()" classname="demolition.TestPlayer" time="1.306"/>
+  <testcase name="checkCollisionWithEnemyPositive()" classname="demolition.TestPlayer" time="5.92"/>
+  <testcase name="checkCollisionWithEnemyNegative()" classname="demolition.TestPlayer" time="1.395"/>
+  <testcase name="checkMoveUpNoObstacles()" classname="demolition.TestPlayer" time="1.405"/>
+  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestPlayer" time="1.356"/>
+  <testcase name="moveLeftRightUpDownObstacles()" classname="demolition.TestPlayer" time="1.485"/>
+  <testcase name="checkCollisionWithExplosionNegativeNoExplosion()" classname="demolition.TestPlayer" time="1.332"/>
+  <testcase name="checkMoveRightNoObstacles()" classname="demolition.TestPlayer" time="1.404"/>
+  <testcase name="checkCollisionWithExplosionNegative()" classname="demolition.TestPlayer" time="1.325"/>
+  <testcase name="checkMoveLeftNoObstacles()" classname="demolition.TestPlayer" time="1.308"/>
+  <testcase name="notNull()" classname="demolition.TestPlayer" time="1.319"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

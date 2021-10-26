@@ -111,8 +111,6 @@ public class App extends PApplet {
     }
     public static void main(String[] args) {
         PApplet.main("demolition.App");
-        SpriteFactory sf = new SpriteFactory();
-        List<String> strings = sf.getSpriteImageDirectories("player", "player");
-        System.out.print(strings);
+        
     }
 }

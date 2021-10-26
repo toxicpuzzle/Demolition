@@ -45,7 +45,7 @@ public class Player extends MovingObject implements Movable {
     @Override
     public void tick(int currentTime) {
         // Animate the object
-<span class="pc bpc" id="L48" title="3 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">        if (currentTime &gt;= lastDisplayedTime + currentAnimation.getFrameDuration() || justChangedDirection){</span>
 <span class="fc" id="L49">            justChangedDirection = false;</span>
 <span class="fc" id="L50">            this.currentFrame = currentAnimation.getNextFrame();</span>
 <span class="fc" id="L51">            lastDisplayedTime = currentTime;</span>
@@ -55,8 +55,8 @@ public class Player extends MovingObject implements Movable {
     public boolean collideWithEnemy() {
 <span class="fc" id="L56">        List&lt;Enemy&gt; enemies = this.currentLevel.getEnemies();</span>
 <span class="fc bfc" id="L57" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
-<span class="pc bpc" id="L58" title="3 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
-<span class="nc" id="L59">                return true;</span>
+<span class="pc bpc" id="L58" title="1 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="fc" id="L59">                return true;</span>
             }
 <span class="fc" id="L61">        }</span>
 <span class="fc" id="L62">        return false;</span>
@@ -64,20 +64,20 @@ public class Player extends MovingObject implements Movable {
 
     public boolean collideWithExplosion() {
 <span class="fc" id="L66">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        for (ExplosionTile e: explosions){</span>
-<span class="nc bnc" id="L68" title="All 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
-<span class="nc" id="L69">                return true;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (ExplosionTile e: explosions){</span>
+<span class="pc bpc" id="L68" title="2 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="fc" id="L69">                return true;</span>
             }
 <span class="nc" id="L71">        }</span>
 <span class="fc" id="L72">        return false;</span>
     } 
 
     public void placeBomb(PApplet app){
-<span class="nc" id="L76">        Bomb bomb = (Bomb) Sprites.BOMB.make(this.xPos, this.yPos, app);</span>
-<span class="nc" id="L77">        bomb.setCurrentLevel(this.currentLevel);</span>
-<span class="nc" id="L78">        bomb.setApp(app);</span>
-<span class="nc" id="L79">        currentLevel.addObject(bomb);</span>
-<span class="nc" id="L80">    }</span>
+<span class="fc" id="L76">        Bomb bomb = SpriteFactory.makeBomb(this.xPos, this.yPos, app);</span>
+<span class="fc" id="L77">        bomb.setCurrentLevel(this.currentLevel);</span>
+<span class="fc" id="L78">        bomb.setApp(app);</span>
+<span class="fc" id="L79">        currentLevel.addObject(bomb);</span>
+<span class="fc" id="L80">    }</span>
     
     @Override
     public void moveUp() {

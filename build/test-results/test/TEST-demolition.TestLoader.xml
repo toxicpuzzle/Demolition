@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestLoader" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-10-26T07:07:22" hostname="DESKTOP-DBK8A4Q" time="6.523">
+<testsuite name="demolition.TestLoader" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-10-26T07:49:43" hostname="DESKTOP-DBK8A4Q" time="16.073">
   <properties/>
-  <testcase name="loadSingleLevelCorrectItems1()" classname="demolition.TestLoader" time="1.34"/>
-  <testcase name="loadSingleLevelCorrectItems2()" classname="demolition.TestLoader" time="1.301"/>
-  <testcase name="loadAllLevelsNoConfigFile()" classname="demolition.TestLoader" time="1.236"/>
-  <testcase name="loadAllLevelsCorrectSize()" classname="demolition.TestLoader" time="1.358"/>
-  <testcase name="loadSingleLevelNotNull()" classname="demolition.TestLoader" time="1.288"/>
+  <testcase name="loadSingleLevelCorrectItems1()" classname="demolition.TestLoader" time="1.315"/>
+  <testcase name="loadSingleLevelCorrectItems2()" classname="demolition.TestLoader" time="1.277"/>
+  <testcase name="loadInvalidLevelNoPlayer()" classname="demolition.TestLoader" time="1.213"/>
+  <testcase name="loadInvalidLevelInvalidHeight()" classname="demolition.TestLoader" time="1.199"/>
+  <testcase name="loadInvalidLevelNoGoal()" classname="demolition.TestLoader" time="1.241"/>
+  <testcase name="loadAllLevelsNoConfigFile()" classname="demolition.TestLoader" time="1.506"/>
+  <testcase name="loadInvalidLevelInvalidTile()" classname="demolition.TestLoader" time="2.024"/>
+  <testcase name="loadInvalidLevelTwoGoals()" classname="demolition.TestLoader" time="1.217"/>
+  <testcase name="loadAllLevelsCorrectSize()" classname="demolition.TestLoader" time="1.356"/>
+  <testcase name="loadInvalidLevelDoesNotExist()" classname="demolition.TestLoader" time="1.226"/>
+  <testcase name="loadInvalidLevelTwoStartingLocations()" classname="demolition.TestLoader" time="1.201"/>
+  <testcase name="loadSingleLevelNotNull()" classname="demolition.TestLoader" time="1.295"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

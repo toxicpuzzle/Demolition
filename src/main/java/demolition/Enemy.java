@@ -30,32 +30,59 @@ public abstract class Enemy extends MovingObject implements Movable {
     @Override
     public void moveUp() {
         this.yPos -= 32;
-        this.direction = direction.UP;
-        updateCurrentAnimation();
-    }
-
-    @Override
-    public void moveRight() {
-        this.xPos += 32;
-        this.direction = direction.RIGHT;
-        updateCurrentAnimation();
     }
 
     @Override
     public void moveDown() {
         this.yPos += 32;
-        this.direction = direction.DOWN;
-        updateCurrentAnimation();
+    }
+    
+
+    @Override
+    public void moveRight() {
+        this.xPos += 32;
     }
 
     @Override
     public void moveLeft() {
         this.xPos -= 32;
-        this.direction = direction.LEFT;
-        updateCurrentAnimation();
     }
 
-    public abstract void walk();
+    protected void walk(){
+        // keep trying random direction until clear path opens up and animation updates
+        int oldX = this.xPos;
+        int oldY = this.yPos;
+        Direction oldDirection = this.direction;
+
+        switch(direction){
+            case DOWN: 
+                moveDown();
+                break;
+            case UP: 
+                moveUp();
+                break;
+            case LEFT: 
+                moveLeft();
+                break;
+            case RIGHT:
+                moveRight();
+                break; 
+        }
+
+        // TODO: Change it so that this only checks collision with tiles and not hard bodies such as the player -> temp fix
+        if (collideWithSolid()){
+            resetPosition(oldX, oldY, oldDirection);
+            Direction newDirection = getDirectionStrategy();
+            this.direction = newDirection;
+            justChangedDirection = true;
+            walk();
+        } else {
+            updateCurrentAnimation();
+            return;
+        }
+    }
+
+    public abstract Direction getDirectionStrategy();
 
     public boolean collideWithExplosion() {
         List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
@@ -85,9 +112,6 @@ public abstract class Enemy extends MovingObject implements Movable {
             this.currentFrame = currentAnimation.getNextFrame();
             lastDisplayedTime = currentTime;
         }
-
-        
-        
     }
     
 }
