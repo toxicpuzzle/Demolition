@@ -11,8 +11,7 @@ public enum Direction {
     DOWN,
     NONE;
 
-
-    // TODO: Cannot use enum function, must handle logic by detecting collisions.
+    /**Gets the direction clockwise to the current direction */
     public Direction clockwise() {
         switch(this){
             case LEFT: return UP;
@@ -23,6 +22,7 @@ public enum Direction {
         return NONE;
     }
 
+    /**Gets a random direction from the current direction */
     public Direction random(){
         int rand = (int) (Math.random()*4 + 1);
         switch(rand){

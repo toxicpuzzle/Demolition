@@ -15,7 +15,7 @@ public abstract class Enemy extends MovingObject implements Movable {
     protected int walkTimer;
     protected List<Direction> directionsTried;
 
-     /**Default constructor for enemyObjects, creates animations, and sets all starting directions for objects to be down 
+     /**Default constructor for enemyObjects, creates animations
      * @param x x coord to create the object
      * @param y y coord to create the object
      * @param animations animations corresponding to each direction the directional object is moving

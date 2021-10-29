@@ -11,7 +11,13 @@ public class Player extends MovingObject implements Movable {
     private int xStarting;
     private int yStarting;
     private int timer; 
-   
+    
+    /**Constructor for player objects
+     * @param lives the number of lives 
+     * @param x x coord to create the object
+     * @param y y coord to create the object
+     * @param animations animations corresponding to each direction the directional object is moving
+    */
     public Player(int lives, int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
         this.lives = lives;

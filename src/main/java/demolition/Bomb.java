@@ -9,24 +9,36 @@ public class Bomb extends MovingObject{
     private int timeSincePlaced;
     private PApplet app; // TEMP
 
+    /**Constructor for bomb objects, creates animations, and the time placed for the bomb. 
+     * @param x x coord to create the object
+     * @param y y coord to create the object
+     * @param animations animations corresponding to each direction the directional object is moving
+     * @deprecated timeplaced is deprecated parameter
+    */
     public Bomb(int x, int y, HashMap<Direction, Animation> animations, int timePlaced){
         super(x, y, animations);
     }
 
+    /**Sets the app object that is used by the bomb 
+     * @param app the app instance used to run the game.
+    */
     public void setApp(PApplet app){
         this.app = app;
     }
 
+    /**@param level the level in which the bomb is to be placed */
     //Repetitive code, try to remove
     public void setCurrentLevel(Level level){
         this.currentLevel = level;
     }
 
+    /**Draws the bomb onto the screen */
     @Override
     public void draw(PApplet app) {
         super.draw(app);
     }
 
+    /**Updates the bomb so that it will be removed & generate an explosion if all of its animation frames have been played */
     @Override
     public void tick() {
         if (this.isRemoved){
