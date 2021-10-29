@@ -25,6 +25,8 @@ public class TestPlayer extends AppTester {
         this.player = SpriteFactory.makePlayer(0, 0, app); 
         this.level = Loader.loadFromFile("src/test/resources/level1.txt", 10, 10, app);
         player.setCurrentLevel(level);
+
+        //! app is not linked iwth player or level
     }
 
     @Test
@@ -41,7 +43,7 @@ public class TestPlayer extends AppTester {
         player.moveLeft();
         assertEquals(player.getX(), -32);
         assertEquals(player.justChangedDirection, true);
-        app.draw();
+        app.draw(); // Redundant
         assertEquals(player.animations.get(Direction.LEFT), player.currentAnimation);
     } 
 
@@ -52,7 +54,7 @@ public class TestPlayer extends AppTester {
         assertEquals(player.getX(), 32);
         assertEquals(player.justChangedDirection, true);
         app.draw();
-        assertEquals( player.animations.get(Direction.RIGHT), player.currentAnimation);
+        assertEquals(player.animations.get(Direction.RIGHT), player.currentAnimation);
     }
 
     @Test
@@ -165,9 +167,31 @@ public class TestPlayer extends AppTester {
         assertEquals(true, player.collideWithEnemy());
     }
 
+    private void tickPlayer(int milliSeconds){
+        double seconds = milliSeconds*0.001;
+        double frames = App.FPS*seconds;
+        long iFrames = Math.round(frames);
+        for (long i = 0; i < iFrames; i++){
+            System.out.println("ticked on the " + i+1 + "th" + " time.");
+            this.player.tick();
+        }
+    }
+
+    @Test
     // Test animation cycle is changing at correct pace.
     public void checkAnimationCycle(){
         // TODO: implement framerate counting method of checking speed rather than relying on millis(); -> DOne
+        Animation animation = this.player.getCurrentAnimation();
+        System.out.println(this.player.getCurrentAnimation().getFrameNumber());
+        // assertEquals(1, animation.getFrameNumber());
+        tickPlayer(200);
+        System.out.println(this.player.getCurrentAnimation().getFrameNumber());
+
+        // assertEquals(2, animation.getFrameNumber());
+        tick(200);
+        System.out.println(this.player.getCurrentAnimation().getFrameNumber());
+
+        // assertEquals(3, animation.getFrameNumber());
     }
 
 

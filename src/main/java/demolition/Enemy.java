@@ -15,6 +15,11 @@ public abstract class Enemy extends MovingObject implements Movable {
     protected int walkTimer;
     protected List<Direction> directionsTried;
 
+     /**Default constructor for enemyObjects, creates animations, and sets all starting directions for objects to be down 
+     * @param x x coord to create the object
+     * @param y y coord to create the object
+     * @param animations animations corresponding to each direction the directional object is moving
+    */
     public Enemy(int x, int y, HashMap<Direction, Animation> animations){
         super(x, y, animations);
         this.yStarting = y;
@@ -26,31 +31,40 @@ public abstract class Enemy extends MovingObject implements Movable {
     }
     @Override
     
+    /**Draws the enemy's current frame on screen
+     * @param app the app object associated with the enemy
+     */
     public void draw(PApplet app) {
         app.image(currentFrame, xPos, yPos-yHeadOffset);
     }
 
+    /**Moves the enemy up */
     @Override
     public void moveUp() {
         this.yPos -= 32;
     }
 
+    /**Moves the enemy down */
     @Override
     public void moveDown() {
         this.yPos += 32;
     }
     
-
+    /**Moves the enemy right */
     @Override
     public void moveRight() {
         this.xPos += 32;
     }
 
+    /**Moves the enemy left */
     @Override
     public void moveLeft() {
         this.xPos -= 32;
     }
 
+    /**Automatically walks the enemy in the appropriate direction/changes its coords and 
+     * updates its direction when it hits a wall based on the specific enemy's concrete 
+     * implementation of the abstract movementstrategy method */
     protected void walk(){
         // keep trying random direction until clear path opens up and animation updates
         int oldX = this.xPos;
@@ -103,8 +117,11 @@ public abstract class Enemy extends MovingObject implements Movable {
         }
     }
 
+    /**@return the direction for the enemy to move in when it is facing a solid object */
     public abstract Direction getDirectionStrategy();
 
+    /**@return true if the enemy is colliding with an explosion */
+    //TODO: put this method as well as the collide with solid method into the gameobject class since it is also used elsewhere e.g. in explosion class.
     public boolean collideWithExplosion() {
         List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
         for (ExplosionTile e: explosions){
@@ -115,6 +132,7 @@ public abstract class Enemy extends MovingObject implements Movable {
         return false;
     } 
 
+    /**Updates the state of the enemy based on if has touched an explosion or if it has changed direction/walked */
     @Override
     public void tick() {
         walkTimer++;

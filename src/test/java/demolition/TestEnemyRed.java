@@ -98,7 +98,7 @@ public class TestEnemyRed extends AppTester {
     @Test
     // Check that the enemy does not move at all if it is stuck
     public void checkStuck(){
-        //!  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls.
+        //!  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls. -> should be fixed now
     }
 
 }

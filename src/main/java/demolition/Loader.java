@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 public class Loader {
 
+    /**Loads all the level files specified by the configFile to be used for the game
+     * @param app the app object used to run the game
+     * @param configFileName the string representation of the config file name
+     * @return A list containing all the levels specified by the txt files listed in the central configfile
+     */
     public static List<Level> loadAllFiles(PApplet app, String configFileName){
         List<Level> allLevels = new ArrayList<Level>();
 
@@ -58,6 +63,14 @@ public class Loader {
 
     }
     
+    /**Loads one level based on the file name, time limit for the level, the lives for the player, 
+     * where all levels must only have one starting position and one finish position and must be 13x13.
+     * @param filename the name of the txt file containing the level's configurations
+     * @param time the time limit to complete the level
+     * @param lives the number of lives the player has in total
+     * @param app the app object used to run the game
+     * @return the level loaded from the filename
+     */
     public static Level loadFromFile(String filename, int time, int lives, PApplet app){
         Level newLevel = new Level();
 

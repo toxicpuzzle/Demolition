@@ -3,25 +3,22 @@ package demolition;
 import java.util.List;
 import processing.core.PApplet;
 import processing.core.PFont;
-public class GameManager extends App{
+public class GameManager {
     private int currentLevelIndex;
     private List<Level> levels;
     private boolean won;
     private boolean gameOver;
     private Level currentLevel;
 
+    /**@param levels all levels the gamemanager needs to handle */
     public GameManager(List<Level> levels){
         this.levels = levels;
         this.currentLevelIndex = 0;
         this.currentLevel = levels.get(currentLevelIndex);
-
         setup();
     }
 
-    public Level copyOf(Level level){
-        return null;
-    }
-
+    /**Removes all broken walls that are colliding with an explosion in a level*/
     public void removeBrokenWalls(){
         for (GameObject object: currentLevel.getBrokenWalls()){
             for (GameObject explosion: currentLevel.getExplosionTiles()){
@@ -32,6 +29,7 @@ public class GameManager extends App{
         }
     }
 
+    /**Implements gamelogic to check if the player will lose a life, has won, run out of time -> go to gameover or win screen or continue the game */
     public void tick() {
 
         Player player = this.currentLevel.getPlayer();
@@ -60,16 +58,19 @@ public class GameManager extends App{
         removeBrokenWalls();
     }
 
+    /**Removes all objects from level and triggers gameover conditions */
     public void goToGameOver(){
         this.currentLevel.removeAllObjects();
         this.gameOver = true;
     }
 
+    /**Removes all objects from level and triggers gamewin conditions */
     public void goToWin(){
         this.currentLevel.removeAllObjects();
         this.won = true;
     }
 
+    /**@return true if the player has won by walking over the gaol tile */
     public boolean hasWon(){
         Player p = currentLevel.getPlayer();
         if (p.collisionWith(currentLevel.getGoal())){
@@ -78,19 +79,18 @@ public class GameManager extends App{
         return false;
     }
 
+    /**@return true if the player has won all levels in the game */
     public boolean hasWonAll(){
         return this.won;
     }
 
+    /**@return true if the level's gameover attribute is true */
     public boolean hasGameOver(){
         return this.gameOver;
     }
-    
-    public boolean hasDied(){
-        return false;
-    }
 
     //Setup current/futurelevel level (Fully intialise enemies and players)
+    /**Sets up all moving objects in the level by allowing the gamemanager to access all enemies and players from the current level */
     public void setup(){
         List<Enemy> enemies = currentLevel.getEnemies();
         Player p = currentLevel.getPlayer();
@@ -101,10 +101,12 @@ public class GameManager extends App{
         p.setCurrentLevel(currentLevel);
     }
 
+    /**@return the level object the gamemanager is currently handling */
     public Level getCurrentLevel(){
         return this.currentLevel;
     }
 
+    /**Goes to the next level and sets it up to be handled by the present gamemanager instance */
     public void toNextLevel(){
         this.currentLevelIndex++;
         int lives = currentLevel.getPlayer().getLives();

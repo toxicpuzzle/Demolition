@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestLoader" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-10-26T11:50:13" hostname="DESKTOP-DBK8A4Q" time="16.457">
+<testsuite name="demolition.TestLoader" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-10-29T10:34:00" hostname="DESKTOP-DBK8A4Q" time="14.978">
   <properties/>
-  <testcase name="loadSingleLevelCorrectItems1()" classname="demolition.TestLoader" time="1.441"/>
-  <testcase name="loadSingleLevelCorrectItems2()" classname="demolition.TestLoader" time="1.401"/>
-  <testcase name="loadInvalidLevelNoPlayer()" classname="demolition.TestLoader" time="1.348"/>
-  <testcase name="loadInvalidLevelInvalidHeight()" classname="demolition.TestLoader" time="1.306"/>
-  <testcase name="loadInvalidLevelNoGoal()" classname="demolition.TestLoader" time="1.293"/>
-  <testcase name="loadAllLevelsNoConfigFile()" classname="demolition.TestLoader" time="1.326"/>
-  <testcase name="loadInvalidLevelInvalidTile()" classname="demolition.TestLoader" time="1.322"/>
-  <testcase name="loadInvalidLevelTwoGoals()" classname="demolition.TestLoader" time="1.354"/>
-  <testcase name="loadAllLevelsCorrectSize()" classname="demolition.TestLoader" time="1.59"/>
-  <testcase name="loadInvalidLevelDoesNotExist()" classname="demolition.TestLoader" time="1.294"/>
-  <testcase name="loadInvalidLevelTwoStartingLocations()" classname="demolition.TestLoader" time="1.35"/>
-  <testcase name="loadSingleLevelNotNull()" classname="demolition.TestLoader" time="1.427"/>
+  <testcase name="loadSingleLevelCorrectItems1()" classname="demolition.TestLoader" time="1.296"/>
+  <testcase name="loadSingleLevelCorrectItems2()" classname="demolition.TestLoader" time="1.298"/>
+  <testcase name="loadInvalidLevelNoPlayer()" classname="demolition.TestLoader" time="1.28"/>
+  <testcase name="loadInvalidLevelInvalidHeight()" classname="demolition.TestLoader" time="1.208"/>
+  <testcase name="loadInvalidLevelNoGoal()" classname="demolition.TestLoader" time="1.24"/>
+  <testcase name="loadAllLevelsNoConfigFile()" classname="demolition.TestLoader" time="1.228"/>
+  <testcase name="loadInvalidLevelInvalidTile()" classname="demolition.TestLoader" time="1.213"/>
+  <testcase name="loadInvalidLevelTwoGoals()" classname="demolition.TestLoader" time="1.223"/>
+  <testcase name="loadAllLevelsCorrectSize()" classname="demolition.TestLoader" time="1.321"/>
+  <testcase name="loadInvalidLevelDoesNotExist()" classname="demolition.TestLoader" time="1.183"/>
+  <testcase name="loadInvalidLevelTwoStartingLocations()" classname="demolition.TestLoader" time="1.208"/>
+  <testcase name="loadSingleLevelNotNull()" classname="demolition.TestLoader" time="1.273"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

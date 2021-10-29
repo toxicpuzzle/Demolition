@@ -18,6 +18,11 @@ public class Explosion{
     // New explosion will be made by the bomb class.
     // NOTE: Explosion is a collection of explosiontiles
     // NB: Pimage is dummy var to avoid nullpointer right now
+    /**@param x the x coord for the centre of the explosion (bomb x)
+     * @param y the y coord for the centre of the explosion (bomb y)
+     * @param level the level in which the explosion is to be placed
+     * @param app the app instance that runs the entire game
+     */
     public Explosion(int x, int y, Level level, PApplet app) {
         this.centre = (ExplosionTile) SpriteFactory.makeExplosionCentre(x, y, app);
         this.left = new ArrayList<ExplosionTile>();
@@ -36,6 +41,10 @@ public class Explosion{
     }
 
     // Helper function for constructor
+    /**Makes the explosion tiles in the given direction
+     * @param direction the direction to make explosiontiles in
+     * @param app the app instance that runs the game
+     */
     private void makeInDirection(Direction direction, PApplet app){
         int xCurrent = this.centre.getX();
         int yCurrent = this.centre.getY();
@@ -80,6 +89,7 @@ public class Explosion{
         } 
     }
 
+    /**@return all the explosion tiles in the explosion object */
     public List<GameObject> getExplosionTiles(){
         List<GameObject> gameObjects = new ArrayList<GameObject>();
         gameObjects.addAll(this.left);
@@ -90,6 +100,7 @@ public class Explosion{
         return gameObjects;
     }
 
+    /**Adds all of the explosiontiles in the explosion object to the level the explosion object was created in */
     public void addAllExpTiles(){
         List<GameObject> tiles = this.getExplosionTiles();
         for (GameObject object: tiles){

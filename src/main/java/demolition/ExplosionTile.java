@@ -34,7 +34,7 @@ public class ExplosionTile extends GameObject {
         }
         return false;
     }
-
+    
     public Level getCurrentLevel(){
         return this.currentLevel;
     }
