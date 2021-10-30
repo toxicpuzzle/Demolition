@@ -37,13 +37,6 @@ public class TestEnemyRed extends AppTester {
         assertNotNull(this.enemy);
     }
 
-    // Movement without obstacles
-    @Test
-    // Check moveleft without obstacles, coords are right and that the player has changed directions
-    public void checkAutoMoveDown(){
-        app.draw();
-    } 
-
     @Test
     // Check that the enemy's coords have moved down and that the correct animation cycle is being played post movement
     public void checkMoveDownNoObstacles(){
@@ -58,7 +51,7 @@ public class TestEnemyRed extends AppTester {
 
     @Test
     // Check that the enemy changes direction after hitting obstacle (case that enemy can only go right because every other direction is blocked)
-    public void checkMoveDownWithObstaclesAllSides(){
+    public void checkMoveDownWithObstaclesAllSidesForceRight(){
         level.addObject(SpriteFactory.makeSolidWall(32, 32*4, app));
         for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
             this.enemy.tick();
@@ -66,6 +59,23 @@ public class TestEnemyRed extends AppTester {
         assertEquals(32*3, enemy.yPos);
         assertEquals(32*2, enemy.xPos);
         assertEquals(enemy.animations.get(Direction.RIGHT), enemy.currentAnimation);
+    }
+
+    @Test
+    // Check that enemy changes direction to left if all other tiles are blocking way
+    public void checkMoveDownWithObstaclesAllSidesForceLeft(){
+        this.enemy = SpriteFactory.makeEnemyRed(32*2, 32*3, app); 
+        this.enemy.setCurrentLevel(this.level);
+        level.addObject(enemy);
+        //Add blocks to right and bottom of enemy
+        level.addObject(SpriteFactory.makeSolidWall(32*2, 32*4, app));
+        level.addObject(SpriteFactory.makeSolidWall(32*3, 32*3, app));
+        for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
+            this.enemy.tick();
+        }
+        assertEquals(32*3, enemy.yPos);
+        assertEquals(32, enemy.xPos);
+        assertEquals(enemy.animations.get(Direction.LEFT), enemy.currentAnimation);
     }
 
     @Test
@@ -96,9 +106,19 @@ public class TestEnemyRed extends AppTester {
     }
 
     @Test
-    // Check that the enemy does not move at all if it is stuck
+    // Check that the enemy does not move at all if it is stuck and continues to face in the same direction.
     public void checkStuck(){
-        //!  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls. -> should be fixed now
+        this.level = Loader.loadFromFile("src/test/resources/enemyallwalls.txt", 100, 100, app);
+        this.enemy = SpriteFactory.makeEnemyRed(32, 32*3, app); 
+        this.level.addObject(enemy);
+        enemy.setCurrentLevel(this.level);
+        for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
+            this.enemy.tick();
+        }
+        assertEquals(32, enemy.getX());
+        assertEquals(32*3, enemy.getY());
+        assertEquals(Direction.DOWN, enemy.getDirection());
+        // !  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls. -> should be fixed now
     }
 
 }

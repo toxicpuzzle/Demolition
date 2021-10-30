@@ -4,6 +4,7 @@ package demolition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import demolition.App;
 import demolition.GameObject;
@@ -103,7 +104,10 @@ public class TestPlayer extends AppTester {
     public void testPlaceBomb(){
         this.player.placeBomb(app);
         List<Bomb> bombs = level.getBombs();
+        Bomb bomb = bombs.get(0);
         assertEquals(1, bombs.size());
+        assertEquals(this.player.getX(), bomb.getX());
+        assertEquals(this.player.getY(), bomb.getY());
     }
 
     @Test
@@ -172,26 +176,68 @@ public class TestPlayer extends AppTester {
         double frames = App.FPS*seconds;
         long iFrames = Math.round(frames);
         for (long i = 0; i < iFrames; i++){
-            System.out.println("ticked on the " + i+1 + "th" + " time.");
+            long ith = i+1;
+            // System.out.println("ticked on the " + ith + "th" + " time.");
             this.player.tick();
         }
     }
 
+    // TODO: Potential edge cases
+    // Player walking into goal tile whilst hitting enemy/explosion
+    // Player walking into a broken tile after it has been borken -> can walk through
+
     @Test
-    // Test animation cycle is changing at correct pace.
-    public void checkAnimationCycle(){
-        // TODO: implement framerate counting method of checking speed rather than relying on millis(); -> DOne
+    // Check that the animation is being played at the correct speed and cycles back to original animation frame after all frames are played
+    public void checkAnimationCycleNoDirectionMovement(){
         Animation animation = this.player.getCurrentAnimation();
-        System.out.println(this.player.getCurrentAnimation().getFrameNumber());
-        // assertEquals(1, animation.getFrameNumber());
+        assertEquals(0, animation.getFrameNumber());
         tickPlayer(200);
-        System.out.println(this.player.getCurrentAnimation().getFrameNumber());
+        assertEquals(1, animation.getFrameNumber());        
+        tickPlayer(200);
+        assertEquals(2, animation.getFrameNumber());
+        tickPlayer(200);
+        assertEquals(3, animation.getFrameNumber());
+        tickPlayer(200);
+        assertEquals(0, animation.getFrameNumber());
+    }
+    @Test
+    // Check that the correct animation cycle is played when the player changes direction in the middle of an animation
+    public void checkAnimationCycleWithSuccessfulDirectionMovement(){
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());        
+        tickPlayer(200);
+        this.player.moveUp();
+        assertEquals(this.player.animations.get(Direction.UP), this.player.currentAnimation);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        this.player.moveUp();
+        assertEquals(this.player.animations.get(Direction.UP), this.player.currentAnimation);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(3, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+    }
 
-        // assertEquals(2, animation.getFrameNumber());
-        tick(200);
-        System.out.println(this.player.getCurrentAnimation().getFrameNumber());
-
-        // assertEquals(3, animation.getFrameNumber());
+    @Test
+    // Check that the frame count does not reset when the player moves in the same direction
+    public void checkAnimationCycleSameDirection(){
+        this.player.moveUp();
+        assertEquals(this.player.animations.get(Direction.UP), this.player.currentAnimation);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        this.player.moveUp();
+        assertEquals(this.player.animations.get(Direction.UP), this.player.currentAnimation);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(3, this.player.getCurrentAnimation().getFrameNumber());
     }
 
 

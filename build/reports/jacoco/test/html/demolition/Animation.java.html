@@ -12,40 +12,59 @@ public class Animation {
     private List&lt;PImage&gt; animationFrames; //Could change this to url of animation frames
     private Direction direction;
 
-<span class="fc" id="L15">    public Animation(List&lt;PImage&gt; frames, int frameCount, int frameDuration, Direction direction){</span>
-<span class="fc" id="L16">        this.animationFrames = frames;</span>
-<span class="fc" id="L17">        this.frameDuration = frameDuration;</span>
-<span class="fc" id="L18">        this.direction = direction;</span>
-<span class="fc" id="L19">        frameLength = this.animationFrames.size();</span>
-<span class="fc" id="L20">        currFrameIndex = 0;</span>
-<span class="fc" id="L21">    }</span>
+    /**Constructor for all animation objects
+     * @param frames list containing all images to be used in the frames, in the order they are to be played
+     * @param frameCount the number of frames in the animation (Deprecated)
+     * @param frameDuration the length in milliseconds for each frame to be played
+     * @param direction the direction associated with the animation.
+     */
+<span class="fc" id="L21">    public Animation(List&lt;PImage&gt; frames, int frameCount, int frameDuration, Direction direction){</span>
+<span class="fc" id="L22">        this.animationFrames = frames;</span>
+<span class="fc" id="L23">        this.frameDuration = frameDuration;</span>
+<span class="fc" id="L24">        this.direction = direction;</span>
+<span class="fc" id="L25">        frameLength = this.animationFrames.size();</span>
+<span class="fc" id="L26">        currFrameIndex = 0;</span>
+<span class="fc" id="L27">    }</span>
 
+    /**Constructor for gameobjects with no directional attribute */
     public Animation(List&lt;PImage&gt; frames, int frameCount, int frameDuration){
-<span class="fc" id="L24">        this(frames, frameCount, frameDuration, Direction.NONE);</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L31">        this(frames, frameCount, frameDuration, Direction.NONE);</span>
+<span class="fc" id="L32">    }</span>
 
+    /**Sets the direction of the animation if it was initialised using the simpler constructor
+     * @param direction the direction for the animation.
+     */
+    public void setDirection(Direction direction){
+<span class="fc" id="L38">        this.direction = direction;</span>
+<span class="fc" id="L39">    }</span>
+
+    /**@return the duration for each frame to be played*/
     public int getFrameDuration(){
-<span class="fc" id="L28">        return this.frameDuration;</span>
+<span class="fc" id="L43">        return this.frameDuration;</span>
     }
 
+    /**@return the image object for the next frame in the current animation */
     public PImage getNextFrame(){
-<span class="fc" id="L32">        return animationFrames.get(currFrameIndex++%frameLength);</span>
+<span class="fc" id="L48">        return animationFrames.get(currFrameIndex++%frameLength);</span>
     }
 
+    /**@return the frame at a particular index in the current animationsFrame list */
     public PImage getFrameAtIndex(int index){
-<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (index &gt; frameLength){</span>
-<span class="nc" id="L37">            return null;</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (index &gt; frameLength){</span>
+<span class="nc" id="L54">            return null;</span>
         } else{
-<span class="fc" id="L39">            return this.animationFrames.get(index);</span>
+<span class="fc" id="L56">            return this.animationFrames.get(index);</span>
         }
     }
 
+    /**@return the direction in which the current animation is to be placed */
     public Direction getDirection(){
-<span class="nc" id="L44">        return this.direction;</span>
+<span class="fc" id="L62">        return this.direction;</span>
     }
 
+    /**@return the current frame number that is being played */
     public int getFrameNumber(){
-<span class="nc" id="L48">        return this.currFrameIndex%frameLength;</span>
+<span class="fc" id="L67">        return this.currFrameIndex%frameLength;</span>
     }
 
 }

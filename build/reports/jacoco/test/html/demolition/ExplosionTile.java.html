@@ -16,41 +16,41 @@ public class ExplosionTile extends GameObject {
 
     // TODO: Remove duplicate code
     public boolean collideWithBroken(){
-<span class="nc" id="L19">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        for (GameObject object: brokenWalls){</span>
-<span class="nc bnc" id="L21" title="All 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
-<span class="nc" id="L22">                return true;</span>
+<span class="fc" id="L19">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        for (GameObject object: brokenWalls){</span>
+<span class="pc bpc" id="L21" title="1 of 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
+<span class="fc" id="L22">                return true;</span>
             }
-<span class="nc" id="L24">        }</span>
-<span class="nc" id="L25">        return false;</span>
+<span class="fc" id="L24">        }</span>
+<span class="fc" id="L25">        return false;</span>
     }
 
     public boolean collideWithSolid(){
-<span class="nc" id="L29">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        for (GameObject object: solidWalls){</span>
-<span class="nc bnc" id="L31" title="All 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
-<span class="nc" id="L32">                return true;</span>
+<span class="fc" id="L29">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (GameObject object: solidWalls){</span>
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">            if (this.collisionWith(object) &amp;&amp; !object.isRemoved){</span>
+<span class="fc" id="L32">                return true;</span>
             }
-<span class="nc" id="L34">        }</span>
-<span class="nc" id="L35">        return false;</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">        return false;</span>
     }
-
+    
     public Level getCurrentLevel(){
 <span class="nc" id="L39">        return this.currentLevel;</span>
     }
 
     public void setCurrentLevel(Level level){
-<span class="nc" id="L43">        this.currentLevel = level;</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        this.currentLevel = level;</span>
+<span class="fc" id="L44">    }</span>
 
     @Override
     public void tick() {
-<span class="nc" id="L48">        timeSinceExplosion++;</span>
-<span class="nc" id="L49">        float secondsLasted = (float) duration/1000;</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
-<span class="nc" id="L51">            this.remove();</span>
+<span class="fc" id="L48">        timeSinceExplosion++;</span>
+<span class="fc" id="L49">        float secondsLasted = (float) duration/1000;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
+<span class="fc" id="L51">            this.remove();</span>
         } 
-<span class="nc" id="L53">    }</span>
+<span class="fc" id="L53">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

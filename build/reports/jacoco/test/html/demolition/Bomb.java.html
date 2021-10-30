@@ -9,41 +9,53 @@ public class Bomb extends MovingObject{
     private int timeSincePlaced;
     private PApplet app; // TEMP
 
+    /**Constructor for bomb objects, creates animations, and the time placed for the bomb. 
+     * @param x x coord to create the object
+     * @param y y coord to create the object
+     * @param animations animations corresponding to each direction the directional object is moving
+     * @deprecated timeplaced is deprecated parameter
+    */
     public Bomb(int x, int y, HashMap&lt;Direction, Animation&gt; animations, int timePlaced){
-<span class="fc" id="L13">        super(x, y, animations);</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L19">        super(x, y, animations);</span>
+<span class="fc" id="L20">    }</span>
 
+    /**Sets the app object that is used by the bomb 
+     * @param app the app instance used to run the game.
+    */
     public void setApp(PApplet app){
-<span class="fc" id="L17">        this.app = app;</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L26">        this.app = app;</span>
+<span class="fc" id="L27">    }</span>
 
+    /**@param level the level in which the bomb is to be placed */
     //Repetitive code, try to remove
     public void setCurrentLevel(Level level){
-<span class="fc" id="L22">        this.currentLevel = level;</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L32">        this.currentLevel = level;</span>
+<span class="fc" id="L33">    }</span>
 
+    /**Draws the bomb onto the screen */
     @Override
     public void draw(PApplet app) {
-<span class="nc" id="L27">        super.draw(app);</span>
-<span class="nc" id="L28">    }</span>
+<span class="nc" id="L38">        super.draw(app);</span>
+<span class="nc" id="L39">    }</span>
 
+    /**Updates the bomb so that it will be removed &amp; generate an explosion if all of its animation frames have been played */
     @Override
     public void tick() {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (this.isRemoved){</span>
-<span class="nc" id="L33">            return;</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (this.isRemoved){</span>
+<span class="nc" id="L45">            return;</span>
         }
         // System.out.println(this.currentAnimation.getFrameNumber());
-<span class="nc" id="L36">        timeSincePlaced++;</span>
+<span class="fc" id="L48">        timeSincePlaced++;</span>
 
-<span class="nc" id="L38">        float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;</span>
-<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (timeSincePlaced &gt;= secondsBetweenFrames*App.FPS*8){</span>
-<span class="nc" id="L40">            Explosion explosion = new Explosion(this.xPos, this.yPos, this.currentLevel, app);</span>
-<span class="nc" id="L41">            explosion.addAllExpTiles();</span>
-<span class="nc" id="L42">            this.isRemoved = true;</span>
+<span class="fc" id="L50">        float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (timeSincePlaced &gt;= secondsBetweenFrames*App.FPS*8){</span>
+<span class="fc" id="L52">            Explosion explosion = new Explosion(this.xPos, this.yPos, this.currentLevel, app);</span>
+<span class="fc" id="L53">            explosion.addAllExpTiles();</span>
+<span class="fc" id="L54">            this.isRemoved = true;</span>
         }
 
-<span class="nc" id="L45">        super.tick();        </span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L57">        super.tick();        </span>
+<span class="fc" id="L58">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

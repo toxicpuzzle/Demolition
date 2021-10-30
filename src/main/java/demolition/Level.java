@@ -189,6 +189,8 @@ public class Level {
             e.isRemoved = false;
             e.xPos = e.xStarting;
             e.yPos = e.yStarting;
+            e.direction = Direction.DOWN;
+            e.currentAnimation = e.animations.get(Direction.DOWN);
         }
 
         List<BrokenWall> brokenWalls = this.brokenWalls;

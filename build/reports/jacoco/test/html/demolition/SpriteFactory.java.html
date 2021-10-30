@@ -48,90 +48,94 @@ import java.io.FilenameFilter;
     public static HashMap&lt;Direction, Animation&gt; createAnimationsForMovable(String spriteName, PApplet app){
 <span class="fc" id="L49">        HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
 <span class="fc" id="L50">        animations.put(Direction.DOWN, createAnimation(spriteName, spriteName + &quot;_down&quot;, app));</span>
-<span class="fc" id="L51">        animations.put(Direction.UP, createAnimation(spriteName, spriteName + &quot;_up&quot;, app));</span>
-<span class="fc" id="L52">        animations.put(Direction.LEFT, createAnimation(spriteName, spriteName + &quot;_left&quot;, app));</span>
-<span class="fc" id="L53">        animations.put(Direction.RIGHT, createAnimation(spriteName, spriteName + &quot;_right&quot;, app));</span>
-<span class="fc" id="L54">        return animations;</span>
+<span class="fc" id="L51">        animations.get(Direction.DOWN).setDirection(Direction.DOWN);</span>
+<span class="fc" id="L52">        animations.put(Direction.UP, createAnimation(spriteName, spriteName + &quot;_up&quot;, app));</span>
+<span class="fc" id="L53">        animations.get(Direction.UP).setDirection(Direction.UP);</span>
+<span class="fc" id="L54">        animations.put(Direction.LEFT, createAnimation(spriteName, spriteName + &quot;_left&quot;, app));</span>
+<span class="fc" id="L55">        animations.get(Direction.LEFT).setDirection(Direction.LEFT);</span>
+<span class="fc" id="L56">        animations.put(Direction.RIGHT, createAnimation(spriteName, spriteName + &quot;_right&quot;, app));</span>
+<span class="fc" id="L57">        animations.get(Direction.RIGHT).setDirection(Direction.RIGHT);</span>
+<span class="fc" id="L58">        return animations;</span>
     }
 
     public static Player makePlayer(int x, int y, PApplet app){
-<span class="fc" id="L58">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;player&quot;, app);</span>
-<span class="fc" id="L59">        Player player = new Player(10, x, y, animations);</span>
-<span class="fc" id="L60">        return player;</span>
+<span class="fc" id="L62">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;player&quot;, app);</span>
+<span class="fc" id="L63">        Player player = new Player(10, x, y, animations);</span>
+<span class="fc" id="L64">        return player;</span>
     }
 
     public static EnemyRed makeEnemyRed(int x, int y, PApplet app){
-<span class="fc" id="L64">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;red_enemy&quot;, app);</span>
-<span class="fc" id="L65">        EnemyRed enemy = new EnemyRed(x, y, animations);</span>
-<span class="fc" id="L66">        return enemy;</span>
+<span class="fc" id="L68">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;red_enemy&quot;, app);</span>
+<span class="fc" id="L69">        EnemyRed enemy = new EnemyRed(x, y, animations);</span>
+<span class="fc" id="L70">        return enemy;</span>
     }
 
     public static EnemyYellow makeEnemyYellow(int x, int y, PApplet app){
-<span class="fc" id="L70">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;yellow_enemy&quot;, app);</span>
-<span class="fc" id="L71">        EnemyYellow enemy = new EnemyYellow(x, y, animations);</span>
-<span class="fc" id="L72">        return enemy;</span>
+<span class="fc" id="L74">        HashMap&lt;Direction, Animation&gt; animations = createAnimationsForMovable(&quot;yellow_enemy&quot;, app);</span>
+<span class="fc" id="L75">        EnemyYellow enemy = new EnemyYellow(x, y, animations);</span>
+<span class="fc" id="L76">        return enemy;</span>
     }
 
     public static Bomb makeBomb(int x, int y, PApplet app){
-<span class="fc" id="L76">        HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
-<span class="fc" id="L77">        animations.put(Direction.DOWN,createAnimation(&quot;bomb&quot;, &quot;bomb&quot;, app));</span>
-<span class="fc" id="L78">        Bomb bomb = new Bomb(x, y, animations, app.millis());</span>
-<span class="fc" id="L79">        return bomb;</span>
+<span class="fc" id="L80">        HashMap&lt;Direction, Animation&gt; animations = new HashMap&lt;Direction, Animation&gt;();</span>
+<span class="fc" id="L81">        animations.put(Direction.DOWN,createAnimation(&quot;bomb&quot;, &quot;bomb&quot;, app));</span>
+<span class="fc" id="L82">        Bomb bomb = new Bomb(x, y, animations, app.millis());</span>
+<span class="fc" id="L83">        return bomb;</span>
     }
 
     public static SolidWall makeSolidWall(int x, int y, PApplet app){
-<span class="fc" id="L83">        PImage tileImage = app.loadImage(&quot;src/main/resources/wall/solid.png&quot;);</span>
-<span class="fc" id="L84">        SolidWall tile = new SolidWall(x, y, tileImage);</span>
-<span class="fc" id="L85">        return tile;</span>
+<span class="fc" id="L87">        PImage tileImage = app.loadImage(&quot;src/main/resources/wall/solid.png&quot;);</span>
+<span class="fc" id="L88">        SolidWall tile = new SolidWall(x, y, tileImage);</span>
+<span class="fc" id="L89">        return tile;</span>
     }
 
     public static BrokenWall makeBrokenWall(int x, int y, PApplet app){
-<span class="fc" id="L89">        PImage tileImage = app.loadImage(&quot;src/main/resources/broken/broken.png&quot;);</span>
-<span class="fc" id="L90">        BrokenWall tile = new BrokenWall(x, y, tileImage);</span>
-<span class="fc" id="L91">        return tile;</span>
+<span class="fc" id="L93">        PImage tileImage = app.loadImage(&quot;src/main/resources/broken/broken.png&quot;);</span>
+<span class="fc" id="L94">        BrokenWall tile = new BrokenWall(x, y, tileImage);</span>
+<span class="fc" id="L95">        return tile;</span>
     }
 
     public static Goal makeGoal(int x, int y, PApplet app){
-<span class="fc" id="L95">        PImage tileImage = app.loadImage(&quot;src/main/resources/goal/goal.png&quot;);</span>
-<span class="fc" id="L96">        Goal tile = new Goal(x, y, tileImage);</span>
-<span class="fc" id="L97">        return tile;</span>
+<span class="fc" id="L99">        PImage tileImage = app.loadImage(&quot;src/main/resources/goal/goal.png&quot;);</span>
+<span class="fc" id="L100">        Goal tile = new Goal(x, y, tileImage);</span>
+<span class="fc" id="L101">        return tile;</span>
     }
 
     public static Empty makeEmpty(int x, int y, PApplet app){
-<span class="fc" id="L101">        PImage tileImage = app.loadImage(&quot;src/main/resources/empty/empty.png&quot;);</span>
-<span class="fc" id="L102">        Empty tile = new Empty(x, y, tileImage);</span>
-<span class="fc" id="L103">        return tile;</span>
+<span class="fc" id="L105">        PImage tileImage = app.loadImage(&quot;src/main/resources/empty/empty.png&quot;);</span>
+<span class="fc" id="L106">        Empty tile = new Empty(x, y, tileImage);</span>
+<span class="fc" id="L107">        return tile;</span>
     }
 
     public static ExplosionTile makeExplosionCentre(int x, int y, PApplet app){
-<span class="fc" id="L107">        PImage image = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
-<span class="fc" id="L108">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
-<span class="fc" id="L109">        return tile;</span>
+<span class="fc" id="L111">        PImage image = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
+<span class="fc" id="L112">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="fc" id="L113">        return tile;</span>
     }
 
     public static ExplosionTile makeExplosionHorizontal(int x, int y, PApplet app){
-<span class="nc" id="L113">        PImage image = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
-<span class="nc" id="L114">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
-<span class="nc" id="L115">        return tile;</span>
+<span class="fc" id="L117">        PImage image = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
+<span class="fc" id="L118">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="fc" id="L119">        return tile;</span>
     }
 
     public static ExplosionTile makeExplosionVertical(int x, int y, PApplet app){
-<span class="nc" id="L119">        PImage image = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
-<span class="nc" id="L120">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
-<span class="nc" id="L121">        return tile;</span>
+<span class="fc" id="L123">        PImage image = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
+<span class="fc" id="L124">        ExplosionTile tile = new ExplosionTile(x, y, image);</span>
+<span class="fc" id="L125">        return tile;</span>
     }
 
     public static GameObject makeByChar(char c, int x, int y, PApplet app){
-<span class="pc bpc" id="L125" title="1 of 8 branches missed.">        switch(c){</span>
-<span class="fc" id="L126">            case 'W' : return makeSolidWall(x, y, app);</span>
-<span class="fc" id="L127">            case 'B' : return makeBrokenWall(x, y, app);</span>
-<span class="fc" id="L128">            case ' ' : return makeEmpty(x, y, app);</span>
-<span class="fc" id="L129">            case 'G' : return makeGoal(x, y, app);</span>
-<span class="fc" id="L130">            case 'P' : return makePlayer(x, y, app);</span>
-<span class="fc" id="L131">            case 'Y' : return makeEnemyYellow(x, y, app);</span>
-<span class="fc" id="L132">            case 'R' : return makeEnemyRed(x, y, app);</span>
+<span class="pc bpc" id="L129" title="1 of 8 branches missed.">        switch(c){</span>
+<span class="fc" id="L130">            case 'W' : return makeSolidWall(x, y, app);</span>
+<span class="fc" id="L131">            case 'B' : return makeBrokenWall(x, y, app);</span>
+<span class="fc" id="L132">            case ' ' : return makeEmpty(x, y, app);</span>
+<span class="fc" id="L133">            case 'G' : return makeGoal(x, y, app);</span>
+<span class="fc" id="L134">            case 'P' : return makePlayer(x, y, app);</span>
+<span class="fc" id="L135">            case 'Y' : return makeEnemyYellow(x, y, app);</span>
+<span class="fc" id="L136">            case 'R' : return makeEnemyRed(x, y, app);</span>
         }
-<span class="nc" id="L134">        return makeEmpty(x, y, app); // return empty tile if cannot find specified char</span>
+<span class="nc" id="L138">        return makeEmpty(x, y, app); // return empty tile if cannot find specified char</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -95,6 +95,8 @@ public abstract class Enemy extends MovingObject implements Movable {
             resetPosition(oldX, oldY, oldDirection);
             
             if (directionsTried.size() >= 4){
+                this.direction = this.getCurrentAnimation().getDirection();
+                // System.out.println(this.direction);
                 justChangedDirection = false;
                 directionsTried.clear();
                 return;
@@ -107,7 +109,7 @@ public abstract class Enemy extends MovingObject implements Movable {
             }
 
             // Set the object's direction to the new direction chosen and try walking in that direction;
-            this.direction = newDirection;
+            this.direction = newDirection; //NB: Direction attribute will still change but animation is 
             justChangedDirection = true;
             walk();
         } else {

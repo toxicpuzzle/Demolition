@@ -11,25 +11,25 @@ import java.util.Random;
 <span class="fc" id="L11">    DOWN,</span>
 <span class="fc" id="L12">    NONE;</span>
 
-
-    // TODO: Cannot use enum function, must handle logic by detecting collisions.
+    /**Gets the direction clockwise to the current direction */
     public Direction clockwise() {
-<span class="nc bnc" id="L17" title="All 5 branches missed.">        switch(this){</span>
-<span class="nc" id="L18">            case LEFT: return UP;</span>
-<span class="nc" id="L19">            case RIGHT: return DOWN;</span>
-<span class="nc" id="L20">            case UP: return RIGHT;</span>
-<span class="nc" id="L21">            case DOWN: return LEFT;</span>
+<span class="nc bnc" id="L16" title="All 5 branches missed.">        switch(this){</span>
+<span class="nc" id="L17">            case LEFT: return UP;</span>
+<span class="nc" id="L18">            case RIGHT: return DOWN;</span>
+<span class="nc" id="L19">            case UP: return RIGHT;</span>
+<span class="nc" id="L20">            case DOWN: return LEFT;</span>
         }
-<span class="nc" id="L23">        return NONE;</span>
+<span class="nc" id="L22">        return NONE;</span>
     }
 
+    /**Gets a random direction from the current direction */
     public Direction random(){
 <span class="fc" id="L27">        int rand = (int) (Math.random()*4 + 1);</span>
-<span class="pc bpc" id="L28" title="2 of 5 branches missed.">        switch(rand){</span>
+<span class="pc bpc" id="L28" title="1 of 5 branches missed.">        switch(rand){</span>
 <span class="fc" id="L29">            case 1: return UP;</span>
 <span class="fc" id="L30">            case 2: return DOWN;</span>
 <span class="fc" id="L31">            case 3: return RIGHT;</span>
-<span class="nc" id="L32">            case 4: return LEFT;</span>
+<span class="fc" id="L32">            case 4: return LEFT;</span>
         }
 <span class="nc" id="L34">        return NONE;</span>
     }   

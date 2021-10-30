@@ -48,9 +48,13 @@ public class SpriteFactory {
     public static HashMap<Direction, Animation> createAnimationsForMovable(String spriteName, PApplet app){
         HashMap<Direction, Animation> animations = new HashMap<Direction, Animation>();
         animations.put(Direction.DOWN, createAnimation(spriteName, spriteName + "_down", app));
+        animations.get(Direction.DOWN).setDirection(Direction.DOWN);
         animations.put(Direction.UP, createAnimation(spriteName, spriteName + "_up", app));
+        animations.get(Direction.UP).setDirection(Direction.UP);
         animations.put(Direction.LEFT, createAnimation(spriteName, spriteName + "_left", app));
+        animations.get(Direction.LEFT).setDirection(Direction.LEFT);
         animations.put(Direction.RIGHT, createAnimation(spriteName, spriteName + "_right", app));
+        animations.get(Direction.RIGHT).setDirection(Direction.RIGHT);
         return animations;
     }
 

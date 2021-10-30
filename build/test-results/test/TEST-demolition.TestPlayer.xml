@@ -1,46 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestPlayer" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-10-29T10:34:15" hostname="DESKTOP-DBK8A4Q" time="17.322">
+<testsuite name="demolition.TestPlayer" tests="15" skipped="0" failures="0" errors="0" timestamp="2021-10-30T07:50:44" hostname="DESKTOP-DBK8A4Q" time="22.289">
   <properties/>
-  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestPlayer" time="1.318"/>
-  <testcase name="testPlaceBomb()" classname="demolition.TestPlayer" time="1.319"/>
-  <testcase name="checkCollisionWithEnemyPositive()" classname="demolition.TestPlayer" time="1.337"/>
-  <testcase name="checkCollisionWithEnemyNegative()" classname="demolition.TestPlayer" time="1.277"/>
-  <testcase name="checkMoveUpNoObstacles()" classname="demolition.TestPlayer" time="1.302"/>
-  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestPlayer" time="1.316"/>
-  <testcase name="moveLeftRightUpDownObstacles()" classname="demolition.TestPlayer" time="1.375"/>
-  <testcase name="checkCollisionWithExplosionNegativeNoExplosion()" classname="demolition.TestPlayer" time="1.299"/>
-  <testcase name="checkMoveRightNoObstacles()" classname="demolition.TestPlayer" time="1.331"/>
-  <testcase name="checkCollisionWithExplosionNegative()" classname="demolition.TestPlayer" time="1.316"/>
-  <testcase name="checkMoveLeftNoObstacles()" classname="demolition.TestPlayer" time="1.368"/>
-  <testcase name="checkAnimationCycle()" classname="demolition.TestPlayer" time="1.38"/>
-  <testcase name="notNull()" classname="demolition.TestPlayer" time="1.381"/>
-  <system-out><![CDATA[0
-ticked on the 0th time.
-ticked on the 1th time.
-ticked on the 2th time.
-ticked on the 3th time.
-ticked on the 4th time.
-ticked on the 5th time.
-ticked on the 6th time.
-ticked on the 7th time.
-ticked on the 8th time.
-ticked on the 9th time.
-ticked on the 10th time.
-ticked on the 11th time.
-0
-ticked on the 0th time.
-ticked on the 1th time.
-ticked on the 2th time.
-ticked on the 3th time.
-ticked on the 4th time.
-ticked on the 5th time.
-ticked on the 6th time.
-ticked on the 7th time.
-ticked on the 8th time.
-ticked on the 9th time.
-ticked on the 10th time.
-ticked on the 11th time.
-1
-]]></system-out>
+  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestPlayer" time="1.496"/>
+  <testcase name="checkAnimationCycleWithSuccessfulDirectionMovement()" classname="demolition.TestPlayer" time="1.465"/>
+  <testcase name="testPlaceBomb()" classname="demolition.TestPlayer" time="1.445"/>
+  <testcase name="checkCollisionWithEnemyPositive()" classname="demolition.TestPlayer" time="1.452"/>
+  <testcase name="checkCollisionWithEnemyNegative()" classname="demolition.TestPlayer" time="1.477"/>
+  <testcase name="checkMoveUpNoObstacles()" classname="demolition.TestPlayer" time="1.484"/>
+  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestPlayer" time="1.497"/>
+  <testcase name="moveLeftRightUpDownObstacles()" classname="demolition.TestPlayer" time="1.708"/>
+  <testcase name="checkCollisionWithExplosionNegativeNoExplosion()" classname="demolition.TestPlayer" time="1.47"/>
+  <testcase name="checkAnimationCycleSameDirection()" classname="demolition.TestPlayer" time="1.491"/>
+  <testcase name="checkMoveRightNoObstacles()" classname="demolition.TestPlayer" time="1.454"/>
+  <testcase name="checkAnimationCycleNoDirectionMovement()" classname="demolition.TestPlayer" time="1.453"/>
+  <testcase name="checkCollisionWithExplosionNegative()" classname="demolition.TestPlayer" time="1.477"/>
+  <testcase name="checkMoveLeftNoObstacles()" classname="demolition.TestPlayer" time="1.462"/>
+  <testcase name="notNull()" classname="demolition.TestPlayer" time="1.452"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

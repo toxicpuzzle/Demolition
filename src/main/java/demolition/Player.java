@@ -56,18 +56,18 @@ public class Player extends MovingObject implements Movable {
         return this.lives;
     }
 
-    //! Might be redundant so just remove
-    @Override
-    public void tick() {
-        this.timer++;
-        // Animate the object
-        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
-        if ((this.timer > (secondsBetweenFrames * App.FPS)) || justChangedDirection){
-            justChangedDirection = false;
-            this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.
-            this.timer = 0;
-        } 
-    }
+    // //! Might be redundant so just remove
+    // @Override
+    // public void tick() {
+    //     this.timer++;
+    //     // Animate the object
+    //     float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
+    //     if ((this.timer > (secondsBetweenFrames * App.FPS)) || justChangedDirection){
+    //         justChangedDirection = false;
+    //         this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.
+    //         this.timer = 0;
+    //     } 
+    // }
     
     /**@return true if the player is colliding with an enemy that has not been removed from the screen */
     public boolean collideWithEnemy() {

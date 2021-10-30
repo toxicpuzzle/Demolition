@@ -11,148 +11,171 @@ public class Player extends MovingObject implements Movable {
     private int xStarting;
     private int yStarting;
     private int timer; 
-   
+    
+    /**Constructor for player objects
+     * @param lives the number of lives 
+     * @param x x coord to create the object
+     * @param y y coord to create the object
+     * @param animations animations corresponding to each direction the directional object is moving
+    */
     public Player(int lives, int x, int y, HashMap&lt;Direction, Animation&gt; animations){
-<span class="fc" id="L16">        super(x, y, animations);</span>
-<span class="fc" id="L17">        this.lives = lives;</span>
-<span class="fc" id="L18">        this.width = 32; // WARNING: Hard code</span>
-<span class="fc" id="L19">        this.height = 32;</span>
-<span class="fc" id="L20">        this.xStarting = x;</span>
-<span class="fc" id="L21">        this.yStarting = y;</span>
+<span class="fc" id="L22">        super(x, y, animations);</span>
+<span class="fc" id="L23">        this.lives = lives;</span>
+<span class="fc" id="L24">        this.width = 32; // WARNING: Hard code</span>
+<span class="fc" id="L25">        this.height = 32;</span>
+<span class="fc" id="L26">        this.xStarting = x;</span>
+<span class="fc" id="L27">        this.yStarting = y;</span>
         // Need to find a way to load all of the animations in
-<span class="fc" id="L23">    }</span>
-
+<span class="fc" id="L29">    }</span>
+    
+    /**@return the object's X starting position i.e. when it was first constructed on screen -&gt; used to restart levels */
     public int getXStarting(){
-<span class="nc" id="L26">        return this.xStarting;</span>
+<span class="nc" id="L33">        return this.xStarting;</span>
     }
 
+    /**@return the object's Y starting position i.e. when it was first constructed on screen -&gt; used to restart levels */        
     public int getYStarting(){
-<span class="nc" id="L30">        return this.yStarting;</span>
+<span class="nc" id="L38">        return this.yStarting;</span>
     }
 
+    /**Draws the object onto the screen but with an offset since the player object is larger than a normal tile 
+     * @param app the app object that is used to load the game
+    */
     @Override
     public void draw(PApplet app) {
-<span class="fc" id="L35">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L46">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
+<span class="fc" id="L47">    }</span>
 
+    /**@param lives The player's new lives*/
     public void setLives(int lives){
-<span class="fc" id="L39">        this.lives = lives;</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L51">        this.lives = lives;</span>
+<span class="fc" id="L52">    }</span>
 
+    /**@return the player's current lives count */
     public int getLives(){
-<span class="fc" id="L43">        return this.lives;</span>
+<span class="fc" id="L56">        return this.lives;</span>
     }
 
-    @Override
-    public void tick() {
-<span class="fc" id="L48">        this.timer++;</span>
-        // Animate the object
-<span class="fc" id="L50">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
-<span class="pc bpc" id="L51" title="2 of 4 branches missed.">        if ((this.timer &gt; (secondsBetweenFrames * App.FPS)) || justChangedDirection){</span>
-<span class="nc" id="L52">            justChangedDirection = false;</span>
-<span class="nc" id="L53">            this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.</span>
-<span class="nc" id="L54">            this.timer = 0;</span>
-        } 
-<span class="fc" id="L56">    }</span>
+    // //! Might be redundant so just remove
+    // @Override
+    // public void tick() {
+    //     this.timer++;
+    //     // Animate the object
+    //     float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
+    //     if ((this.timer &gt; (secondsBetweenFrames * App.FPS)) || justChangedDirection){
+    //         justChangedDirection = false;
+    //         this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.
+    //         this.timer = 0;
+    //     } 
+    // }
     
+    /**@return true if the player is colliding with an enemy that has not been removed from the screen */
     public boolean collideWithEnemy() {
-<span class="fc" id="L59">        List&lt;Enemy&gt; enemies = this.currentLevel.getEnemies();</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
-<span class="pc bpc" id="L61" title="1 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
-<span class="fc" id="L62">                return true;</span>
+<span class="fc" id="L74">        List&lt;Enemy&gt; enemies = this.currentLevel.getEnemies();</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
+<span class="pc bpc" id="L76" title="1 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="fc" id="L77">                return true;</span>
             }
-<span class="fc" id="L64">        }</span>
-<span class="fc" id="L65">        return false;</span>
+<span class="fc" id="L79">        }</span>
+<span class="fc" id="L80">        return false;</span>
     } 
-
-    public boolean collideWithExplosion() {
-<span class="fc" id="L69">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        for (ExplosionTile e: explosions){</span>
-<span class="pc bpc" id="L71" title="2 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
-<span class="fc" id="L72">                return true;</span>
-            }
-<span class="nc" id="L74">        }</span>
-<span class="fc" id="L75">        return false;</span>
-    } 
-
-    public void placeBomb(PApplet app){
-<span class="fc" id="L79">        Bomb bomb = SpriteFactory.makeBomb(this.xPos, this.yPos, app);</span>
-<span class="fc" id="L80">        bomb.setCurrentLevel(this.currentLevel);</span>
-<span class="fc" id="L81">        bomb.setApp(app);</span>
-<span class="fc" id="L82">        currentLevel.addObject(bomb);</span>
-<span class="fc" id="L83">    }</span>
     
+    /**@return true if the player is colliding with an explosion that has not yet expired */
+    public boolean collideWithExplosion() {
+<span class="fc" id="L85">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        for (ExplosionTile e: explosions){</span>
+<span class="pc bpc" id="L87" title="2 of 4 branches missed.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="fc" id="L88">                return true;</span>
+            }
+<span class="nc" id="L90">        }</span>
+<span class="fc" id="L91">        return false;</span>
+    } 
+
+    /**Places a bomb onto the level the player is in
+     * @param app the applet that is used to load the game
+     */
+    public void placeBomb(PApplet app){
+<span class="fc" id="L98">        Bomb bomb = SpriteFactory.makeBomb(this.xPos, this.yPos, app);</span>
+<span class="fc" id="L99">        bomb.setCurrentLevel(this.currentLevel);</span>
+<span class="fc" id="L100">        bomb.setApp(app);</span>
+<span class="fc" id="L101">        currentLevel.addObject(bomb);</span>
+<span class="fc" id="L102">    }</span>
+    
+    /**Moves the player up and resets the player's current direction as well as animation */
     @Override
     public void moveUp() {
-<span class="fc" id="L87">        int oldY = this.yPos;</span>
-<span class="fc" id="L88">        int oldX = this.xPos;</span>
-<span class="fc" id="L89">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L107">        int oldY = this.yPos;</span>
+<span class="fc" id="L108">        int oldX = this.xPos;</span>
+<span class="fc" id="L109">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L91">        this.yPos -= 32;</span>
+<span class="fc" id="L111">        this.yPos -= 32;</span>
     
-<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (collideWithSolid()){</span>
-<span class="fc" id="L94">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (collideWithSolid()){</span>
+<span class="fc" id="L114">            resetPosition(oldX, oldY, oldDirection);</span>
         } else {
-<span class="fc" id="L96">            this.direction = direction.UP;</span>
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
+<span class="fc" id="L116">            this.direction = direction.UP;</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            justChangedDirection = !(this.direction == oldDirection);</span>
         }
 
-<span class="fc" id="L100">        updateCurrentAnimation();</span>
-<span class="fc" id="L101">    }</span>
+<span class="fc" id="L120">        updateCurrentAnimation();</span>
+<span class="fc" id="L121">    }</span>
 
+    /**Moves the player right and resets the player's current direction as well as animation */
     @Override
     public void moveRight() {
-<span class="fc" id="L105">        int oldY = this.yPos;</span>
-<span class="fc" id="L106">        int oldX = this.xPos;</span>
-<span class="fc" id="L107">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L126">        int oldY = this.yPos;</span>
+<span class="fc" id="L127">        int oldX = this.xPos;</span>
+<span class="fc" id="L128">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L109">        this.xPos += 32;</span>
+<span class="fc" id="L130">        this.xPos += 32;</span>
 
-<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (collideWithSolid()){</span>
-<span class="fc" id="L112">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (collideWithSolid()){</span>
+<span class="fc" id="L133">            resetPosition(oldX, oldY, oldDirection);</span>
         } else {
-<span class="fc" id="L114">            this.direction = direction.RIGHT;</span>
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
+<span class="fc" id="L135">            this.direction = direction.RIGHT;</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
         }
 
-<span class="fc" id="L118">        updateCurrentAnimation();</span>
-<span class="fc" id="L119">    }</span>
-
+<span class="fc" id="L139">        updateCurrentAnimation();</span>
+<span class="fc" id="L140">    }</span>
+    
+    /**Moves the player down and resets the player's current direction as well as animation */
     @Override
     public void moveDown() {
-<span class="fc" id="L123">        int oldY = this.yPos;</span>
-<span class="fc" id="L124">        int oldX = this.xPos;</span>
-<span class="fc" id="L125">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L145">        int oldY = this.yPos;</span>
+<span class="fc" id="L146">        int oldX = this.xPos;</span>
+<span class="fc" id="L147">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L127">        this.yPos += 32;</span>
+<span class="fc" id="L149">        this.yPos += 32;</span>
 
-<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (collideWithSolid()){</span>
-<span class="fc" id="L130">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (collideWithSolid()){</span>
+<span class="fc" id="L152">            resetPosition(oldX, oldY, oldDirection);</span>
         } else {
-<span class="fc" id="L132">            this.direction = direction.DOWN;</span>
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
+<span class="fc" id="L154">            this.direction = direction.DOWN;</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
         }
 
-<span class="fc" id="L136">        updateCurrentAnimation();</span>
-<span class="fc" id="L137">    }</span>
+<span class="fc" id="L158">        updateCurrentAnimation();</span>
+<span class="fc" id="L159">    }</span>
 
+    /**Moves the player left and resets the player's current direction as well as animation */
     @Override
     public void moveLeft() {
-<span class="fc" id="L141">        int oldY = this.yPos;</span>
-<span class="fc" id="L142">        int oldX = this.xPos;</span>
-<span class="fc" id="L143">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L164">        int oldY = this.yPos;</span>
+<span class="fc" id="L165">        int oldX = this.xPos;</span>
+<span class="fc" id="L166">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L145">        this.xPos -= 32;</span>
-<span class="fc" id="L146">        this.direction = direction.LEFT;</span>
+<span class="fc" id="L168">        this.xPos -= 32;</span>
+<span class="fc" id="L169">        this.direction = direction.LEFT;</span>
 
-<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (collideWithSolid()) {</span>
-<span class="fc" id="L149">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (collideWithSolid()) {</span>
+<span class="fc" id="L172">            resetPosition(oldX, oldY, oldDirection);</span>
         } else {
-<span class="pc bpc" id="L151" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">            justChangedDirection = !(this.direction == oldDirection);</span>
         }
         
-<span class="fc" id="L154">        updateCurrentAnimation();</span>
-<span class="fc" id="L155">    }</span>
+<span class="fc" id="L177">        updateCurrentAnimation();</span>
+<span class="fc" id="L178">    }</span>
 
     
 }

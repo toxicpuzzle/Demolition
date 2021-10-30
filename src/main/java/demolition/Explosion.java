@@ -89,7 +89,7 @@ public class Explosion{
         } 
     }
 
-    /**@return all the explosion tiles in the explosion object */
+    /**@return all the explosion tiles in the explosion object that have not been removed preliminarily from hitting a block*/
     public List<GameObject> getExplosionTiles(){
         List<GameObject> gameObjects = new ArrayList<GameObject>();
         gameObjects.addAll(this.left);
@@ -97,7 +97,13 @@ public class Explosion{
         gameObjects.addAll(this.up);
         gameObjects.addAll(this.down);
         gameObjects.add(this.centre);
-        return gameObjects;
+        List<GameObject> returnList = new ArrayList<GameObject>();
+        for (GameObject object: gameObjects){
+            if (!object.isRemoved){
+                returnList.add(object);
+            }
+        }
+        return returnList;
     }
 
     /**Adds all of the explosiontiles in the explosion object to the level the explosion object was created in */

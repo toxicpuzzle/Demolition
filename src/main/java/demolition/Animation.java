@@ -31,6 +31,13 @@ public class Animation {
         this(frames, frameCount, frameDuration, Direction.NONE);
     }
 
+    /**Sets the direction of the animation if it was initialised using the simpler constructor
+     * @param direction the direction for the animation.
+     */
+    public void setDirection(Direction direction){
+        this.direction = direction;
+    }
+
     /**@return the duration for each frame to be played*/
     public int getFrameDuration(){
         return this.frameDuration;
