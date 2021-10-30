@@ -52,7 +52,7 @@ public class App extends PApplet {
     public void tick() {
         background(255, 128, 0);
         Level currentLevel = game.getCurrentLevel();
-        int m = millis();
+        // int m = millis();
         // System.out.println(frameRate);
         if (!game.hasWonAll() && !game.hasGameOver()){
             for(GameObject object: currentLevel.getGameObjects()){
@@ -66,7 +66,7 @@ public class App extends PApplet {
             image(player, 100, 18);
             drawText(String.valueOf(currentLevel.getTimeLeft()), 330, 45, 20);
             drawText(String.valueOf(currentLevel.getPlayer().getLives()), 165, 45, 20);
-            currentLevel.tick(m);
+            currentLevel.tick();
             game.tick();
         }
     

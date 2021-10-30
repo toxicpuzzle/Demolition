@@ -14,7 +14,7 @@ public class ExplosionTile extends GameObject {
        
     } 
 
-    // TODO: Remove duplicate code
+    // TODO: Remove duplicate code -> problem is that this is from moving object -> problem with adding level attribute to gameobject is that not all gameobjects need to know level -> null pointer
     public boolean collideWithBroken(){
         List<BrokenWall> brokenWalls = currentLevel.getBrokenWalls();
         for (GameObject object: brokenWalls){

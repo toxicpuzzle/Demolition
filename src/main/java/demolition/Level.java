@@ -15,6 +15,9 @@ public class Level {
     private List<ExplosionTile> explosionTiles;
     private int timeLeft;
     private int lastDrawn;
+    private int timer;
+
+
     // TODO: Add time left to level object
     
     //Add bombs and explosions later
@@ -65,13 +68,20 @@ public class Level {
 
     // Ensure player does not die after winning if timer lapses out
     //!
-    public int tick(int millis){
-        int oneSecond = 1000;
-        if (millis >= this.lastDrawn + oneSecond){
-            this.timeLeft -= 1;
-            this.lastDrawn = millis;
+    public int tick(){
+        timer++;
+        if (this.timer >= App.FPS*1){
+            this.timeLeft--;
+            timer = 0;
         }
         return this.timeLeft;
+
+        // int oneSecond = 1000;
+        // if (millis >= this.lastDrawn + oneSecond){
+        //     this.timeLeft -= 1;
+        //     this.lastDrawn = millis;
+        // }
+        // return this.timeLeft;
     }
 
 
