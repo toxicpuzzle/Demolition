@@ -19,14 +19,17 @@ public class GameManager {
     }
 
     /**Removes all broken walls that are colliding with an explosion in a level*/
-    public void removeBrokenWalls(){
+    public int removeBrokenWalls(){
+        int counter = 0;
         for (GameObject object: currentLevel.getBrokenWalls()){
             for (GameObject explosion: currentLevel.getExplosionTiles()){
                 if (object.collisionWith(explosion)){
                     object.remove();
+                    counter++;
                 }
             }
         }
+        return counter;
     }
 
     /**Implements gamelogic to check if the player will lose a life, has won, run out of time -> go to gameover or win screen or continue the game */
@@ -104,6 +107,10 @@ public class GameManager {
     /**@return the level object the gamemanager is currently handling */
     public Level getCurrentLevel(){
         return this.currentLevel;
+    }
+
+    public int getCurrentLevelIndex(){
+        return this.currentLevelIndex;
     }
 
     /**Goes to the next level and sets it up to be handled by the present gamemanager instance */

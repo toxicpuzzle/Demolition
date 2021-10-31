@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestPlayer" tests="15" skipped="0" failures="0" errors="0" timestamp="2021-10-30T07:50:44" hostname="DESKTOP-DBK8A4Q" time="22.289">
+<testsuite name="demolition.TestPlayer" tests="15" skipped="0" failures="0" errors="0" timestamp="2021-10-31T12:40:25" hostname="DESKTOP-DBK8A4Q" time="20.304">
   <properties/>
-  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestPlayer" time="1.496"/>
-  <testcase name="checkAnimationCycleWithSuccessfulDirectionMovement()" classname="demolition.TestPlayer" time="1.465"/>
-  <testcase name="testPlaceBomb()" classname="demolition.TestPlayer" time="1.445"/>
-  <testcase name="checkCollisionWithEnemyPositive()" classname="demolition.TestPlayer" time="1.452"/>
-  <testcase name="checkCollisionWithEnemyNegative()" classname="demolition.TestPlayer" time="1.477"/>
-  <testcase name="checkMoveUpNoObstacles()" classname="demolition.TestPlayer" time="1.484"/>
-  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestPlayer" time="1.497"/>
-  <testcase name="moveLeftRightUpDownObstacles()" classname="demolition.TestPlayer" time="1.708"/>
-  <testcase name="checkCollisionWithExplosionNegativeNoExplosion()" classname="demolition.TestPlayer" time="1.47"/>
-  <testcase name="checkAnimationCycleSameDirection()" classname="demolition.TestPlayer" time="1.491"/>
-  <testcase name="checkMoveRightNoObstacles()" classname="demolition.TestPlayer" time="1.454"/>
-  <testcase name="checkAnimationCycleNoDirectionMovement()" classname="demolition.TestPlayer" time="1.453"/>
-  <testcase name="checkCollisionWithExplosionNegative()" classname="demolition.TestPlayer" time="1.477"/>
-  <testcase name="checkMoveLeftNoObstacles()" classname="demolition.TestPlayer" time="1.462"/>
-  <testcase name="notNull()" classname="demolition.TestPlayer" time="1.452"/>
+  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestPlayer" time="1.339"/>
+  <testcase name="checkAnimationCycleWithSuccessfulDirectionMovement()" classname="demolition.TestPlayer" time="1.313"/>
+  <testcase name="testPlaceBomb()" classname="demolition.TestPlayer" time="1.345"/>
+  <testcase name="checkCollisionWithEnemyPositive()" classname="demolition.TestPlayer" time="1.331"/>
+  <testcase name="checkCollisionWithEnemyNegative()" classname="demolition.TestPlayer" time="1.319"/>
+  <testcase name="checkMoveUpNoObstacles()" classname="demolition.TestPlayer" time="1.335"/>
+  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestPlayer" time="1.325"/>
+  <testcase name="moveLeftRightUpDownObstacles()" classname="demolition.TestPlayer" time="1.499"/>
+  <testcase name="checkCollisionWithExplosionNegativeNoExplosion()" classname="demolition.TestPlayer" time="1.391"/>
+  <testcase name="checkAnimationCycleSameDirection()" classname="demolition.TestPlayer" time="1.354"/>
+  <testcase name="checkMoveRightNoObstacles()" classname="demolition.TestPlayer" time="1.384"/>
+  <testcase name="checkAnimationCycleNoDirectionMovement()" classname="demolition.TestPlayer" time="1.324"/>
+  <testcase name="checkCollisionWithExplosionNegative()" classname="demolition.TestPlayer" time="1.326"/>
+  <testcase name="checkMoveLeftNoObstacles()" classname="demolition.TestPlayer" time="1.333"/>
+  <testcase name="notNull()" classname="demolition.TestPlayer" time="1.383"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

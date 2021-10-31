@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestEnemyRed" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-10-30T07:50:17" hostname="DESKTOP-DBK8A4Q" time="9.941">
+<testsuite name="demolition.TestEnemyRed" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-10-31T12:39:32" hostname="DESKTOP-DBK8A4Q" time="9.381">
   <properties/>
-  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestEnemyRed" time="1.379"/>
-  <testcase name="checkStuck()" classname="demolition.TestEnemyRed" time="1.545"/>
-  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestEnemyRed" time="1.397"/>
-  <testcase name="checkMoveDownWithObstaclesAllSidesForceRight()" classname="demolition.TestEnemyRed" time="1.383"/>
-  <testcase name="checkMoveDownWithObstacles()" classname="demolition.TestEnemyRed" time="1.381"/>
-  <testcase name="checkMoveDownWithObstaclesAllSidesForceLeft()" classname="demolition.TestEnemyRed" time="1.422"/>
-  <testcase name="notNull()" classname="demolition.TestEnemyRed" time="1.433"/>
+  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestEnemyRed" time="1.343"/>
+  <testcase name="checkStuck()" classname="demolition.TestEnemyRed" time="1.375"/>
+  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestEnemyRed" time="1.296"/>
+  <testcase name="checkMoveDownWithObstaclesAllSidesForceRight()" classname="demolition.TestEnemyRed" time="1.341"/>
+  <testcase name="checkMoveDownWithObstacles()" classname="demolition.TestEnemyRed" time="1.303"/>
+  <testcase name="checkMoveDownWithObstaclesAllSidesForceLeft()" classname="demolition.TestEnemyRed" time="1.322"/>
+  <testcase name="notNull()" classname="demolition.TestEnemyRed" time="1.397"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

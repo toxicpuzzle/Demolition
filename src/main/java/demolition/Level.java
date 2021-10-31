@@ -177,23 +177,28 @@ public class Level {
         return GameObjects;
     }
 
-    /**Sets all gameobjects in current level to be isRemoved = true;
-     * @return true if there are gameobjects to be removed */
-    public boolean removeAllObjects(){
+    /**Sets all gameobjects in current level to be isRemoved = true*/
+    public void removeAllObjects(){
         List<GameObject> gameObjects = getGameObjects();
-        if (gameObjects == null || gameObjects.size() < 0){
-            return false;
-        }
+        // if (gameObjects == null || gameObjects.size() < 0){
+        //     return false;
+        // }
         for (GameObject object: gameObjects){
             object.isRemoved = true;
         }
-        return true;
+        // return true;
     }
 
     /**Resets the current level by restoring all enemies, broken walls, and removing all explosion tiles and bombs, and also resetting the player's position/animation
      * @return true if the reset method is executed successfully.
     */
     public boolean reset(){
+
+        // Restore all gameobjects
+        for (GameObject object: this.getGameObjects()){
+            object.isRemoved = false;
+        }
+
         List<Enemy> enemies = this.enemies;
         for(Enemy e: enemies){
             e.isRemoved = false;

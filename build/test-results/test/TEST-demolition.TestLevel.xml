@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="demolition.TestLevel" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-10-31T12:39:17" hostname="DESKTOP-DBK8A4Q" time="10.908">
+  <properties/>
+  <testcase name="testObjectStatusAfterReset()" classname="demolition.TestLevel" time="1.81"/>
+  <testcase name="testGettingSolidWalls()" classname="demolition.TestLevel" time="1.345"/>
+  <testcase name="testGettingBrokenWalls()" classname="demolition.TestLevel" time="1.298"/>
+  <testcase name="testExplosionsAndBombsRemovedOnReset()" classname="demolition.TestLevel" time="1.279"/>
+  <testcase name="testRemoveAllGameObjects()" classname="demolition.TestLevel" time="1.312"/>
+  <testcase name="testGettingEmptyTiles()" classname="demolition.TestLevel" time="1.285"/>
+  <testcase name="testGettingAll()" classname="demolition.TestLevel" time="1.267"/>
+  <testcase name="notNull()" classname="demolition.TestLevel" time="1.309"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

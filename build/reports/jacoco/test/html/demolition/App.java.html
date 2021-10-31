@@ -52,7 +52,7 @@ public class App extends PApplet {
     public void tick() {
 <span class="fc" id="L53">        background(255, 128, 0);</span>
 <span class="fc" id="L54">        Level currentLevel = game.getCurrentLevel();</span>
-<span class="fc" id="L55">        int m = millis();</span>
+        // int m = millis();
         // System.out.println(frameRate);
 <span class="pc bpc" id="L57" title="2 of 4 branches missed.">        if (!game.hasWonAll() &amp;&amp; !game.hasGameOver()){</span>
 <span class="fc bfc" id="L58" title="All 2 branches covered.">            for(GameObject object: currentLevel.getGameObjects()){</span>
@@ -66,7 +66,7 @@ public class App extends PApplet {
 <span class="fc" id="L66">            image(player, 100, 18);</span>
 <span class="fc" id="L67">            drawText(String.valueOf(currentLevel.getTimeLeft()), 330, 45, 20);</span>
 <span class="fc" id="L68">            drawText(String.valueOf(currentLevel.getPlayer().getLives()), 165, 45, 20);</span>
-<span class="fc" id="L69">            currentLevel.tick(m);</span>
+<span class="fc" id="L69">            currentLevel.tick();</span>
 <span class="fc" id="L70">            game.tick();</span>
         }
     

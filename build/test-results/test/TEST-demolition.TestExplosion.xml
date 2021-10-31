@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestExplosion" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-10-30T07:49:58" hostname="DESKTOP-DBK8A4Q" time="14.816">
+<testsuite name="demolition.TestExplosion" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-10-31T12:39:42" hostname="DESKTOP-DBK8A4Q" time="12.643">
   <properties/>
-  <testcase name="correctTilesLeftBlockage()" classname="demolition.TestExplosion" time="2.056"/>
-  <testcase name="correctTilesTopBlockage()" classname="demolition.TestExplosion" time="1.618"/>
-  <testcase name="testExplosionDuration()" classname="demolition.TestExplosion" time="1.945"/>
-  <testcase name="correctTilesBrokenFullBlockage()" classname="demolition.TestExplosion" time="1.724"/>
-  <testcase name="correctTilesFullBlockage()" classname="demolition.TestExplosion" time="1.677"/>
-  <testcase name="correctTilesBottomBlockage()" classname="demolition.TestExplosion" time="1.563"/>
-  <testcase name="correctTilesNoBlockage()" classname="demolition.TestExplosion" time="1.393"/>
-  <testcase name="correctTilesRightBlockage()" classname="demolition.TestExplosion" time="1.48"/>
-  <testcase name="notNull()" classname="demolition.TestExplosion" time="1.357"/>
+  <testcase name="correctTilesLeftBlockage()" classname="demolition.TestExplosion" time="1.386"/>
+  <testcase name="correctTilesTopBlockage()" classname="demolition.TestExplosion" time="1.43"/>
+  <testcase name="testExplosionDuration()" classname="demolition.TestExplosion" time="1.35"/>
+  <testcase name="correctTilesBrokenFullBlockage()" classname="demolition.TestExplosion" time="1.475"/>
+  <testcase name="correctTilesFullBlockage()" classname="demolition.TestExplosion" time="1.427"/>
+  <testcase name="correctTilesBottomBlockage()" classname="demolition.TestExplosion" time="1.428"/>
+  <testcase name="correctTilesNoBlockage()" classname="demolition.TestExplosion" time="1.346"/>
+  <testcase name="correctTilesRightBlockage()" classname="demolition.TestExplosion" time="1.434"/>
+  <testcase name="notNull()" classname="demolition.TestExplosion" time="1.363"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
