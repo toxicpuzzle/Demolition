@@ -78,6 +78,7 @@ public class TestPlayer extends AppTester {
         assertEquals(player.animations.get(Direction.DOWN), player.currentAnimation);
     }
 
+
     // Test movements with obstacles
 
     @Test
@@ -201,8 +202,8 @@ public class TestPlayer extends AppTester {
         assertEquals(0, animation.getFrameNumber());
     }
     @Test
-    // Check that the correct animation cycle is played when the player changes direction in the middle of an animation
-    public void checkAnimationCycleWithSuccessfulDirectionMovement(){
+    // Check that the correct animation cycle is played when the player changes direction to up in the middle of an animation
+    public void checkAnimationCycleWithSuccessfulDirectionChangeCaseUp(){
         assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
         tickPlayer(200);
         assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());        
@@ -216,6 +217,52 @@ public class TestPlayer extends AppTester {
         assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
         this.player.moveUp();
         assertEquals(this.player.animations.get(Direction.UP), this.player.currentAnimation);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(3, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+    }
+
+    @Test
+    // Check that the correct animation cycle is played when the player changes direction to left in the middle of an animation
+    public void checkAnimationCycleWithSuccessfulDirectionChangeCaseLeft(){
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());        
+        tickPlayer(200);
+        this.player.moveLeft();
+        assertEquals(this.player.animations.get(Direction.LEFT), this.player.currentAnimation);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        this.player.moveLeft();
+        assertEquals(this.player.animations.get(Direction.LEFT), this.player.currentAnimation);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(3, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+    }
+
+    @Test
+    // Check that the correct animation cycle is played when the player changes direction to right in the middle of an animation
+    public void checkAnimationCycleWithSuccessfulDirectionChangeCaseRight(){
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());        
+        tickPlayer(200);
+        this.player.moveRight();
+        assertEquals(this.player.animations.get(Direction.RIGHT), this.player.currentAnimation);
+        assertEquals(0, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(1, this.player.getCurrentAnimation().getFrameNumber());
+        tickPlayer(200);
+        assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
+        this.player.moveRight();
+        assertEquals(this.player.animations.get(Direction.RIGHT), this.player.currentAnimation);
         assertEquals(2, this.player.getCurrentAnimation().getFrameNumber());
         tickPlayer(200);
         assertEquals(3, this.player.getCurrentAnimation().getFrameNumber());

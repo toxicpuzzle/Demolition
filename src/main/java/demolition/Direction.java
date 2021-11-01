@@ -17,9 +17,10 @@ public enum Direction {
             case LEFT: return UP;
             case RIGHT: return DOWN;
             case UP: return RIGHT;
-            case DOWN: return LEFT;
+            // case DOWN: return LEFT;
         }
-        return NONE;
+        // return NONE;
+        return LEFT;
     }
 
     /**Gets a random direction from the current direction */
@@ -29,9 +30,10 @@ public enum Direction {
             case 1: return UP;
             case 2: return DOWN;
             case 3: return RIGHT;
-            case 4: return LEFT;
+            // case 4: return LEFT;
         }
-        return NONE;
+        // return NONE;
+        return LEFT;
     }   
     
 }

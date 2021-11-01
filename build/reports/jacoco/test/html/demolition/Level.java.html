@@ -84,7 +84,17 @@ public class Level {
         // return this.timeLeft;
     }
 
-
+    /**@return all objects with the isSolid attribute true in the level */
+    public List&lt;GameObject&gt; getSolids(){
+<span class="fc" id="L89">        List&lt;GameObject&gt; objects = this.getGameObjects();</span>
+<span class="fc" id="L90">        List&lt;GameObject&gt; returned = new ArrayList&lt;GameObject&gt;();</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        for (GameObject object: objects){</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (object.isSolid){</span>
+<span class="fc" id="L93">                returned.add(object);</span>
+            }
+<span class="fc" id="L95">        }</span>
+<span class="fc" id="L96">        return returned;</span>
+    }
     // public GameObject getObjectAt(int x, int y){
     //     List&lt;GameObject&gt; objects = this.getGameObjects();
     //     for (GameObject object: objects){
@@ -97,97 +107,97 @@ public class Level {
 
     /**@return all bombs that have been placed either removed or not removed in this level */
     public List&lt;Bomb&gt; getBombs(){
-<span class="fc" id="L100">        return this.bombs;</span>
+<span class="fc" id="L110">        return this.bombs;</span>
     }
 
     /**@return all enemies in the level that have either been removed or not removed in the level */
     public List&lt;Enemy&gt; getEnemies(){
-<span class="fc" id="L105">        return this.enemies;</span>
+<span class="fc" id="L115">        return this.enemies;</span>
     }   
 
     /**@return all solid walls that cannot be broken */
     public List&lt;SolidWall&gt; getSolidWalls(){
-<span class="fc" id="L110">        return this.solidWalls;</span>
+<span class="fc" id="L120">        return this.solidWalls;</span>
     }
 
     /**@return all solid walls that can be broken, including ones that have already been removed */
     public List &lt;BrokenWall&gt; getBrokenWalls(){
-<span class="fc" id="L115">        return this.brokenWalls;</span>
+<span class="fc" id="L125">        return this.brokenWalls;</span>
     }
     
     /**@return the player in the level */
     public Player getPlayer(){
-<span class="fc" id="L120">        return this.player;</span>
+<span class="fc" id="L130">        return this.player;</span>
     }
 
     /**@return returns all background/empty tiles in the level */
     public List&lt;Empty&gt; getEmpty(){
-<span class="fc" id="L125">        return this.empty;</span>
+<span class="fc" id="L135">        return this.empty;</span>
     }
     
     /**@return returns the goal tile in the current level */
     public Goal getGoal(){
-<span class="fc" id="L130">        return this.goal;</span>
+<span class="fc" id="L140">        return this.goal;</span>
     }
 
     /**@return all explosion tiles in current level assuming they have not been removed */
     public List&lt;ExplosionTile&gt; getExplosionTiles(){
-<span class="fc" id="L135">        List&lt;ExplosionTile&gt; explosionTiles = this.explosionTiles;</span>
-<span class="fc" id="L136">        List&lt;ExplosionTile&gt; newList = new ArrayList&lt;ExplosionTile&gt;();</span>
-<span class="fc bfc" id="L137" title="All 2 branches covered.">        for (ExplosionTile tile: explosionTiles){</span>
-<span class="fc bfc" id="L138" title="All 2 branches covered.">            if (!tile.isRemoved){</span>
-<span class="fc" id="L139">                newList.add(tile);</span>
+<span class="fc" id="L145">        List&lt;ExplosionTile&gt; explosionTiles = this.explosionTiles;</span>
+<span class="fc" id="L146">        List&lt;ExplosionTile&gt; newList = new ArrayList&lt;ExplosionTile&gt;();</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (ExplosionTile tile: explosionTiles){</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            if (!tile.isRemoved){</span>
+<span class="fc" id="L149">                newList.add(tile);</span>
             }
-<span class="fc" id="L141">        }</span>
-<span class="fc" id="L142">        this.explosionTiles = newList;</span>
-<span class="fc" id="L143">        return this.explosionTiles;</span>
+<span class="fc" id="L151">        }</span>
+<span class="fc" id="L152">        this.explosionTiles = newList;</span>
+<span class="fc" id="L153">        return this.explosionTiles;</span>
     }
 
     /**@return all game objects in the current level in the order they are to be displayed */
     public List&lt;GameObject&gt; getGameObjects(){
-<span class="fc" id="L148">        List&lt;GameObject&gt; GameObjects = new ArrayList&lt;GameObject&gt;();</span>
-<span class="fc" id="L149">        GameObjects.addAll(empty);</span>
-<span class="fc" id="L150">        GameObjects.addAll(solidWalls);</span>
-<span class="fc" id="L151">        GameObjects.addAll(brokenWalls);</span>
-<span class="fc" id="L152">        GameObjects.add(goal);</span>
-<span class="fc" id="L153">        GameObjects.addAll(explosionTiles);</span>
-<span class="fc" id="L154">        GameObjects.addAll(bombs);</span>
+<span class="fc" id="L158">        List&lt;GameObject&gt; GameObjects = new ArrayList&lt;GameObject&gt;();</span>
+<span class="fc" id="L159">        GameObjects.addAll(empty);</span>
+<span class="fc" id="L160">        GameObjects.addAll(solidWalls);</span>
+<span class="fc" id="L161">        GameObjects.addAll(brokenWalls);</span>
+<span class="fc" id="L162">        GameObjects.add(goal);</span>
+<span class="fc" id="L163">        GameObjects.addAll(explosionTiles);</span>
+<span class="fc" id="L164">        GameObjects.addAll(bombs);</span>
         
-<span class="fc" id="L156">        List&lt;GameObject&gt; sorted = new ArrayList&lt;GameObject&gt;();</span>
-<span class="fc" id="L157">        sorted.addAll(enemies);</span>
-<span class="fc" id="L158">        sorted.add(player);</span>
+<span class="fc" id="L166">        List&lt;GameObject&gt; sorted = new ArrayList&lt;GameObject&gt;();</span>
+<span class="fc" id="L167">        sorted.addAll(enemies);</span>
+<span class="fc" id="L168">        sorted.add(player);</span>
         
-<span class="fc" id="L160">        int minIndex = 0;</span>
-<span class="fc" id="L161">        int minY = 1000; </span>
-<span class="fc bfc" id="L162" title="All 2 branches covered.">        while (sorted.size() &gt; 0) {</span>
+<span class="fc" id="L170">        int minIndex = 0;</span>
+<span class="fc" id="L171">        int minY = 1000; </span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        while (sorted.size() &gt; 0) {</span>
             // Find the object with the smallest y;
-<span class="fc bfc" id="L164" title="All 2 branches covered.">            for (int i = 0; i &lt; sorted.size(); i++){</span>
-<span class="fc" id="L165">                GameObject current = sorted.get(i);</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">                if (current.yPos &lt; minY){</span>
-<span class="fc" id="L167">                    minY = current.yPos;</span>
-<span class="fc" id="L168">                    minIndex = i;</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">            for (int i = 0; i &lt; sorted.size(); i++){</span>
+<span class="fc" id="L175">                GameObject current = sorted.get(i);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">                if (current.yPos &lt; minY){</span>
+<span class="fc" id="L177">                    minY = current.yPos;</span>
+<span class="fc" id="L178">                    minIndex = i;</span>
                 }
             }
-<span class="fc" id="L171">            GameObjects.add(sorted.get(minIndex));</span>
-<span class="fc" id="L172">            sorted.remove(minIndex);</span>
-<span class="fc" id="L173">            minY = 1000;</span>
+<span class="fc" id="L181">            GameObjects.add(sorted.get(minIndex));</span>
+<span class="fc" id="L182">            sorted.remove(minIndex);</span>
+<span class="fc" id="L183">            minY = 1000;</span>
         }
         
 
-<span class="fc" id="L177">        return GameObjects;</span>
+<span class="fc" id="L187">        return GameObjects;</span>
     }
 
     /**Sets all gameobjects in current level to be isRemoved = true*/
     public void removeAllObjects(){
-<span class="fc" id="L182">        List&lt;GameObject&gt; gameObjects = getGameObjects();</span>
+<span class="fc" id="L192">        List&lt;GameObject&gt; gameObjects = getGameObjects();</span>
         // if (gameObjects == null || gameObjects.size() &lt; 0){
         //     return false;
         // }
-<span class="fc bfc" id="L186" title="All 2 branches covered.">        for (GameObject object: gameObjects){</span>
-<span class="fc" id="L187">            object.isRemoved = true;</span>
-<span class="fc" id="L188">        }</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        for (GameObject object: gameObjects){</span>
+<span class="fc" id="L197">            object.isRemoved = true;</span>
+<span class="fc" id="L198">        }</span>
         // return true;
-<span class="fc" id="L190">    }</span>
+<span class="fc" id="L200">    }</span>
 
     /**Resets the current level by restoring all enemies, broken walls, and removing all explosion tiles and bombs, and also resetting the player's position/animation
      * @return true if the reset method is executed successfully.
@@ -195,31 +205,31 @@ public class Level {
     public boolean reset(){
 
         // Restore all gameobjects
-<span class="fc bfc" id="L198" title="All 2 branches covered.">        for (GameObject object: this.getGameObjects()){</span>
-<span class="fc" id="L199">            object.isRemoved = false;</span>
-<span class="fc" id="L200">        }</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">        for (GameObject object: this.getGameObjects()){</span>
+<span class="fc" id="L209">            object.isRemoved = false;</span>
+<span class="fc" id="L210">        }</span>
 
-<span class="fc" id="L202">        List&lt;Enemy&gt; enemies = this.enemies;</span>
-<span class="fc bfc" id="L203" title="All 2 branches covered.">        for(Enemy e: enemies){</span>
-<span class="fc" id="L204">            e.isRemoved = false;</span>
-<span class="fc" id="L205">            e.xPos = e.xStarting;</span>
-<span class="fc" id="L206">            e.yPos = e.yStarting;</span>
-<span class="fc" id="L207">            e.direction = Direction.DOWN;</span>
-<span class="fc" id="L208">            e.currentAnimation = e.animations.get(Direction.DOWN);</span>
-<span class="fc" id="L209">        }</span>
+<span class="fc" id="L212">        List&lt;Enemy&gt; enemies = this.enemies;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">        for(Enemy e: enemies){</span>
+<span class="fc" id="L214">            e.isRemoved = false;</span>
+<span class="fc" id="L215">            e.xPos = e.xStarting;</span>
+<span class="fc" id="L216">            e.yPos = e.yStarting;</span>
+<span class="fc" id="L217">            e.direction = Direction.DOWN;</span>
+<span class="fc" id="L218">            e.currentAnimation = e.animations.get(Direction.DOWN);</span>
+<span class="fc" id="L219">        }</span>
 
-<span class="fc" id="L211">        List&lt;BrokenWall&gt; brokenWalls = this.brokenWalls;</span>
-<span class="fc bfc" id="L212" title="All 2 branches covered.">        for(BrokenWall w: brokenWalls){</span>
-<span class="fc" id="L213">            w.isRemoved = false;</span>
-<span class="fc" id="L214">        }</span>
+<span class="fc" id="L221">        List&lt;BrokenWall&gt; brokenWalls = this.brokenWalls;</span>
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        for(BrokenWall w: brokenWalls){</span>
+<span class="fc" id="L223">            w.isRemoved = false;</span>
+<span class="fc" id="L224">        }</span>
 
-<span class="fc" id="L216">        this.explosionTiles.clear();</span>
-<span class="fc" id="L217">        this.bombs.clear();</span>
+<span class="fc" id="L226">        this.explosionTiles.clear();</span>
+<span class="fc" id="L227">        this.bombs.clear();</span>
 
-<span class="fc" id="L219">        player.xPos = player.getXStarting();</span>
-<span class="fc" id="L220">        player.yPos = player.getYStarting();</span>
-<span class="fc" id="L221">        player.currentAnimation = player.animations.get(Direction.DOWN);</span>
-<span class="fc" id="L222">        return true;</span>
+<span class="fc" id="L229">        player.xPos = player.getXStarting();</span>
+<span class="fc" id="L230">        player.yPos = player.getYStarting();</span>
+<span class="fc" id="L231">        player.currentAnimation = player.animations.get(Direction.DOWN);</span>
+<span class="fc" id="L232">        return true;</span>
     }
 
 }

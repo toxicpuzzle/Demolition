@@ -129,7 +129,7 @@ public class SpriteFactory {
         switch(c){
             case 'W' : return makeSolidWall(x, y, app);
             case 'B' : return makeBrokenWall(x, y, app);
-            case ' ' : return makeEmpty(x, y, app);
+            // case ' ' : return makeEmpty(x, y, app);
             case 'G' : return makeGoal(x, y, app);
             case 'P' : return makePlayer(x, y, app);
             case 'Y' : return makeEnemyYellow(x, y, app);

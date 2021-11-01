@@ -2,6 +2,8 @@ package demolition;
 
 import processing.core.PApplet;
 import processing.core.PImage; 
+import java.util.List;
+
 
 public abstract class GameObject {
     protected int xPos;
@@ -102,6 +104,17 @@ public abstract class GameObject {
 
         if (thisRight > objectLeft && thisLeft < objectRight && thisBottom > objectTop && thisTop < objectBottom) {
             return true;
+        }
+        return false;
+    }
+
+    /**@param objects the list of objects to check the current object is colliding
+     * @return true if the current object is colliding with any one of the specified objects */
+    public boolean collideWithObjects(List<? extends GameObject> objects){
+        for (GameObject e: objects){
+            if (this.collisionWith(e) && !e.isRemoved){
+                return true;
+            }
         }
         return false;
     }

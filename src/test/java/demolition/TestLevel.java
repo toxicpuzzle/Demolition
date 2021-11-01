@@ -100,6 +100,6 @@ public class TestLevel extends AppTester {
         // }
     
     // TODO: Add testenemyyellow, testDirection, and optional: testexplosiontile
-
+    // @Test
     
 }

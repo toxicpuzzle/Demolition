@@ -2,6 +2,8 @@
 
 import processing.core.PApplet;
 import processing.core.PImage; 
+import java.util.List;
+
 
 public abstract class GameObject {
     protected int xPos;
@@ -19,91 +21,102 @@ public abstract class GameObject {
      * @param isSolid whether the object is breakable 
      * @param startingImage the image of the object to be displayed (when it is initiated)
      */
-<span class="fc" id="L22">    public GameObject(int x, int y, boolean isSolid, PImage startingImage){</span>
-<span class="fc" id="L23">        this.xPos = x;</span>
-<span class="fc" id="L24">        this.yPos = y;</span>
-<span class="fc" id="L25">        this.currentFrame = startingImage;</span>
-<span class="fc" id="L26">        this.width = startingImage.width;</span>
-<span class="fc" id="L27">        this.height = startingImage.height;</span>
-<span class="fc" id="L28">        this.isRemoved = false;</span>
-<span class="fc" id="L29">        this.isSolid = isSolid;</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L24">    public GameObject(int x, int y, boolean isSolid, PImage startingImage){</span>
+<span class="fc" id="L25">        this.xPos = x;</span>
+<span class="fc" id="L26">        this.yPos = y;</span>
+<span class="fc" id="L27">        this.currentFrame = startingImage;</span>
+<span class="fc" id="L28">        this.width = startingImage.width;</span>
+<span class="fc" id="L29">        this.height = startingImage.height;</span>
+<span class="fc" id="L30">        this.isRemoved = false;</span>
+<span class="fc" id="L31">        this.isSolid = isSolid;</span>
+<span class="fc" id="L32">    }</span>
 
     /**Draws the object using the app object */
     public void draw(PApplet app){
-<span class="fc" id="L34">        app.image(currentFrame, xPos, yPos);</span>
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L36">        app.image(currentFrame, xPos, yPos);</span>
+<span class="fc" id="L37">    }</span>
 
-<span class="fc" id="L37">    public void tick(){};</span>
+<span class="fc" id="L39">    public void tick(){};</span>
 
     /**Sets the object to be removed */
     public void remove() {
-<span class="fc" id="L41">        this.isRemoved = true;</span>
-<span class="fc" id="L42">    } </span>
+<span class="fc" id="L43">        this.isRemoved = true;</span>
+<span class="fc" id="L44">    } </span>
 
     /**@return the x coord of the object */
     public int getX(){
-<span class="fc" id="L46">        return this.xPos;</span>
+<span class="fc" id="L48">        return this.xPos;</span>
     }
 
     /**@return the y coord of the object */
     public int getY(){
-<span class="fc" id="L51">        return this.yPos;</span>
+<span class="fc" id="L53">        return this.yPos;</span>
     }
 
     /**@return the x coord of the object */
     public void setX(int x){
-<span class="fc" id="L56">        this.xPos = x;</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L58">        this.xPos = x;</span>
+<span class="fc" id="L59">    }</span>
 
     /**@return the y coord of the object */
     public void setY(int y){
-<span class="fc" id="L61">        this.yPos = y;</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L63">        this.yPos = y;</span>
+<span class="fc" id="L64">    }</span>
 
     /**@return the width of the object */
     public int getWidth(){
-<span class="nc" id="L66">        return this.width;</span>
+<span class="nc" id="L68">        return this.width;</span>
     }
 
     /**@return the height of the object */
     public int getHeight(){
-<span class="nc" id="L71">        return this.height;</span>
+<span class="nc" id="L73">        return this.height;</span>
     }
 
     /**@return true if the object has been removed */
     public boolean hasRemoved(){
-<span class="nc" id="L76">        return this.isRemoved;</span>
+<span class="nc" id="L78">        return this.isRemoved;</span>
     }
 
     /**@return true if the object is solid i.e. cannot be walked through */
     public boolean isSolid(){
-<span class="nc" id="L81">        return this.isSolid;</span>
+<span class="nc" id="L83">        return this.isSolid;</span>
     }
 
     /**Changes the current image of the gameobject
      * @param image the image to be changed to
     */
     public void setCurrentFrame(PImage image){
-<span class="nc" id="L88">        this.currentFrame = image;</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L90">        this.currentFrame = image;</span>
+<span class="nc" id="L91">    }</span>
 
     /**@param object the object to check collision with
      * @return true if the current object is colliding with the specified object */
     public boolean collisionWith(GameObject object) {
-<span class="fc" id="L94">        int objectLeft = object.xPos;</span>
-<span class="fc" id="L95">        int objectRight = object.xPos + object.width;</span>
-<span class="fc" id="L96">        int objectTop = object.yPos;</span>
-<span class="fc" id="L97">        int objectBottom = object.yPos + object.height;</span>
-<span class="fc" id="L98">        int thisTop = this.yPos;</span>
-<span class="fc" id="L99">        int thisBottom = this.yPos + this.height;</span>
-<span class="fc" id="L100">        int thisRight = this.xPos + this.width;</span>
-<span class="fc" id="L101">        int thisLeft = this.xPos;</span>
+<span class="fc" id="L96">        int objectLeft = object.xPos;</span>
+<span class="fc" id="L97">        int objectRight = object.xPos + object.width;</span>
+<span class="fc" id="L98">        int objectTop = object.yPos;</span>
+<span class="fc" id="L99">        int objectBottom = object.yPos + object.height;</span>
+<span class="fc" id="L100">        int thisTop = this.yPos;</span>
+<span class="fc" id="L101">        int thisBottom = this.yPos + this.height;</span>
+<span class="fc" id="L102">        int thisRight = this.xPos + this.width;</span>
+<span class="fc" id="L103">        int thisLeft = this.xPos;</span>
 
-<span class="fc bfc" id="L103" title="All 8 branches covered.">        if (thisRight &gt; objectLeft &amp;&amp; thisLeft &lt; objectRight &amp;&amp; thisBottom &gt; objectTop &amp;&amp; thisTop &lt; objectBottom) {</span>
-<span class="fc" id="L104">            return true;</span>
+<span class="fc bfc" id="L105" title="All 8 branches covered.">        if (thisRight &gt; objectLeft &amp;&amp; thisLeft &lt; objectRight &amp;&amp; thisBottom &gt; objectTop &amp;&amp; thisTop &lt; objectBottom) {</span>
+<span class="fc" id="L106">            return true;</span>
         }
-<span class="fc" id="L106">        return false;</span>
+<span class="fc" id="L108">        return false;</span>
+    }
+
+    /**@param objects the list of objects to check the current object is colliding
+     * @return true if the current object is colliding with any one of the specified objects */
+    public boolean collideWithObjects(List&lt;? extends GameObject&gt; objects){
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (GameObject e: objects){</span>
+<span class="fc bfc" id="L115" title="All 4 branches covered.">            if (this.collisionWith(e) &amp;&amp; !e.isRemoved){</span>
+<span class="fc" id="L116">                return true;</span>
+            }
+<span class="fc" id="L118">        }</span>
+<span class="fc" id="L119">        return false;</span>
     }
 
     

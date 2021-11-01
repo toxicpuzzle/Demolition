@@ -32,17 +32,17 @@ public class Bomb extends MovingObject{
 <span class="fc" id="L32">        this.currentLevel = level;</span>
 <span class="fc" id="L33">    }</span>
 
-    /**Draws the bomb onto the screen */
-    @Override
-    public void draw(PApplet app) {
-<span class="nc" id="L38">        super.draw(app);</span>
-<span class="nc" id="L39">    }</span>
+    // /**Draws the bomb onto the screen */
+    // @Override
+    // public void draw(PApplet app) {
+    //     super.draw(app);
+    // }
 
     /**Updates the bomb so that it will be removed &amp; generate an explosion if all of its animation frames have been played */
     @Override
     public void tick() {
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (this.isRemoved){</span>
-<span class="nc" id="L45">            return;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (this.isRemoved){</span>
+<span class="fc" id="L45">            return;</span>
         }
         // System.out.println(this.currentAnimation.getFrameNumber());
 <span class="fc" id="L48">        timeSincePlaced++;</span>

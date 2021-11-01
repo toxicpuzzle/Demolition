@@ -84,7 +84,17 @@ public class Level {
         // return this.timeLeft;
     }
 
-
+    /**@return all objects with the isSolid attribute true in the level */
+    public List<GameObject> getSolids(){
+        List<GameObject> objects = this.getGameObjects();
+        List<GameObject> returned = new ArrayList<GameObject>();
+        for (GameObject object: objects){
+            if (object.isSolid){
+                returned.add(object);
+            }
+        }
+        return returned;
+    }
     // public GameObject getObjectAt(int x, int y){
     //     List<GameObject> objects = this.getGameObjects();
     //     for (GameObject object: objects){

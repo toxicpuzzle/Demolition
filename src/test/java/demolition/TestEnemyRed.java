@@ -78,11 +78,11 @@ public class TestEnemyRed extends AppTester {
         assertEquals(enemy.animations.get(Direction.LEFT), enemy.currentAnimation);
     }
 
+    // TODO: Test this testcase
     @Test
     // Check that the enemy changes direction after hitting obstacle (case where all enemyred could either go back up, left or right)
     public void checkMoveDownWithObstacles(){
-        level.addObject(SpriteFactory.makeSolidWall(32*2, 32*4, app));
-        enemy.moveRight();
+        level.addObject(SpriteFactory.makeSolidWall(32, 32*4, app));
         for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
             this.enemy.tick();
         }
@@ -106,6 +106,25 @@ public class TestEnemyRed extends AppTester {
     }
 
     @Test
+    //Check that collission with expired explosions return false and that the enemy is not dead
+    public void checkCollisionWithExpiredExplosion(){
+        double explosionDuration = 0.5;
+        this.level = Loader.loadFromFile("src/test/resources/empty.txt", 100, 100, app);
+        Explosion explosion = new Explosion(32*4, 32*3, this.level, app);
+        explosion.addAllExpTiles(); 
+        for (GameObject et: explosion.getExplosionTiles()){
+            for (int i = 0; i < App.FPS*explosionDuration; i++){
+                et.tick();
+            }
+        }
+        enemy.moveRight();
+        assertEquals(false, enemy.collideWithExplosion());
+        this.enemy.tick();
+        assertEquals(false, this.enemy.isRemoved);
+        
+    }
+
+    @Test
     // Check that the enemy does not move at all if it is stuck and continues to face in the same direction.
     public void checkStuck(){
         this.level = Loader.loadFromFile("src/test/resources/enemyallwalls.txt", 100, 100, app);
@@ -119,6 +138,24 @@ public class TestEnemyRed extends AppTester {
         assertEquals(32*3, enemy.getY());
         assertEquals(Direction.DOWN, enemy.getDirection());
         // !  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls. -> should be fixed now
+    }
+
+    @Test
+    // Check that the enemy can walk through a broken wall that has been removed (e.g. by explosion)
+    public void checkWalkThroughRemovedWall(){
+        this.level = Loader.loadFromFile("src/test/resources/walkthroughbrokenwall.txt", 100, 100, app);
+        this.enemy = SpriteFactory.makeEnemyRed(32, 32*3, app); 
+        this.level.addObject(enemy);
+        enemy.setCurrentLevel(this.level);
+        BrokenWall wall = SpriteFactory.makeBrokenWall(32*2, 32*3, app);
+        this.level.addObject(wall);
+        wall.remove();
+        for (int i = 0; i < SECONDS_TO_WALK*App.FPS; i++) {
+            this.enemy.tick();
+        }
+        assertEquals(32*2, enemy.getX());
+        assertEquals(32*3, enemy.getY());
+        assertEquals(Direction.RIGHT, enemy.getDirection());
     }
 
 }

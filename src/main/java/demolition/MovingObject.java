@@ -52,16 +52,31 @@ public abstract class MovingObject extends GameObject{
     /**Checks if the object has collided with an object that has the "isSolid" attribute equal to true and is not removed
      * @return true if the object has collided with an object that is solid and is not removed else false
      */
+    // public boolean collideWithSolid(){
+    //     List<GameObject> otherObjects = currentLevel.getGameObjects();
+    //     otherObjects.remove(this);
+    //     for (GameObject object: otherObjects){
+    //         if (this.collisionWith(object) && !object.isRemoved && object.isSolid){
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    /**Checks if the object has collided with an object that has the "isSolid" attribute equal to true and is not removed
+     * @return true if the object has collided with an object that is solid and is not removed else false
+     */
     public boolean collideWithSolid(){
-        List<GameObject> otherObjects = currentLevel.getGameObjects();
-        otherObjects.remove(this);
-        for (GameObject object: otherObjects){
-            if (this.collisionWith(object) && !object.isRemoved && object.isSolid){
-                return true;
-            }
-        }
-        return false;
+        List<GameObject> solids = this.currentLevel.getSolids();
+        return this.collideWithObjects(solids);
     }
+
+
+    /**@return true if the moving is colliding with an explosion that has not yet expired */
+    public boolean collideWithExplosion() {
+        List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
+        return this.collideWithObjects(explosions);
+    } 
 
     /**Sets the object's position to an old X, old Y, old Direction
      * @param oldX the object's new X coord

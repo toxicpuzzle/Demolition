@@ -126,16 +126,16 @@ import java.io.FilenameFilter;
     }
 
     public static GameObject makeByChar(char c, int x, int y, PApplet app){
-<span class="pc bpc" id="L129" title="1 of 8 branches missed.">        switch(c){</span>
+<span class="fc bfc" id="L129" title="All 7 branches covered.">        switch(c){</span>
 <span class="fc" id="L130">            case 'W' : return makeSolidWall(x, y, app);</span>
 <span class="fc" id="L131">            case 'B' : return makeBrokenWall(x, y, app);</span>
-<span class="fc" id="L132">            case ' ' : return makeEmpty(x, y, app);</span>
+            // case ' ' : return makeEmpty(x, y, app);
 <span class="fc" id="L133">            case 'G' : return makeGoal(x, y, app);</span>
 <span class="fc" id="L134">            case 'P' : return makePlayer(x, y, app);</span>
 <span class="fc" id="L135">            case 'Y' : return makeEnemyYellow(x, y, app);</span>
 <span class="fc" id="L136">            case 'R' : return makeEnemyRed(x, y, app);</span>
         }
-<span class="nc" id="L138">        return makeEmpty(x, y, app); // return empty tile if cannot find specified char</span>
+<span class="fc" id="L138">        return makeEmpty(x, y, app); // return empty tile if cannot find specified char</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

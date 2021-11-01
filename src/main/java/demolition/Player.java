@@ -72,24 +72,38 @@ public class Player extends MovingObject implements Movable {
     /**@return true if the player is colliding with an enemy that has not been removed from the screen */
     public boolean collideWithEnemy() {
         List<Enemy> enemies = this.currentLevel.getEnemies();
-        for (Enemy e: enemies){
-            if (this.collisionWith(e) && !e.isRemoved){
-                return true;
-            }
-        }
-        return false;
+        // for (Enemy e: enemies){
+        //     if (this.collisionWith(e) && !e.isRemoved){
+        //         return true;
+        //     }
+        // }
+        return this.collideWithObjects(enemies);
     } 
     
-    /**@return true if the player is colliding with an explosion that has not yet expired */
-    public boolean collideWithExplosion() {
-        List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
-        for (ExplosionTile e: explosions){
-            if (this.collisionWith(e) && !e.isRemoved){
-                return true;
-            }
+    // /**@return true if the player is colliding with an explosion that has not yet expired */
+    // public boolean collideWithExplosion() {
+    //     List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
+    //     for (ExplosionTile e: explosions){
+    //         if (this.collisionWith(e) && !e.isRemoved){
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // } 
+
+    private void savePositions(){
+        int oldY = this.yPos;
+        int oldX = this.xPos;
+        Direction oldDirection = this.direction;
+    }
+
+    private void handleCollision(int oldX, int oldY, Direction oldDirection){
+        if (collideWithSolid()){
+            resetPosition(oldX, oldY, oldDirection);
+        } else {
+            justChangedDirection = !(this.direction == oldDirection);
         }
-        return false;
-    } 
+    }
 
     /**Places a bomb onto the level the player is in
      * @param app the applet that is used to load the game
@@ -109,14 +123,14 @@ public class Player extends MovingObject implements Movable {
         Direction oldDirection = this.direction;
         
         this.yPos -= 32;
+        this.direction = Direction.UP;
     
-        if (collideWithSolid()){
-            resetPosition(oldX, oldY, oldDirection);
-        } else {
-            this.direction = direction.UP;
-            justChangedDirection = !(this.direction == oldDirection);
-        }
-
+        // if (collideWithSolid()){
+        //     resetPosition(oldX, oldY, oldDirection);
+        // } else {
+        //     justChangedDirection = !(this.direction == oldDirection);
+        // }
+        handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
 
@@ -128,14 +142,15 @@ public class Player extends MovingObject implements Movable {
         Direction oldDirection = this.direction;
         
         this.xPos += 32;
+        this.direction = Direction.RIGHT;
 
-        if (collideWithSolid()){
-            resetPosition(oldX, oldY, oldDirection);
-        } else {
-            this.direction = direction.RIGHT;
-            justChangedDirection = !(this.direction == oldDirection);
-        }
-
+        // if (collideWithSolid()){
+        //     resetPosition(oldX, oldY, oldDirection);
+        // } else {
+        //     this.direction = Direction.RIGHT;
+        //     justChangedDirection = !(this.direction == oldDirection);
+        // }
+        handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
     
@@ -147,14 +162,15 @@ public class Player extends MovingObject implements Movable {
         Direction oldDirection = this.direction;
         
         this.yPos += 32;
+        this.direction = Direction.DOWN;
 
-        if (collideWithSolid()){
-            resetPosition(oldX, oldY, oldDirection);
-        } else {
-            this.direction = direction.DOWN;
-            justChangedDirection = !(this.direction == oldDirection);
-        }
-
+        // if (collideWithSolid()){
+        //     resetPosition(oldX, oldY, oldDirection);
+        // } else {
+            
+        //     justChangedDirection = !(this.direction == oldDirection);
+        // }
+        handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
 
@@ -166,14 +182,14 @@ public class Player extends MovingObject implements Movable {
         Direction oldDirection = this.direction;
         
         this.xPos -= 32;
-        this.direction = direction.LEFT;
+        this.direction = Direction.LEFT;
 
-        if (collideWithSolid()) {
-            resetPosition(oldX, oldY, oldDirection);
-        } else {
-            justChangedDirection = !(this.direction == oldDirection);
-        }
-        
+        // if (collideWithSolid()) {
+        //     resetPosition(oldX, oldY, oldDirection);
+        // } else {
+        //     justChangedDirection = !(this.direction == oldDirection);
+        // }
+        handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
 

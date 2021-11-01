@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestGameManager" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-10-31T12:39:54" hostname="DESKTOP-DBK8A4Q" time="14.134">
+<testsuite name="demolition.TestGameManager" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-01T02:29:29" hostname="DESKTOP-DBK8A4Q" time="10.68">
   <properties/>
-  <testcase name="testRestartAfterTouchingExplosion()" classname="demolition.TestGameManager" time="1.431"/>
-  <testcase name="testStepOnEnemyResetLevel()" classname="demolition.TestGameManager" time="1.415"/>
-  <testcase name="testStepGoalTile()" classname="demolition.TestGameManager" time="1.426"/>
-  <testcase name="testGameOverOutOfLives()" classname="demolition.TestGameManager" time="1.419"/>
-  <testcase name="testStepFinalGoalTile()" classname="demolition.TestGameManager" time="1.356"/>
-  <testcase name="testTileBrokenAfterExplosion()" classname="demolition.TestGameManager" time="2.538"/>
-  <testcase name="testGameOverOutOfTime()" classname="demolition.TestGameManager" time="1.727"/>
-  <testcase name="notNull()" classname="demolition.TestGameManager" time="2.82"/>
+  <testcase name="testRestartAfterTouchingExplosion()" classname="demolition.TestGameManager" time="1.334"/>
+  <testcase name="testStepOnEnemyResetLevel()" classname="demolition.TestGameManager" time="1.318"/>
+  <testcase name="testStepGoalTile()" classname="demolition.TestGameManager" time="1.332"/>
+  <testcase name="testGameOverOutOfLives()" classname="demolition.TestGameManager" time="1.325"/>
+  <testcase name="testStepFinalGoalTile()" classname="demolition.TestGameManager" time="1.34"/>
+  <testcase name="testTileBrokenAfterExplosion()" classname="demolition.TestGameManager" time="1.341"/>
+  <testcase name="testGameOverOutOfTime()" classname="demolition.TestGameManager" time="1.35"/>
+  <testcase name="notNull()" classname="demolition.TestGameManager" time="1.337"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

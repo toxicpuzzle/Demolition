@@ -32,11 +32,11 @@ public class Bomb extends MovingObject{
         this.currentLevel = level;
     }
 
-    /**Draws the bomb onto the screen */
-    @Override
-    public void draw(PApplet app) {
-        super.draw(app);
-    }
+    // /**Draws the bomb onto the screen */
+    // @Override
+    // public void draw(PApplet app) {
+    //     super.draw(app);
+    // }
 
     /**Updates the bomb so that it will be removed & generate an explosion if all of its animation frames have been played */
     @Override

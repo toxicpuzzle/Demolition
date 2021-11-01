@@ -14,25 +14,35 @@ public class ExplosionTile extends GameObject {
        
     } 
 
-    // TODO: Remove duplicate code -> problem is that this is from moving object -> problem with adding level attribute to gameobject is that not all gameobjects need to know level -> null pointer
+    // // TODO: Remove duplicate code -> problem is that this is from moving object -> problem with adding level attribute to gameobject is that not all gameobjects need to know level -> null pointer
+    // public boolean collideWithBroken(){
+    //     List<BrokenWall> brokenWalls = currentLevel.getBrokenWalls();
+    //     for (GameObject object: brokenWalls){
+    //         if (this.collisionWith(object) && !object.isRemoved){
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    // public boolean collideWithSolid(){
+    //     List<SolidWall> solidWalls = currentLevel.getSolidWalls();
+    //     for (GameObject object: solidWalls){
+    //         if (this.collisionWith(object) && !object.isRemoved){
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
     public boolean collideWithBroken(){
         List<BrokenWall> brokenWalls = currentLevel.getBrokenWalls();
-        for (GameObject object: brokenWalls){
-            if (this.collisionWith(object) && !object.isRemoved){
-                return true;
-            }
-        }
-        return false;
+        return this.collideWithObjects(brokenWalls);
     }
 
     public boolean collideWithSolid(){
         List<SolidWall> solidWalls = currentLevel.getSolidWalls();
-        for (GameObject object: solidWalls){
-            if (this.collisionWith(object) && !object.isRemoved){
-                return true;
-            }
-        }
-        return false;
+        return this.collideWithObjects(solidWalls);
     }
     
     public Level getCurrentLevel(){

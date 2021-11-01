@@ -122,17 +122,17 @@ public abstract class Enemy extends MovingObject implements Movable {
     /**@return the direction for the enemy to move in when it is facing a solid object */
     public abstract Direction getDirectionStrategy();
 
-    /**@return true if the enemy is colliding with an explosion */
-    //TODO: put this method as well as the collide with solid method into the gameobject class since it is also used elsewhere e.g. in explosion class.
-    public boolean collideWithExplosion() {
-        List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
-        for (ExplosionTile e: explosions){
-            if (this.collisionWith(e) && !e.isRemoved){
-                return true;
-            }
-        }
-        return false;
-    } 
+    // /**@return true if the enemy is colliding with an explosion */
+    // //TODO: put this method as well as the collide with solid method into the gameobject class since it is also used elsewhere e.g. in explosion class.
+    // public boolean collideWithExplosion() {
+    //     List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
+    //     for (ExplosionTile e: explosions){
+    //         if (this.collisionWith(e) && !e.isRemoved){
+    //             return true;
+    //         } 
+    //     }
+    //     return false;
+    // } 
 
     /**Updates the state of the enemy based on if has touched an explosion or if it has changed direction/walked */
     @Override

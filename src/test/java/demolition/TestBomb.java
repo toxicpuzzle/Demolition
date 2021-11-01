@@ -35,6 +35,21 @@ public class TestBomb extends AppTester {
         }
         assertEquals(this.bomb.isRemoved, true);
         assertTrue(this.level.getExplosionTiles().size() > 0);
+        // bomb.tick();
+        // assertEquals(this.bomb.isRemoved, true);
+    } 
+
+    @Test
+    // Test that removed bomb does not tick at all
+    public void testVanishedBomb(){
+        bomb.remove();
+        for (int i = 0, j = 0; i < TIME_PER_FRAME*App.FPS*8; i++){
+            this.bomb.tick();
+        }
+        assertEquals(this.bomb.isRemoved, true);
+        assertTrue(this.level.getExplosionTiles().size() == 0);
+        // bomb.tick();
+        // assertEquals(this.bomb.isRemoved, true);
     } 
 
     @Test
@@ -42,6 +57,7 @@ public class TestBomb extends AppTester {
     public void testAnimation(){
         for (int i = 0, j = 0; i < TIME_PER_FRAME*App.FPS*8; i++){
             this.bomb.tick();
+            app.draw();
             if (i >= TIME_PER_FRAME*App.FPS*j){
                 assertEquals(j, bomb.currentAnimation.getFrameNumber());
                 j++;
