@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -117,6 +117,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">App</span>
 extends processing.core.PApplet</pre>
+<div class="block">Runs the game</div>
 </li>
 </ul>
 </div>
@@ -237,14 +238,12 @@ extends processing.core.PApplet</pre>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../demolition/App.html#keyReleased--">keyReleased</a></span>()</code>
-<div class="block">Sets the alreadyPressed attribute to false</div>
+<div class="block">Sets the alreadyPressed attribute to false on key release</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/App.html#main-java.lang.String:A-">main</a></span>(java.lang.String[]&nbsp;args)</code>
-<div class="block">Main method to run the app itself</div>
-</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/App.html#main-java.lang.String:A-">main</a></span>(java.lang.String[]&nbsp;args)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -262,12 +261,6 @@ extends processing.core.PApplet</pre>
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../demolition/App.html#setup--">setup</a></span>()</code>
 <div class="block">Loads in the levels from the config file and the UI icons</div>
-</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/App.html#tick--">tick</a></span>()</code>
-<div class="block">Handles all drawing, called by the draw() function</div>
 </td>
 </tr>
 </table>
@@ -484,16 +477,6 @@ extends processing.core.PApplet</pre>
 </dl>
 </li>
 </ul>
-<a name="tick--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>tick</h4>
-<pre>public&nbsp;void&nbsp;tick()</pre>
-<div class="block">Handles all drawing, called by the draw() function</div>
-</li>
-</ul>
 <a name="keyReleased--">
 <!--   -->
 </a>
@@ -501,7 +484,7 @@ extends processing.core.PApplet</pre>
 <li class="blockList">
 <h4>keyReleased</h4>
 <pre>public&nbsp;void&nbsp;keyReleased()</pre>
-<div class="block">Sets the alreadyPressed attribute to false</div>
+<div class="block">Sets the alreadyPressed attribute to false on key release</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>keyReleased</code>&nbsp;in class&nbsp;<code>processing.core.PApplet</code></dd>
@@ -529,7 +512,6 @@ extends processing.core.PApplet</pre>
 <li class="blockList">
 <h4>main</h4>
 <pre>public static&nbsp;void&nbsp;main(java.lang.String[]&nbsp;args)</pre>
-<div class="block">Main method to run the app itself</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>args</code> - the command line arguments for the app</dd>

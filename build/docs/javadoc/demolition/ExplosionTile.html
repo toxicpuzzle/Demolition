@@ -113,6 +113,8 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ExplosionTile</span>
 extends <a href="../demolition/GameObject.html" title="class in demolition">GameObject</a></pre>
+<div class="block">Explosion tile, can be centre, vertical, or horizontal, and destroys any moving thing and brokenwall in its path.
+ Collision an deletion of objects hit by explosion is handled by the gamemanager, that has knowledge of locations of all objects</div>
 </li>
 </ul>
 </div>
@@ -185,7 +187,9 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/ExplosionTile.html#tick--">tick</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/ExplosionTile.html#tick--">tick</a></span>()</code>
+<div class="block">Ticks the explosion tile so that it will disappear after 0.5 seconds</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -249,6 +253,10 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>collideWithBroken</h4>
 <pre>public&nbsp;boolean&nbsp;collideWithBroken()</pre>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the explosiontile is colliding with a broken tile</dd>
+</dl>
 </li>
 </ul>
 <a name="collideWithSolid--">
@@ -258,6 +266,10 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>collideWithSolid</h4>
 <pre>public&nbsp;boolean&nbsp;collideWithSolid()</pre>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the explosiontile is colliding with a solid unbreakable wall</dd>
+</dl>
 </li>
 </ul>
 <a name="getCurrentLevel--">
@@ -267,6 +279,10 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>getCurrentLevel</h4>
 <pre>public&nbsp;<a href="../demolition/Level.html" title="class in demolition">Level</a>&nbsp;getCurrentLevel()</pre>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the level object that the explosiontile resides in</dd>
+</dl>
 </li>
 </ul>
 <a name="setCurrentLevel-demolition.Level-">
@@ -276,6 +292,10 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>setCurrentLevel</h4>
 <pre>public&nbsp;void&nbsp;setCurrentLevel(<a href="../demolition/Level.html" title="class in demolition">Level</a>&nbsp;level)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>level</code> - The level to set the current explosiontile to belong to</dd>
+</dl>
 </li>
 </ul>
 <a name="tick--">
@@ -285,6 +305,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>tick</h4>
 <pre>public&nbsp;void&nbsp;tick()</pre>
+<div class="block">Ticks the explosion tile so that it will disappear after 0.5 seconds</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../demolition/GameObject.html#tick--">tick</a></code>&nbsp;in class&nbsp;<code><a href="../demolition/GameObject.html" title="class in demolition">GameObject</a></code></dd>

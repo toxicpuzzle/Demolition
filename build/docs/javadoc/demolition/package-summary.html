@@ -81,7 +81,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Movable.html" title="interface in demolition">Movable</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Interface that is implemented by all movingobjects which could move in specific cardinal directions</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -96,79 +98,123 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Animation.html" title="class in demolition">Animation</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Holds and plays the image objects that makes up the animation for the sprite on screen</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/App.html" title="class in demolition">App</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Runs the game</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Bomb.html" title="class in demolition">Bomb</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Bomb object that can be placed by the player, and which spawns an explosion that destroys walls</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/BrokenWall.html" title="class in demolition">BrokenWall</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A wall that can be broken wall by bombs</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Empty.html" title="class in demolition">Empty</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Empty background tile that players and enemies stand on</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/Enemy.html" title="class in demolition">Enemy</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Abstract enemy object that depends on movement strategies 
+ concretely implemented by EnemyYellow and EnemyRed</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/EnemyRed.html" title="class in demolition">EnemyRed</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Concrete implementation of enemy that moves in a random direction upon hitting a wall</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/EnemyYellow.html" title="class in demolition">EnemyYellow</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Concrete implementation of enemy that moves in clockwise upon hitting a wall</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Explosion.html" title="class in demolition">Explosion</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Spawns a set of explosiontiles from the location that the bomb was placed, 
+ and ensures explosions only break 1 breakable wall max and do not penetrate solidwalls</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/ExplosionTile.html" title="class in demolition">ExplosionTile</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Explosion tile, can be centre, vertical, or horizontal, and destroys any moving thing and brokenwall in its path.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/GameManager.html" title="class in demolition">GameManager</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Manages the game state and aftermath of explosions (eliminating the player and destroying walls), 
+ and the levelling system so that the player goes to the next level (or wins if it is the last level)
+ once they collide with the goal tile (provided they don't hit an explosion or enemy first)</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/GameObject.html" title="class in demolition">GameObject</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Central GameObject template class that all tiles and moving objects inherit from</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Goal.html" title="class in demolition">Goal</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Goal tile that moves the player to the next level if they step on it</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/Level.html" title="class in demolition">Level</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">The Level object holds the time limit for the level, and all objects in the level, 
+ and can reset all objects to their starting position/status and return objects in the level</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Loader.html" title="class in demolition">Loader</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Loads in the level(s) as level objects based on config files provided</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/MovingObject.html" title="class in demolition">MovingObject</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Template class GameObjects which require directional based animations and knowledge of the current level</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Player.html" title="class in demolition">Player</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">The bomberman that is controlled by the player through keyboard input in the app class</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../demolition/SolidWall.html" title="class in demolition">SolidWall</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Wall tile that cannot be broken by bombs and cannot be stepped through</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/SpriteFactory.html" title="class in demolition">SpriteFactory</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Class that helps construct images for the constructors of GameObjects to 
+ help construct objects in one line without having to load in images repeatedly</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -183,7 +229,10 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../demolition/Direction.html" title="enum in demolition">Direction</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Directional enum that helps keep track the direction an animation is played for
+ and the direction that enemies and players are currently facing</div>
+</td>
 </tr>
 </tbody>
 </table>
