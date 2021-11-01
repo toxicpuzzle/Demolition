@@ -37,6 +37,17 @@ public class TestGameManager extends AppTester {
     }
 
     @Test
+    // Check that the gamemanager is running at the correct pace
+    public void testGameTimerCorrectTime(){
+        Level level = manager.getCurrentLevel();
+        for (int i = 0; i < 50*App.FPS; i++){
+            level.tick();
+            manager.tick();
+        }
+        assertEquals(50, level.getTimeLeft());
+    }
+
+    @Test
     // Check manager goes to gameover if the player runs out of lives
     public void testGameOverOutOfLives(){
         Level level = manager.getCurrentLevel();

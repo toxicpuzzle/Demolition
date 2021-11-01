@@ -4,7 +4,11 @@ import java.util.HashMap;
 
 public class EnemyYellow extends Enemy {
 
-
+    /**Construct yellow enemies
+     * @param x x coord 
+     * @param y y coord
+     * @param animations animation objects for the yellow enemy
+     */
     public EnemyYellow(int x, int y, HashMap<Direction, Animation> animations) {
         super(x, y, animations);
     }

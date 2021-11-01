@@ -18,7 +18,9 @@ public class GameManager {
         setup();
     }
 
-    /**Removes all broken walls that are colliding with an explosion in a level*/
+    /**Removes all broken walls that are colliding with an explosion in a level
+     * @return the number of brokenwalls removed
+    */
     public int removeBrokenWalls(){
         int counter = 0;
         for (GameObject object: currentLevel.getBrokenWalls()){

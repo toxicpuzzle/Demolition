@@ -13,6 +13,10 @@ public class SpriteFactory {
 
     public static final int frameDuration = 200; //In milliseconds
 
+    /**@param spriteName the name of the sprite used to search the directories (finding folder) 
+     * @param filePrefix the prefix of the image for the sprite (finding file in folder)
+     * @return a list of directories containing the images for the sprite
+     */
     public static List<String> getSpriteImageDirectories(String spriteName, String filePrefix){
         List<String> images = new ArrayList<String>();
 
@@ -31,12 +35,20 @@ public class SpriteFactory {
         return images;
     }
 
+    /**@param paths All image paths for the sprite -> found from getSpriteImageDirectories
+     * @param app The app object to load the PImages
+     * @return list of images for the sprite object to create an animation
+     */
     public static List<PImage> convertPathsToPImages(List<String> paths, PApplet app){
         List<PImage> images = new ArrayList<>();
         for(String path: paths) { images.add(app.loadImage(path)); }
         return images;
     }
 
+    /**@param spriteName the name of the sprite used to search the directories (finding folder) 
+     * @param animationName the name of the animation for the sprite e.g. up (file search)
+     * @return An animation object containing the images for that animation
+     */
     public static Animation createAnimation(String spriteName, String animationName, PApplet app){
         List<String> directories = getSpriteImageDirectories(spriteName, animationName);
         List<PImage> frames = convertPathsToPImages(directories, app);
@@ -44,7 +56,9 @@ public class SpriteFactory {
         return animation;
     }   
 
-    /** @return Returns animations for movable objects like enemies and the player */
+    /**@param spriteName the name of the sprite used to search the directories (finding folder) 
+     * @param app The app object to load the PImages
+     * @return Returns animations for movable objects like enemies and the player */
     public static HashMap<Direction, Animation> createAnimationsForMovable(String spriteName, PApplet app){
         HashMap<Direction, Animation> animations = new HashMap<Direction, Animation>();
         animations.put(Direction.DOWN, createAnimation(spriteName, spriteName + "_down", app));
@@ -58,24 +72,44 @@ public class SpriteFactory {
         return animations;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod animations for the player
+     * @return a Player
+     */
     public static Player makePlayer(int x, int y, PApplet app){
         HashMap<Direction, Animation> animations = createAnimationsForMovable("player", app);
         Player player = new Player(10, x, y, animations);
         return player;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod animations for the red enemy
+     * @return a red enemy
+     */
     public static EnemyRed makeEnemyRed(int x, int y, PApplet app){
         HashMap<Direction, Animation> animations = createAnimationsForMovable("red_enemy", app);
         EnemyRed enemy = new EnemyRed(x, y, animations);
         return enemy;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod animations for the yellow enemy
+     * @return a yellow enemy
+     */
     public static EnemyYellow makeEnemyYellow(int x, int y, PApplet app){
         HashMap<Direction, Animation> animations = createAnimationsForMovable("yellow_enemy", app);
         EnemyYellow enemy = new EnemyYellow(x, y, animations);
         return enemy;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod animations for a bomb
+     * @return a bomb
+     */
     public static Bomb makeBomb(int x, int y, PApplet app){
         HashMap<Direction, Animation> animations = new HashMap<Direction, Animation>();
         animations.put(Direction.DOWN,createAnimation("bomb", "bomb", app));
@@ -83,48 +117,90 @@ public class SpriteFactory {
         return bomb;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod images for a solidwall
+     * @return a solidwall
+     */
     public static SolidWall makeSolidWall(int x, int y, PApplet app){
         PImage tileImage = app.loadImage("src/main/resources/wall/solid.png");
         SolidWall tile = new SolidWall(x, y, tileImage);
         return tile;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod images for a brokenwall
+     * @return a brokenwall
+     */
     public static BrokenWall makeBrokenWall(int x, int y, PApplet app){
         PImage tileImage = app.loadImage("src/main/resources/broken/broken.png");
         BrokenWall tile = new BrokenWall(x, y, tileImage);
         return tile;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to laod images for a goal
+     * @return a goal object
+     */
     public static Goal makeGoal(int x, int y, PApplet app){
         PImage tileImage = app.loadImage("src/main/resources/goal/goal.png");
         Goal tile = new Goal(x, y, tileImage);
         return tile;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to load images an empty tile
+     * @return a empty tile object
+     */
     public static Empty makeEmpty(int x, int y, PApplet app){
         PImage tileImage = app.loadImage("src/main/resources/empty/empty.png");
         Empty tile = new Empty(x, y, tileImage);
         return tile;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to load images for an explosion tile
+     * @return the centre tile for an explosion
+     */
     public static ExplosionTile makeExplosionCentre(int x, int y, PApplet app){
         PImage image = app.loadImage("src/main/resources/explosion/centre.png");
         ExplosionTile tile = new ExplosionTile(x, y, image);
         return tile;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to load images for an explosion tile
+     * @return a horizontal tile for an explosion
+     */
     public static ExplosionTile makeExplosionHorizontal(int x, int y, PApplet app){
         PImage image = app.loadImage("src/main/resources/explosion/horizontal.png");
         ExplosionTile tile = new ExplosionTile(x, y, image);
         return tile;
     }
 
+    /**@param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to load images for an explosion tile
+     * @return a vertical tile for an explosion
+     */
     public static ExplosionTile makeExplosionVertical(int x, int y, PApplet app){
         PImage image = app.loadImage("src/main/resources/explosion/vertical.png");
         ExplosionTile tile = new ExplosionTile(x, y, image);
         return tile;
     }
 
+    /**Used by the loader method toconstruct gameobjects based off chars in level files
+     * @param c the character read in by the loader method
+     * @param x x coord for the object
+     * @param y y coord for the object
+     * @param app app instance to load images for the object
+     * @return a gameobject
+     */
     public static GameObject makeByChar(char c, int x, int y, PApplet app){
         switch(c){
             case 'W' : return makeSolidWall(x, y, app);

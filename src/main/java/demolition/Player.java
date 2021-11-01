@@ -10,7 +10,7 @@ public class Player extends MovingObject implements Movable {
     private int lives;
     private int xStarting;
     private int yStarting;
-    private int timer; 
+    // private int timer; 
     
     /**Constructor for player objects
      * @param lives the number of lives 
@@ -91,11 +91,7 @@ public class Player extends MovingObject implements Movable {
     //     return false;
     // } 
 
-    private void savePositions(){
-        int oldY = this.yPos;
-        int oldX = this.xPos;
-        Direction oldDirection = this.direction;
-    }
+    
 
     private void handleCollision(int oldX, int oldY, Direction oldDirection){
         if (collideWithSolid()){

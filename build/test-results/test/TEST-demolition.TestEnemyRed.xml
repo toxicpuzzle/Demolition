@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestEnemyRed" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-01T02:29:04" hostname="DESKTOP-DBK8A4Q" time="11.455">
+<testsuite name="demolition.TestEnemyRed" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-01T08:58:04" hostname="DESKTOP-DBK8A4Q" time="11.751">
   <properties/>
-  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestEnemyRed" time="1.26"/>
-  <testcase name="checkStuck()" classname="demolition.TestEnemyRed" time="1.323"/>
-  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestEnemyRed" time="1.247"/>
-  <testcase name="checkWalkThroughRemovedWall()" classname="demolition.TestEnemyRed" time="1.316"/>
-  <testcase name="checkMoveDownWithObstaclesAllSidesForceRight()" classname="demolition.TestEnemyRed" time="1.241"/>
-  <testcase name="checkCollisionWithExpiredExplosion()" classname="demolition.TestEnemyRed" time="1.316"/>
-  <testcase name="checkMoveDownWithObstacles()" classname="demolition.TestEnemyRed" time="1.245"/>
-  <testcase name="checkMoveDownWithObstaclesAllSidesForceLeft()" classname="demolition.TestEnemyRed" time="1.254"/>
-  <testcase name="notNull()" classname="demolition.TestEnemyRed" time="1.249"/>
+  <testcase name="checkCollisionWithExplosion()" classname="demolition.TestEnemyRed" time="1.298"/>
+  <testcase name="checkStuck()" classname="demolition.TestEnemyRed" time="1.36"/>
+  <testcase name="checkMoveDownNoObstacles()" classname="demolition.TestEnemyRed" time="1.258"/>
+  <testcase name="checkWalkThroughRemovedWall()" classname="demolition.TestEnemyRed" time="1.346"/>
+  <testcase name="checkMoveDownWithObstaclesAllSidesForceRight()" classname="demolition.TestEnemyRed" time="1.264"/>
+  <testcase name="checkCollisionWithExpiredExplosion()" classname="demolition.TestEnemyRed" time="1.329"/>
+  <testcase name="checkMoveDownWithObstacles()" classname="demolition.TestEnemyRed" time="1.253"/>
+  <testcase name="checkMoveDownWithObstaclesAllSidesForceLeft()" classname="demolition.TestEnemyRed" time="1.336"/>
+  <testcase name="notNull()" classname="demolition.TestEnemyRed" time="1.304"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

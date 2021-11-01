@@ -14,13 +14,12 @@ public class Level {
     private Player player;
     private List<ExplosionTile> explosionTiles;
     private int timeLeft;
-    private int lastDrawn;
+    // private int lastDrawn;
     private int timer;
 
 
-    // TODO: Add time left to level object
     
-    //Add bombs and explosions later
+    /**Constructor for level */
     public Level(){
         this.enemies = new ArrayList<Enemy>();
         this.solidWalls = new ArrayList<SolidWall>();
@@ -30,7 +29,6 @@ public class Level {
         this.explosionTiles = new ArrayList<ExplosionTile>();
     }
 
-    // TODO: Refactor to only add game object and make it so getters handle casting, since everytime you want to add something to the level you will have to add new logic to level.
     /**Adds a gameobject to the level
      * @param object the game object to be added
     */
@@ -66,8 +64,7 @@ public class Level {
         return this.timeLeft;
     }
 
-    // Ensure player does not die after winning if timer lapses out
-    //!
+    /**@return the time left in the current level in seconds */
     public int tick(){
         timer++;
         if (this.timer >= App.FPS*1){
@@ -121,7 +118,7 @@ public class Level {
     }
 
     /**@return all solid walls that can be broken, including ones that have already been removed */
-    public List <BrokenWall> getBrokenWalls(){
+    public List<BrokenWall> getBrokenWalls(){
         return this.brokenWalls;
     }
     

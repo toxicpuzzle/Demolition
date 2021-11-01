@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestBomb" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-11-01T02:28:57" hostname="DESKTOP-DBK8A4Q" time="6.136">
+<testsuite name="demolition.TestBomb" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-11-01T08:57:57" hostname="DESKTOP-DBK8A4Q" time="6.516">
   <properties/>
-  <testcase name="testVanishedBomb()" classname="demolition.TestBomb" time="1.737"/>
-  <testcase name="testVanishing()" classname="demolition.TestBomb" time="1.276"/>
-  <testcase name="testAnimation()" classname="demolition.TestBomb" time="1.857"/>
-  <testcase name="notNull()" classname="demolition.TestBomb" time="1.265"/>
+  <testcase name="testVanishedBomb()" classname="demolition.TestBomb" time="1.881"/>
+  <testcase name="testVanishing()" classname="demolition.TestBomb" time="1.322"/>
+  <testcase name="testAnimation()" classname="demolition.TestBomb" time="1.987"/>
+  <testcase name="notNull()" classname="demolition.TestBomb" time="1.325"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

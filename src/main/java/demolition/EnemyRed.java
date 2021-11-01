@@ -4,7 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class EnemyRed extends Enemy {
-
+    
+    /**Construct red enemies
+     * @param x x coord 
+     * @param y y coord
+     * @param animations animation objects for the enemy
+     */
     public EnemyRed(int x, int y, HashMap<Direction, Animation> animations) {
         super(x, y, animations);
     }
@@ -14,10 +19,10 @@ public class EnemyRed extends Enemy {
         return this.direction.random();
     }
 
-    @Override
-    public void tick() {
-        // System.out.println(currentAnimation.getFrameNumber()); //TODO: Ensure there is not dodgy frame skipping
-        super.tick();
-    }
+    // @Override
+    // public void tick() {
+    //     // System.out.println(currentAnimation.getFrameNumber()); //TODO: Ensure there is not dodgy frame skipping
+    //     super.tick();
+    // }
 
 }

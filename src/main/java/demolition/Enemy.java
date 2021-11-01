@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public abstract class Enemy extends MovingObject implements Movable {
 
     
-    protected int lastWalked;
-    protected boolean justChangedDirection;
-    protected int yHeadOffset = 16;
+    // protected int lastWalked;
+    // protected boolean justChangedDirection;
+    protected static int yHeadOffset = 16;
     protected int yStarting;
     protected int xStarting;
     protected int walkTimer;
@@ -29,11 +29,11 @@ public abstract class Enemy extends MovingObject implements Movable {
         this.directionsTried = new ArrayList<Direction>();
         // Need to find a way to load all of the animations in
     }
-    @Override
-    
+
     /**Draws the enemy's current frame on screen
      * @param app the app object associated with the enemy
      */
+    @Override
     public void draw(PApplet app) {
         app.image(currentFrame, xPos, yPos-yHeadOffset);
     }

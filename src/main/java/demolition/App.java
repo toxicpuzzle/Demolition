@@ -23,10 +23,12 @@ public class App extends PApplet {
         
     }
 
+    /**Sets up the width and height of the window to play the game in */
     public void settings() {
         size(WIDTH, HEIGHT);
     }
 
+    /**Loads in the levels from the config file and the UI icons */
     public void setup() {
         frameRate(FPS); 
         List<Level> levels = Loader.loadAllFiles(this, configFileName);
@@ -35,10 +37,19 @@ public class App extends PApplet {
         this.timer = loadImage("src/main/resources/icons/clock.png");
     }
 
+    /**Changes the config file -> used during testing 
+     * @param name The name/directory of the config file
+    */
     public void setConfig(String name){
         configFileName = name;
     }
 
+    /**Writes a text on screen 
+     * @param word the string/word to be written
+     * @param x the x coord of the centre of the word
+     * @param y the y coord of the centre of the word
+     * @param size font size
+     */
     public void drawText(String word, int x, int y, int size){
         PFont text = createFont("src/main/resources/PressStart2P-Regular.ttf", 16);
         textFont(text, size);
@@ -46,9 +57,13 @@ public class App extends PApplet {
         fill(0,0,0);
         text(word, x, y);
     }
+
+    /**Draws all elements onto the screen */
     public void draw(){
         this.tick();
     }
+
+    /**Handles all drawing, called by the draw() function */
     public void tick() {
         background(255, 128, 0);
         Level currentLevel = game.getCurrentLevel();
@@ -78,11 +93,13 @@ public class App extends PApplet {
            
     }   
 
+    /**Sets the alreadyPressed attribute to false */
     @Override
     public void keyReleased() {
         alreadyPressed = false;
     }
 
+    /**Moves the player depending which keys has bene pressed, will not move the player until the key is released again. */
     @Override
     public void keyPressed() {
         Level currentLevel = game.getCurrentLevel();
@@ -99,6 +116,10 @@ public class App extends PApplet {
         alreadyPressed = true;
         
     }
+
+    /**Main method to run the app itself
+     * @param args the command line arguments for the app
+     */
     public static void main(String[] args) {
         PApplet.main("demolition.App");
     }
