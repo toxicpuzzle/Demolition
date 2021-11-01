@@ -9,6 +9,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import java.io.FilenameFilter;
 
+/**Class that helps construct images for the constructors of GameObjects to 
+ * help construct objects in one line without having to load in images repeatedly */
 public class SpriteFactory {
 
     public static final int frameDuration = 200; //In milliseconds

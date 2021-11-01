@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import processing.core.PApplet;
 import java.util.ArrayList;
+
+/**Abstract enemy object that depends on movement strategies 
+ * concretely implemented by EnemyYellow and EnemyRed */
 public abstract class Enemy extends MovingObject implements Movable {
 
-    
-    // protected int lastWalked;
-    // protected boolean justChangedDirection;
 <span class="fc" id="L12">    protected static int yHeadOffset = 16;</span>
     protected int yStarting;
     protected int xStarting;
@@ -94,28 +94,27 @@ public abstract class Enemy extends MovingObject implements Movable {
             
 <span class="fc bfc" id="L95" title="All 2 branches covered.">            if (directionsTried.size() &gt;= 4){</span>
 <span class="fc" id="L96">                this.direction = this.getCurrentAnimation().getDirection();</span>
-                // System.out.println(this.direction);
-<span class="fc" id="L98">                justChangedDirection = false;</span>
-<span class="fc" id="L99">                directionsTried.clear();</span>
-<span class="fc" id="L100">                return;</span>
+<span class="fc" id="L97">                justChangedDirection = false;</span>
+<span class="fc" id="L98">                directionsTried.clear();</span>
+<span class="fc" id="L99">                return;</span>
             }
 
             // Ensures the new direction is one that has not yet tried
-<span class="fc" id="L104">            Direction newDirection = getDirectionStrategy();</span>
-<span class="fc bfc" id="L105" title="All 2 branches covered.">            while (directionsTried.contains(newDirection)){</span>
-<span class="fc" id="L106">                newDirection = getDirectionStrategy();</span>
+<span class="fc" id="L103">            Direction newDirection = getDirectionStrategy();</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            while (directionsTried.contains(newDirection)){</span>
+<span class="fc" id="L105">                newDirection = getDirectionStrategy();</span>
             }
 
             // Set the object's direction to the new direction chosen and try walking in that direction;
-<span class="fc" id="L110">            this.direction = newDirection; //NB: Direction attribute will still change but animation is </span>
-<span class="fc" id="L111">            justChangedDirection = true;</span>
-<span class="fc" id="L112">            walk();</span>
-<span class="fc" id="L113">        } else {</span>
-<span class="fc" id="L114">            directionsTried.clear();</span>
-<span class="fc" id="L115">            updateCurrentAnimation();</span>
-<span class="fc" id="L116">            return;</span>
+<span class="fc" id="L109">            this.direction = newDirection; //NB: Direction attribute will still change but animation is </span>
+<span class="fc" id="L110">            justChangedDirection = true;</span>
+<span class="fc" id="L111">            walk();</span>
+<span class="fc" id="L112">        } else {</span>
+<span class="fc" id="L113">            directionsTried.clear();</span>
+<span class="fc" id="L114">            updateCurrentAnimation();</span>
+<span class="fc" id="L115">            return;</span>
         }
-<span class="fc" id="L118">    }</span>
+<span class="fc" id="L117">    }</span>
 
     /**@return the direction for the enemy to move in when it is facing a solid object */
     public abstract Direction getDirectionStrategy();
@@ -123,27 +122,24 @@ public abstract class Enemy extends MovingObject implements Movable {
     /**Updates the state of the enemy based on if has touched an explosion or if it has changed direction/walked */
     @Override
     public void tick() {
-<span class="fc" id="L126">        walkTimer++;</span>
+<span class="fc" id="L125">        walkTimer++;</span>
         
-        
-        // System.out.println(this.currentAnimation.getFrameNumber());
-
-<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (collideWithExplosion()){</span>
-<span class="fc" id="L132">            this.isRemoved = true;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (collideWithExplosion()){</span>
+<span class="fc" id="L128">            this.isRemoved = true;</span>
         }
 
-<span class="fc" id="L135">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (this.walkTimer &gt;= secondsBetweenFrames*App.FPS*4){</span>
-<span class="fc" id="L137">            walk();</span>
-<span class="fc bfc" id="L138" title="All 2 branches covered.">            if (justChangedDirection){</span>
-<span class="fc" id="L139">                this.currentFrame = this.currentAnimation.getFrameAtIndex(0); </span>
+<span class="fc" id="L131">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (this.walkTimer &gt;= secondsBetweenFrames*App.FPS*4){</span>
+<span class="fc" id="L133">            walk();</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">            if (justChangedDirection){</span>
+<span class="fc" id="L135">                this.currentFrame = this.currentAnimation.getFrameAtIndex(0); </span>
             }
             // ERROR: Moves before updating frame -&gt; Fixed
-<span class="fc" id="L142">            walkTimer = 0;</span>
+<span class="fc" id="L138">            walkTimer = 0;</span>
         }
 
-<span class="fc" id="L145">        super.tick();</span>
-<span class="fc" id="L146">    }</span>
+<span class="fc" id="L141">        super.tick();</span>
+<span class="fc" id="L142">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

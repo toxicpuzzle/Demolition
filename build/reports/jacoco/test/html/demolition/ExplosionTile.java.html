@@ -3,6 +3,9 @@
 import processing.core.PImage;
 import java.util.List;
 
+/**Explosion tile, can be centre, vertical, or horizontal, and destroys any moving thing and brokenwall in its path.
+ * Collision an deletion of objects hit by explosion is handled by the gamemanager, that has knowledge of locations of all objects
+ */
 public class ExplosionTile extends GameObject {
     private Level currentLevel;
     private static final int duration = 500;
@@ -14,36 +17,41 @@ public class ExplosionTile extends GameObject {
      * @param startingImage image for the explosion tile
      */
     public ExplosionTile(int x, int y, PImage startingImage){
-<span class="fc" id="L17">        super(x, y, false, startingImage);</span>
+<span class="fc" id="L20">        super(x, y, false, startingImage);</span>
        
-<span class="fc" id="L19">    } </span>
+<span class="fc" id="L22">    } </span>
 
+    /**@return true if the explosiontile is colliding with a broken tile */
     public boolean collideWithBroken(){
-<span class="fc" id="L22">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
-<span class="fc" id="L23">        return this.collideWithObjects(brokenWalls);</span>
-    }
-
-    public boolean collideWithSolid(){
-<span class="fc" id="L27">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
-<span class="fc" id="L28">        return this.collideWithObjects(solidWalls);</span>
+<span class="fc" id="L26">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
+<span class="fc" id="L27">        return this.collideWithObjects(brokenWalls);</span>
     }
     
+    /**@return true if the explosiontile is colliding with a solid unbreakable wall */
+    public boolean collideWithSolid(){
+<span class="fc" id="L32">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
+<span class="fc" id="L33">        return this.collideWithObjects(solidWalls);</span>
+    }
+    
+    /**@return the level object that the explosiontile resides in */
     public Level getCurrentLevel(){
-<span class="nc" id="L32">        return this.currentLevel;</span>
+<span class="nc" id="L38">        return this.currentLevel;</span>
     }
 
+    /**@param level The level to set the current explosiontile to belong to */
     public void setCurrentLevel(Level level){
-<span class="fc" id="L36">        this.currentLevel = level;</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L43">        this.currentLevel = level;</span>
+<span class="fc" id="L44">    }</span>
 
+    /**Ticks the explosion tile so that it will disappear after 0.5 seconds */
     @Override
     public void tick() {
-<span class="fc" id="L41">        timeSinceExplosion++;</span>
-<span class="fc" id="L42">        float secondsLasted = (float) duration/1000;</span>
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
-<span class="fc" id="L44">            this.remove();</span>
+<span class="fc" id="L49">        timeSinceExplosion++;</span>
+<span class="fc" id="L50">        float secondsLasted = (float) duration/1000;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
+<span class="fc" id="L52">            this.remove();</span>
         } 
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L54">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

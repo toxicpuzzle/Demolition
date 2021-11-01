@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PImage; 
 import java.util.List;
 
-
+/**Central GameObject template class that all tiles and moving objects inherit from*/
 public abstract class GameObject {
     protected int xPos;
     protected int yPos;

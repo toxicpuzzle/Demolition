@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestDirection" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:36:56" hostname="DESKTOP-DBK8A4Q" time="0.002">
+<testsuite name="demolition.TestDirection" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:55:35" hostname="DESKTOP-DBK8A4Q" time="0.002">
   <properties/>
   <testcase name="checkRandomDirection()" classname="demolition.TestDirection" time="0.0"/>
   <testcase name="checkCyclingDirectionClockwise()" classname="demolition.TestDirection" time="0.002"/>

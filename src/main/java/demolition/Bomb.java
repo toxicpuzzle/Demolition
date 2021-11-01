@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import processing.core.PApplet;
-
+/**Bomb object that can be placed by the player, and which spawns an explosion that destroys walls*/
 public class Bomb extends MovingObject{
     private int timeSincePlaced;
     private PApplet app; // TEMP

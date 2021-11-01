@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import processing.core.PApplet;
-
+/**Bomb object that can be placed by the player, and which spawns an explosion that destroys walls*/
 public class Bomb extends MovingObject{
     private int timeSincePlaced;
     private PApplet app; // TEMP
@@ -44,18 +44,17 @@ public class Bomb extends MovingObject{
 <span class="fc bfc" id="L44" title="All 2 branches covered.">        if (this.isRemoved){</span>
 <span class="fc" id="L45">            return;</span>
         }
-        // System.out.println(this.currentAnimation.getFrameNumber());
-<span class="fc" id="L48">        timeSincePlaced++;</span>
+<span class="fc" id="L47">        timeSincePlaced++;</span>
 
-<span class="fc" id="L50">        float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (timeSincePlaced &gt;= secondsBetweenFrames*App.FPS*8){</span>
-<span class="fc" id="L52">            Explosion explosion = new Explosion(this.xPos, this.yPos, this.currentLevel, app);</span>
-<span class="fc" id="L53">            explosion.addAllExpTiles();</span>
-<span class="fc" id="L54">            this.isRemoved = true;</span>
+<span class="fc" id="L49">        float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (timeSincePlaced &gt;= secondsBetweenFrames*App.FPS*8){</span>
+<span class="fc" id="L51">            Explosion explosion = new Explosion(this.xPos, this.yPos, this.currentLevel, app);</span>
+<span class="fc" id="L52">            explosion.addAllExpTiles();</span>
+<span class="fc" id="L53">            this.isRemoved = true;</span>
         }
 
-<span class="fc" id="L57">        super.tick();        </span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L56">        super.tick();        </span>
+<span class="fc" id="L57">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

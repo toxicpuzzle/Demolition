@@ -5,6 +5,7 @@ import processing.core.PImage;
 import java.util.HashMap;
 import java.util.List;
 
+/**Holds and plays the image objects that makes up the animation for the sprite on screen */
 public class Animation {
     private int currFrameIndex;
     private int frameLength;

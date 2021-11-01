@@ -5,6 +5,7 @@ import processing.core.PApplet;
 import processing.core.PImage; 
 import java.util.HashMap;
 
+/**Template class GameObjects which require directional based animations and knowledge of the current level*/
 public abstract class MovingObject extends GameObject{
     protected HashMap<Direction, Animation> animations; 
     protected Animation currentAnimation;

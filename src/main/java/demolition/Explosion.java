@@ -7,6 +7,8 @@ import processing.core.PImage;
 
 import java.util.ArrayList;
 
+/**Spawns a set of explosiontiles from the location that the bomb was placed, 
+ * and ensures explosions only break 1 breakable wall max and do not penetrate solidwalls*/
 public class Explosion{
     private List<ExplosionTile> left;
     private List<ExplosionTile> right;

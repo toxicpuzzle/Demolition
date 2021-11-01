@@ -2,6 +2,7 @@ package demolition;
 
 import processing.core.PImage;
 
+/**A wall that can be broken wall by bombs*/
 public class BrokenWall extends GameObject {
 
     /**Construct brokenwalls

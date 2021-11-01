@@ -3,41 +3,43 @@
 import java.util.List;
 import java.util.Random;
 
-
-<span class="fc" id="L7">public enum Direction {</span>
-<span class="fc" id="L8">    LEFT,</span>
-<span class="fc" id="L9">    RIGHT,</span>
-<span class="fc" id="L10">    UP,</span>
-<span class="fc" id="L11">    DOWN,</span>
-<span class="fc" id="L12">    NONE;</span>
+/**Directional enum that helps keep track the direction an animation is played for
+ * and the direction that enemies and players are currently facing
+*/
+<span class="fc" id="L9">public enum Direction {</span>
+<span class="fc" id="L10">    LEFT,</span>
+<span class="fc" id="L11">    RIGHT,</span>
+<span class="fc" id="L12">    UP,</span>
+<span class="fc" id="L13">    DOWN,</span>
+<span class="fc" id="L14">    NONE;</span>
 
     /**Gets the direction clockwise to the current direction 
      * @return the direction clockwise to the current direction
     */
     public Direction clockwise() {
-<span class="fc bfc" id="L18" title="All 4 branches covered.">        switch(this){</span>
-<span class="fc" id="L19">            case LEFT: return UP;</span>
-<span class="fc" id="L20">            case RIGHT: return DOWN;</span>
-<span class="fc" id="L21">            case UP: return RIGHT;</span>
+<span class="fc bfc" id="L20" title="All 4 branches covered.">        switch(this){</span>
+<span class="fc" id="L21">            case LEFT: return UP;</span>
+<span class="fc" id="L22">            case RIGHT: return DOWN;</span>
+<span class="fc" id="L23">            case UP: return RIGHT;</span>
             // case DOWN: return LEFT;
         }
         // return NONE;
-<span class="fc" id="L25">        return LEFT;</span>
+<span class="fc" id="L27">        return LEFT;</span>
     }
 
     /**Gets a random direction from the current direction 
      * @return a random direction 
     */
     public Direction random(){
-<span class="fc" id="L32">        int rand = (int) (Math.random()*4 + 1);</span>
-<span class="fc bfc" id="L33" title="All 4 branches covered.">        switch(rand){</span>
-<span class="fc" id="L34">            case 1: return UP;</span>
-<span class="fc" id="L35">            case 2: return DOWN;</span>
-<span class="fc" id="L36">            case 3: return RIGHT;</span>
+<span class="fc" id="L34">        int rand = (int) (Math.random()*4 + 1);</span>
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">        switch(rand){</span>
+<span class="fc" id="L36">            case 1: return UP;</span>
+<span class="nc" id="L37">            case 2: return DOWN;</span>
+<span class="fc" id="L38">            case 3: return RIGHT;</span>
             // case 4: return LEFT;
         }
         // return NONE;
-<span class="fc" id="L40">        return LEFT;</span>
+<span class="fc" id="L42">        return LEFT;</span>
     }   
     
 }

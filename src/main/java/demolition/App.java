@@ -5,6 +5,7 @@ import java.util.List;
 import processing.core.PFont;
 import processing.core.PImage;
 
+/**Runs the game*/
 public class App extends PApplet {
 
     public static final int WIDTH = 480;

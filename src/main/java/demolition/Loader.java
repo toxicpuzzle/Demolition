@@ -10,6 +10,7 @@ import processing.data.JSONObject;
 import java.util.List;
 import java.util.ArrayList;
 
+/**Loads in the level(s) as level objects based on config files provided */
 public class Loader {
 
     /**Loads all the level files specified by the configFile to be used for the game

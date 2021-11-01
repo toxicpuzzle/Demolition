@@ -2,6 +2,7 @@
 
 import java.util.HashMap;
 
+/**Concrete implementation of enemy that moves in clockwise upon hitting a wall*/
 public class EnemyYellow extends Enemy {
 
     /**Construct yellow enemies
@@ -10,13 +11,13 @@ public class EnemyYellow extends Enemy {
      * @param animations animation objects for the yellow enemy
      */
     public EnemyYellow(int x, int y, HashMap&lt;Direction, Animation&gt; animations) {
-<span class="fc" id="L13">        super(x, y, animations);</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L14">        super(x, y, animations);</span>
+<span class="fc" id="L15">    }</span>
 
     /**@return direction for the enemy to move in if the enemy collides with a solid object */
     @Override
     public Direction getDirectionStrategy(){
-<span class="fc" id="L19">        return this.direction.clockwise();</span>
+<span class="fc" id="L20">        return this.direction.clockwise();</span>
     }
     
 }

@@ -2,8 +2,8 @@ package demolition;
 
 import processing.core.PImage; 
 
+/**Wall tile that cannot be broken by bombs and cannot be stepped through */
 public class SolidWall extends GameObject {
-
     
     /**Constructor for solidwall objects
      * @param x x coord to create the object

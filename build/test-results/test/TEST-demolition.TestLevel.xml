@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestLevel" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:37:40" hostname="DESKTOP-DBK8A4Q" time="10.39">
+<testsuite name="demolition.TestLevel" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:56:19" hostname="DESKTOP-DBK8A4Q" time="10.435">
   <properties/>
-  <testcase name="testObjectStatusAfterReset()" classname="demolition.TestLevel" time="1.287"/>
-  <testcase name="testGettingSolidWalls()" classname="demolition.TestLevel" time="1.303"/>
-  <testcase name="testGettingBrokenWalls()" classname="demolition.TestLevel" time="1.294"/>
-  <testcase name="testExplosionsAndBombsRemovedOnReset()" classname="demolition.TestLevel" time="1.321"/>
-  <testcase name="testRemoveAllGameObjects()" classname="demolition.TestLevel" time="1.293"/>
-  <testcase name="testGettingEmptyTiles()" classname="demolition.TestLevel" time="1.295"/>
-  <testcase name="testGettingAll()" classname="demolition.TestLevel" time="1.301"/>
-  <testcase name="notNull()" classname="demolition.TestLevel" time="1.294"/>
+  <testcase name="testObjectStatusAfterReset()" classname="demolition.TestLevel" time="1.288"/>
+  <testcase name="testGettingSolidWalls()" classname="demolition.TestLevel" time="1.302"/>
+  <testcase name="testGettingBrokenWalls()" classname="demolition.TestLevel" time="1.306"/>
+  <testcase name="testExplosionsAndBombsRemovedOnReset()" classname="demolition.TestLevel" time="1.315"/>
+  <testcase name="testRemoveAllGameObjects()" classname="demolition.TestLevel" time="1.298"/>
+  <testcase name="testGettingEmptyTiles()" classname="demolition.TestLevel" time="1.303"/>
+  <testcase name="testGettingAll()" classname="demolition.TestLevel" time="1.304"/>
+  <testcase name="notNull()" classname="demolition.TestLevel" time="1.317"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

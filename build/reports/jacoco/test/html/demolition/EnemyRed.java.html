@@ -3,6 +3,8 @@
 import java.util.HashMap;
 import java.util.List;
 
+
+/**Concrete implementation of enemy that moves in a random direction upon hitting a wall*/
 public class EnemyRed extends Enemy {
     
     /**Construct red enemies
@@ -11,12 +13,12 @@ public class EnemyRed extends Enemy {
      * @param animations animation objects for the enemy
      */
     public EnemyRed(int x, int y, HashMap&lt;Direction, Animation&gt; animations) {
-<span class="fc" id="L14">        super(x, y, animations);</span>
-<span class="fc" id="L15">    }</span>
+<span class="fc" id="L16">        super(x, y, animations);</span>
+<span class="fc" id="L17">    }</span>
 
     /**@return direction for the enemy to move in if the enemy collides with a solid object */
     public Direction getDirectionStrategy(){
-<span class="fc" id="L19">        return this.direction.random();</span>
+<span class="fc" id="L21">        return this.direction.random();</span>
     }
 
 }

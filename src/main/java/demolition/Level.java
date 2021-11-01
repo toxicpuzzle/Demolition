@@ -3,7 +3,8 @@ package demolition;
 import java.util.List;
 import java.util.ArrayList;
 
-//! Check if you need to have javadoc comments for the class.
+/**The Level object holds the time limit for the level, and all objects in the level, 
+ * and can reset all objects to their starting position/status and return objects in the level*/
 public class Level {
     private List<Enemy> enemies;
     private List<SolidWall> solidWalls;

@@ -4,6 +4,7 @@ import java.util.List;
 import processing.core.PApplet;
 import java.util.HashMap;
 
+/**The bomberman that is controlled by the player through keyboard input in the app class */
 public class Player extends MovingObject implements Movable {
 
     private static int yHeadOffset = 16;

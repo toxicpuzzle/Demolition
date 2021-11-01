@@ -3,6 +3,8 @@ package demolition;
 import java.util.HashMap;
 import java.util.List;
 
+
+/**Concrete implementation of enemy that moves in a random direction upon hitting a wall*/
 public class EnemyRed extends Enemy {
     
     /**Construct red enemies

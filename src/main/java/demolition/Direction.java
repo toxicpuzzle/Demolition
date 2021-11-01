@@ -3,7 +3,9 @@ package demolition;
 import java.util.List;
 import java.util.Random;
 
-
+/**Directional enum that helps keep track the direction an animation is played for
+ * and the direction that enemies and players are currently facing
+*/
 public enum Direction {
     LEFT,
     RIGHT,

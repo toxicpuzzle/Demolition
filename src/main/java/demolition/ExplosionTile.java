@@ -3,6 +3,9 @@ package demolition;
 import processing.core.PImage;
 import java.util.List;
 
+/**Explosion tile, can be centre, vertical, or horizontal, and destroys any moving thing and brokenwall in its path.
+ * Collision an deletion of objects hit by explosion is handled by the gamemanager, that has knowledge of locations of all objects
+ */
 public class ExplosionTile extends GameObject {
     private Level currentLevel;
     private static final int duration = 500;

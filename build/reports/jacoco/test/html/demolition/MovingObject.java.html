@@ -5,6 +5,7 @@ import processing.core.PApplet;
 import processing.core.PImage; 
 import java.util.HashMap;
 
+/**Template class GameObjects which require directional based animations and knowledge of the current level*/
 public abstract class MovingObject extends GameObject{
     protected HashMap&lt;Direction, Animation&gt; animations; 
     protected Animation currentAnimation;
@@ -19,50 +20,50 @@ public abstract class MovingObject extends GameObject{
      * @param animations animations corresponding to each direction the directional object is moving
     */
     public MovingObject(int x, int y, HashMap&lt;Direction, Animation&gt; animations){
-<span class="fc" id="L22">        super(x, y, false, animations.get(Direction.DOWN).getFrameAtIndex(0)); </span>
-<span class="fc" id="L23">        this.animations = animations;</span>
-<span class="fc" id="L24">        this.direction = Direction.DOWN;</span>
-<span class="fc" id="L25">        updateCurrentAnimation();</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L23">        super(x, y, false, animations.get(Direction.DOWN).getFrameAtIndex(0)); </span>
+<span class="fc" id="L24">        this.animations = animations;</span>
+<span class="fc" id="L25">        this.direction = Direction.DOWN;</span>
+<span class="fc" id="L26">        updateCurrentAnimation();</span>
+<span class="fc" id="L27">    }</span>
 
     /**Updates how the object is displayed on screen based on if the object has changed direction 
      * or if the frameDuration has elapsed between when the object was last drawn  */
     public void tick(){
-<span class="fc" id="L31">        this.timer++;</span>
+<span class="fc" id="L32">        this.timer++;</span>
         // Animate the object
-<span class="fc" id="L33">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
-<span class="fc bfc" id="L34" title="All 2 branches covered.">        if ((this.timer &gt;= (secondsBetweenFrames * App.FPS))){</span>
-<span class="fc" id="L35">            this.currentFrame = currentAnimation.getNextFrame();</span>
-<span class="fc" id="L36">            this.timer = 0;</span>
+<span class="fc" id="L34">        float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if ((this.timer &gt;= (secondsBetweenFrames * App.FPS))){</span>
+<span class="fc" id="L36">            this.currentFrame = currentAnimation.getNextFrame();</span>
+<span class="fc" id="L37">            this.timer = 0;</span>
         } 
 
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (this.justChangedDirection){</span>
-<span class="fc" id="L40">            this.currentFrame = currentAnimation.getFrameAtIndex(0);</span>
-<span class="fc" id="L41">            this.justChangedDirection = false;            </span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (this.justChangedDirection){</span>
+<span class="fc" id="L41">            this.currentFrame = currentAnimation.getFrameAtIndex(0);</span>
+<span class="fc" id="L42">            this.justChangedDirection = false;            </span>
         }
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L44">    }</span>
 
     /**Sets the movingObject's level so it knows other objects that it could reference for interactions
      * @param currentLevel the level object containing all other objects in the level;
      */
     public void setCurrentLevel(Level currentLevel){
-<span class="fc" id="L49">        this.currentLevel = currentLevel;</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L50">        this.currentLevel = currentLevel;</span>
+<span class="fc" id="L51">    }</span>
 
 
     /**Checks if the object has collided with an object that has the &quot;isSolid&quot; attribute equal to true and is not removed
      * @return true if the object has collided with an object that is solid and is not removed else false
      */
     public boolean collideWithSolid(){
-<span class="fc" id="L57">        List&lt;GameObject&gt; solids = this.currentLevel.getSolids();</span>
-<span class="fc" id="L58">        return this.collideWithObjects(solids);</span>
+<span class="fc" id="L58">        List&lt;GameObject&gt; solids = this.currentLevel.getSolids();</span>
+<span class="fc" id="L59">        return this.collideWithObjects(solids);</span>
     }
 
 
     /**@return true if the moving is colliding with an explosion that has not yet expired */
     public boolean collideWithExplosion() {
-<span class="fc" id="L64">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
-<span class="fc" id="L65">        return this.collideWithObjects(explosions);</span>
+<span class="fc" id="L65">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
+<span class="fc" id="L66">        return this.collideWithObjects(explosions);</span>
     } 
 
     /**Sets the object's position to an old X, old Y, old Direction
@@ -71,24 +72,24 @@ public abstract class MovingObject extends GameObject{
      * @param oldDirection the object's new Direction
      */
     public void resetPosition(int oldX, int oldY, Direction oldDirection){
-<span class="fc" id="L74">        this.xPos = oldX;</span>
-<span class="fc" id="L75">        this.yPos = oldY;</span>
-<span class="fc" id="L76">        this.direction = oldDirection;</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L75">        this.xPos = oldX;</span>
+<span class="fc" id="L76">        this.yPos = oldY;</span>
+<span class="fc" id="L77">        this.direction = oldDirection;</span>
+<span class="fc" id="L78">    }</span>
 
     /**@return the object's current direction */
-<span class="fc" id="L80">    public Direction getDirection() { return this.direction;}</span>
+<span class="fc" id="L81">    public Direction getDirection() { return this.direction;}</span>
 
     
     // Check animation has changed as a result of direction
     /**Updates the current animation to match the object's current direction */
     public void updateCurrentAnimation() {
-<span class="fc" id="L86">        this.currentAnimation = this.animations.get(direction);</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L87">        this.currentAnimation = this.animations.get(direction);</span>
+<span class="fc" id="L88">    }</span>
 
     /**@return the current animation object that the object is playing on screen */
     public Animation getCurrentAnimation(){
-<span class="fc" id="L91">        return this.currentAnimation;</span>
+<span class="fc" id="L92">        return this.currentAnimation;</span>
     }
 
 }

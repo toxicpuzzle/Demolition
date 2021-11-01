@@ -3,6 +3,11 @@ package demolition;
 import java.util.List;
 import processing.core.PApplet;
 import processing.core.PFont;
+
+/**Manages the game state and aftermath of explosions (eliminating the player and destroying walls), 
+ * and the levelling system so that the player goes to the next level (or wins if it is the last level)
+ * once they collide with the goal tile (provided they don't hit an explosion or enemy first)
+ */
 public class GameManager {
     private int currentLevelIndex;
     private List<Level> levels;

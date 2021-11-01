@@ -2,6 +2,7 @@ package demolition;
 
 import java.util.HashMap;
 
+/**Concrete implementation of enemy that moves in clockwise upon hitting a wall*/
 public class EnemyYellow extends Enemy {
 
     /**Construct yellow enemies

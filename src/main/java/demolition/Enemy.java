@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import processing.core.PApplet;
 import java.util.ArrayList;
+
+/**Abstract enemy object that depends on movement strategies 
+ * concretely implemented by EnemyYellow and EnemyRed */
 public abstract class Enemy extends MovingObject implements Movable {
 
     protected static int yHeadOffset = 16;
