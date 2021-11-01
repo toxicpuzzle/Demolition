@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestGameObject" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:56:17" hostname="DESKTOP-DBK8A4Q" time="1.241">
+<testsuite name="demolition.TestGameObject" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-01T13:18:31" hostname="DESKTOP-DBK8A4Q" time="1.237">
   <properties/>
-  <testcase name="objectNotNull()" classname="demolition.TestGameObject" time="1.241"/>
+  <testcase name="objectNotNull()" classname="demolition.TestGameObject" time="1.237"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -117,7 +117,7 @@ public class Loader {
             }
 
             // Check for width dimension of line 
-            if (line.length() != 15){return null;}
+            // if (line.length() != 15){return null;}
 
             lines.add(line);
         }

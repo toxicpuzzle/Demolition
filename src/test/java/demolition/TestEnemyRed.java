@@ -24,7 +24,7 @@ public class TestEnemyRed extends AppTester {
     private Level level;
 
     @BeforeEach
-    public void getEnemy(){ //! Don't implicitly override parent method      
+    public void getEnemy(){ 
         this.enemy = SpriteFactory.makeEnemyRed(32, 32*3, app); 
         this.level = Loader.loadFromFile("src/test/resources/empty.txt", 100, 100, app);
         level.addObject(enemy);
@@ -136,7 +136,6 @@ public class TestEnemyRed extends AppTester {
         assertEquals(32, enemy.getX());
         assertEquals(32*3, enemy.getY());
         assertEquals(Direction.DOWN, enemy.getDirection());
-        // !  ERROR: Stackoverflow since you'll run into infinit recursion if an enemy is stuck between 4 walls. -> should be fixed now
     }
 
     @Test

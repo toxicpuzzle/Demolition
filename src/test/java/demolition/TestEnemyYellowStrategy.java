@@ -14,7 +14,7 @@ public class TestEnemyYellowStrategy extends AppTester{
 
 
     @BeforeEach
-    public void getEnemy(){ //! Don't implicitly override parent method      
+    public void getEnemy(){ 
         this.enemy = SpriteFactory.makeEnemyYellow(32, 32*3, app); 
         this.level = Loader.loadFromFile("src/test/resources/empty.txt", 100, 100, app);
         level.addObject(enemy);

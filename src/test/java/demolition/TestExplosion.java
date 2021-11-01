@@ -29,6 +29,7 @@ public class TestExplosion extends AppTester {
         explosion.addAllExpTiles();    
     }
 
+    
     private void createExplosionAt(int x, int y, String fileUsed){
         this.level = Loader.loadFromFile(fileUsed, 100, 100, app);
         this.explosion = new Explosion(x, y, this.level, app);
