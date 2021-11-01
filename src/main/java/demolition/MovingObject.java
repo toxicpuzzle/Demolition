@@ -80,7 +80,7 @@ public abstract class MovingObject extends GameObject{
 
     /**Sets the object's position to an old X, old Y, old Direction
      * @param oldX the object's new X coord
-     * @param old the object's new Y coord
+     * @param oldY the object's new Y coord
      * @param oldDirection the object's new Direction
      */
     public void resetPosition(int oldX, int oldY, Direction oldDirection){
@@ -99,7 +99,7 @@ public abstract class MovingObject extends GameObject{
         this.currentAnimation = this.animations.get(direction);
     }
 
-    /**@Return the current animation object that the object is playing on screen */
+    /**@return the current animation object that the object is playing on screen */
     public Animation getCurrentAnimation(){
         return this.currentAnimation;
     }

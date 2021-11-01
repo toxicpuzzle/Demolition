@@ -11,7 +11,7 @@ public class ExplosionTile extends GameObject {
     /**Construct explosion tiles 
      * @param x coord 
      * @param y y coord
-     * @param animations animation objects for the explosion tile
+     * @param startingImage image for the explosion tile
      */
     public ExplosionTile(int x, int y, PImage startingImage){
         super(x, y, false, startingImage);

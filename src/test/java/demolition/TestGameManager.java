@@ -107,6 +107,43 @@ public class TestGameManager extends AppTester {
         assertEquals(true, manager.hasWonAll());
     }
 
+    // Player walking into goal tile whilst hitting enemy
+    @Test
+    public void testPlayerWalkingIntoGoalHittingEnemy(){
+        // Setup enemy next to player when player is about to hit goal tile
+        Level level = manager.getCurrentLevel();
+        Player player = level.getPlayer();
+        player.xPos = 12*32;
+        player.yPos = 13*32;
+        Enemy enemy = SpriteFactory.makeEnemyRed(13*32, 13*32, app);
+        level.addObject(enemy);
+        enemy.setCurrentLevel(level);
+        player.moveRight();
+        this.manager.tick();
+
+        // Check that player has lost a life and player is on the same level
+        assertEquals(0, manager.getCurrentLevelIndex());
+        assertEquals(2, player.getLives());
+    }
+
+    // Player walking into goal tile whilst hitting explosion
+    @Test
+    public void testPlayerWalkingIntoGoalHittingExplosion(){
+        // Setup enemy next to player when player is about to hit goal tile
+        Level level = manager.getCurrentLevel();
+        Player player = level.getPlayer();
+        player.xPos = 12*32;
+        player.yPos = 13*32;
+        ExplosionTile explosion = SpriteFactory.makeExplosionCentre(13*32, 13*32, app);
+        level.addObject(explosion);
+        player.moveRight();
+        this.manager.tick();
+
+        // Check that player has lost a life and player is on the same level
+        assertEquals(0, manager.getCurrentLevelIndex());
+        assertEquals(2, player.getLives());
+    }
+
     //Test player loses life if they collide with the enemy -> create enemy and player in the same spot
     @Test
     public void testStepOnEnemyResetLevel(){
@@ -135,10 +172,18 @@ public class TestGameManager extends AppTester {
         assertEquals(1, wallsRemoved);
     }
 
-    
-
-    //Test removing broken walls after explosion + fix explosiontile code copy paste issue
-    
-
+    @Test
+    // Test that no broken walls are set to removed status in level (not removed) after level resets
+    public void testTileBrokenRestoredAfterReset(){
+        Level level = manager.getCurrentLevel();
+        Explosion explosion = new Explosion(5*32, 3*32, level, app);
+        explosion.addAllExpTiles();    
+        int wallsRemoved = manager.removeBrokenWalls();
+        level.reset();
+        List<BrokenWall> walls = level.getBrokenWalls();
+        for(BrokenWall b: walls){
+            assertEquals(false, b.isRemoved);
+        }
+    }
 
 }

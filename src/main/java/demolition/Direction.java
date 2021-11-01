@@ -11,7 +11,9 @@ public enum Direction {
     DOWN,
     NONE;
 
-    /**Gets the direction clockwise to the current direction */
+    /**Gets the direction clockwise to the current direction 
+     * @return the direction clockwise to the current direction
+    */
     public Direction clockwise() {
         switch(this){
             case LEFT: return UP;
@@ -23,7 +25,9 @@ public enum Direction {
         return LEFT;
     }
 
-    /**Gets a random direction from the current direction */
+    /**Gets a random direction from the current direction 
+     * @return a random direction 
+    */
     public Direction random(){
         int rand = (int) (Math.random()*4 + 1);
         switch(rand){

@@ -18,109 +18,111 @@ public class GameManager {
 <span class="fc" id="L18">        setup();</span>
 <span class="fc" id="L19">    }</span>
 
-    /**Removes all broken walls that are colliding with an explosion in a level*/
+    /**Removes all broken walls that are colliding with an explosion in a level
+     * @return the number of brokenwalls removed
+    */
     public int removeBrokenWalls(){
-<span class="fc" id="L23">        int counter = 0;</span>
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (GameObject object: currentLevel.getBrokenWalls()){</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">            for (GameObject explosion: currentLevel.getExplosionTiles()){</span>
-<span class="fc bfc" id="L26" title="All 2 branches covered.">                if (object.collisionWith(explosion)){</span>
-<span class="fc" id="L27">                    object.remove();</span>
-<span class="fc" id="L28">                    counter++;</span>
+<span class="fc" id="L25">        int counter = 0;</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (GameObject object: currentLevel.getBrokenWalls()){</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            for (GameObject explosion: currentLevel.getExplosionTiles()){</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">                if (object.collisionWith(explosion)){</span>
+<span class="fc" id="L29">                    object.remove();</span>
+<span class="fc" id="L30">                    counter++;</span>
                 }
-<span class="fc" id="L30">            }</span>
-<span class="fc" id="L31">        }</span>
-<span class="fc" id="L32">        return counter;</span>
+<span class="fc" id="L32">            }</span>
+<span class="fc" id="L33">        }</span>
+<span class="fc" id="L34">        return counter;</span>
     }
 
-    /**Implements gamelogic to check if the player will lose a life, has won, run out of time -&gt; go to gameover or win screen or continue the game */
+    /**Implements gamelogic to check if the player will lose a life, has won, run out of time, andgo to gameover or win screen or continue the game */
     public void tick() {
 
-<span class="fc" id="L38">        Player player = this.currentLevel.getPlayer();</span>
-<span class="fc bfc" id="L39" title="All 4 branches covered.">        if (player.collideWithEnemy() || player.collideWithExplosion()){</span>
-<span class="fc" id="L40">            currentLevel.reset();</span>
-<span class="fc" id="L41">            player.setLives(player.getLives()-1);</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">            if (player.getLives() &lt;= 0){</span>
-<span class="fc" id="L43">                goToGameOver();</span>
-<span class="fc" id="L44">                return;</span>
+<span class="fc" id="L40">        Player player = this.currentLevel.getPlayer();</span>
+<span class="fc bfc" id="L41" title="All 4 branches covered.">        if (player.collideWithEnemy() || player.collideWithExplosion()){</span>
+<span class="fc" id="L42">            currentLevel.reset();</span>
+<span class="fc" id="L43">            player.setLives(player.getLives()-1);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            if (player.getLives() &lt;= 0){</span>
+<span class="fc" id="L45">                goToGameOver();</span>
+<span class="fc" id="L46">                return;</span>
             }
         }
 
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (this.hasWon()){</span>
-<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (currentLevelIndex == this.levels.size()-1){</span>
-<span class="fc" id="L50">                goToWin();</span>
-<span class="fc" id="L51">                return;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (this.hasWon()){</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (currentLevelIndex == this.levels.size()-1){</span>
+<span class="fc" id="L52">                goToWin();</span>
+<span class="fc" id="L53">                return;</span>
             }
-<span class="fc" id="L53">            this.toNextLevel();</span>
+<span class="fc" id="L55">            this.toNextLevel();</span>
         }
 
         
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (currentLevel.getTimeLeft() &lt;= 0){</span>
-<span class="fc" id="L58">            goToGameOver();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (currentLevel.getTimeLeft() &lt;= 0){</span>
+<span class="fc" id="L60">            goToGameOver();</span>
         }
 
-<span class="fc" id="L61">        removeBrokenWalls();</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L63">        removeBrokenWalls();</span>
+<span class="fc" id="L64">    }</span>
 
     /**Removes all objects from level and triggers gameover conditions */
     public void goToGameOver(){
-<span class="fc" id="L66">        this.currentLevel.removeAllObjects();</span>
-<span class="fc" id="L67">        this.gameOver = true;</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L68">        this.currentLevel.removeAllObjects();</span>
+<span class="fc" id="L69">        this.gameOver = true;</span>
+<span class="fc" id="L70">    }</span>
 
     /**Removes all objects from level and triggers gamewin conditions */
     public void goToWin(){
-<span class="fc" id="L72">        this.currentLevel.removeAllObjects();</span>
-<span class="fc" id="L73">        this.won = true;</span>
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L74">        this.currentLevel.removeAllObjects();</span>
+<span class="fc" id="L75">        this.won = true;</span>
+<span class="fc" id="L76">    }</span>
 
     /**@return true if the player has won by walking over the gaol tile */
     public boolean hasWon(){
-<span class="fc" id="L78">        Player p = currentLevel.getPlayer();</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (p.collisionWith(currentLevel.getGoal())){</span>
-<span class="fc" id="L80">            return true;</span>
+<span class="fc" id="L80">        Player p = currentLevel.getPlayer();</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (p.collisionWith(currentLevel.getGoal())){</span>
+<span class="fc" id="L82">            return true;</span>
         }
-<span class="fc" id="L82">        return false;</span>
+<span class="fc" id="L84">        return false;</span>
     }
 
     /**@return true if the player has won all levels in the game */
     public boolean hasWonAll(){
-<span class="fc" id="L87">        return this.won;</span>
+<span class="fc" id="L89">        return this.won;</span>
     }
 
     /**@return true if the level's gameover attribute is true */
     public boolean hasGameOver(){
-<span class="fc" id="L92">        return this.gameOver;</span>
+<span class="fc" id="L94">        return this.gameOver;</span>
     }
 
     //Setup current/futurelevel level (Fully intialise enemies and players)
     /**Sets up all moving objects in the level by allowing the gamemanager to access all enemies and players from the current level */
     public void setup(){
-<span class="fc" id="L98">        List&lt;Enemy&gt; enemies = currentLevel.getEnemies();</span>
-<span class="fc" id="L99">        Player p = currentLevel.getPlayer();</span>
+<span class="fc" id="L100">        List&lt;Enemy&gt; enemies = currentLevel.getEnemies();</span>
+<span class="fc" id="L101">        Player p = currentLevel.getPlayer();</span>
         
-<span class="fc bfc" id="L101" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
-<span class="fc" id="L102">            e.setCurrentLevel(currentLevel);</span>
-<span class="fc" id="L103">        }</span>
-<span class="fc" id="L104">        p.setCurrentLevel(currentLevel);</span>
-<span class="fc" id="L105">    }</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (Enemy e: enemies){</span>
+<span class="fc" id="L104">            e.setCurrentLevel(currentLevel);</span>
+<span class="fc" id="L105">        }</span>
+<span class="fc" id="L106">        p.setCurrentLevel(currentLevel);</span>
+<span class="fc" id="L107">    }</span>
 
     /**@return the level object the gamemanager is currently handling */
     public Level getCurrentLevel(){
-<span class="fc" id="L109">        return this.currentLevel;</span>
+<span class="fc" id="L111">        return this.currentLevel;</span>
     }
 
     public int getCurrentLevelIndex(){
-<span class="fc" id="L113">        return this.currentLevelIndex;</span>
+<span class="fc" id="L115">        return this.currentLevelIndex;</span>
     }
 
     /**Goes to the next level and sets it up to be handled by the present gamemanager instance */
     public void toNextLevel(){
-<span class="fc" id="L118">        this.currentLevelIndex++;</span>
-<span class="fc" id="L119">        int lives = currentLevel.getPlayer().getLives();</span>
-<span class="fc" id="L120">        this.currentLevel = levels.get(currentLevelIndex);</span>
-<span class="fc" id="L121">        currentLevel.getPlayer().setLives(lives);</span>
-<span class="fc" id="L122">        setup();</span>
-<span class="fc" id="L123">    }</span>
+<span class="fc" id="L120">        this.currentLevelIndex++;</span>
+<span class="fc" id="L121">        int lives = currentLevel.getPlayer().getLives();</span>
+<span class="fc" id="L122">        this.currentLevel = levels.get(currentLevelIndex);</span>
+<span class="fc" id="L123">        currentLevel.getPlayer().setLives(lives);</span>
+<span class="fc" id="L124">        setup();</span>
+<span class="fc" id="L125">    }</span>
 
 
 }

@@ -34,7 +34,7 @@ public class GameManager {
         return counter;
     }
 
-    /**Implements gamelogic to check if the player will lose a life, has won, run out of time -> go to gameover or win screen or continue the game */
+    /**Implements gamelogic to check if the player will lose a life, has won, run out of time, andgo to gameover or win screen or continue the game */
     public void tick() {
 
         Player player = this.currentLevel.getPlayer();

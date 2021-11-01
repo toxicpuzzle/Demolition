@@ -28,12 +28,12 @@ public class Player extends MovingObject implements Movable {
         // Need to find a way to load all of the animations in
     }
     
-    /**@return the object's X starting position i.e. when it was first constructed on screen -> used to restart levels */
+    /**@return the object's X starting position i.e. when it was first constructed on screen. Used to restart levels */
     public int getXStarting(){
         return this.xStarting;
     }
 
-    /**@return the object's Y starting position i.e. when it was first constructed on screen -> used to restart levels */        
+    /**@return the object's Y starting position i.e. when it was first constructed on screen,used to restart levels */        
     public int getYStarting(){
         return this.yStarting;
     }

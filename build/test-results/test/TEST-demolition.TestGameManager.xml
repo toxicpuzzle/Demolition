@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestGameManager" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-01T08:58:30" hostname="DESKTOP-DBK8A4Q" time="12.185">
+<testsuite name="demolition.TestGameManager" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:24:40" hostname="DESKTOP-DBK8A4Q" time="16.557">
   <properties/>
-  <testcase name="testRestartAfterTouchingExplosion()" classname="demolition.TestGameManager" time="1.358"/>
-  <testcase name="testGameTimerCorrectTime()" classname="demolition.TestGameManager" time="1.354"/>
-  <testcase name="testStepOnEnemyResetLevel()" classname="demolition.TestGameManager" time="1.347"/>
-  <testcase name="testStepGoalTile()" classname="demolition.TestGameManager" time="1.346"/>
-  <testcase name="testGameOverOutOfLives()" classname="demolition.TestGameManager" time="1.351"/>
-  <testcase name="testStepFinalGoalTile()" classname="demolition.TestGameManager" time="1.349"/>
-  <testcase name="testTileBrokenAfterExplosion()" classname="demolition.TestGameManager" time="1.355"/>
-  <testcase name="testGameOverOutOfTime()" classname="demolition.TestGameManager" time="1.353"/>
-  <testcase name="notNull()" classname="demolition.TestGameManager" time="1.368"/>
+  <testcase name="testPlayerWalkingIntoGoalHittingExplosion()" classname="demolition.TestGameManager" time="1.349"/>
+  <testcase name="testRestartAfterTouchingExplosion()" classname="demolition.TestGameManager" time="1.362"/>
+  <testcase name="testGameTimerCorrectTime()" classname="demolition.TestGameManager" time="1.38"/>
+  <testcase name="testStepOnEnemyResetLevel()" classname="demolition.TestGameManager" time="1.394"/>
+  <testcase name="testTileBrokenRestoredAfterReset()" classname="demolition.TestGameManager" time="1.372"/>
+  <testcase name="testStepGoalTile()" classname="demolition.TestGameManager" time="1.368"/>
+  <testcase name="testGameOverOutOfLives()" classname="demolition.TestGameManager" time="1.364"/>
+  <testcase name="testStepFinalGoalTile()" classname="demolition.TestGameManager" time="1.375"/>
+  <testcase name="testTileBrokenAfterExplosion()" classname="demolition.TestGameManager" time="1.374"/>
+  <testcase name="testPlayerWalkingIntoGoalHittingEnemy()" classname="demolition.TestGameManager" time="1.445"/>
+  <testcase name="testGameOverOutOfTime()" classname="demolition.TestGameManager" time="1.391"/>
+  <testcase name="notNull()" classname="demolition.TestGameManager" time="1.38"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

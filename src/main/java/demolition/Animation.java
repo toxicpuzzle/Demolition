@@ -26,7 +26,10 @@ public class Animation {
         currFrameIndex = 0;
     }
 
-    /**Constructor for gameobjects with no directional attribute */
+    /**@param frames the list of PImages that form the frames of the animation
+     * @param frameCount the number of frames for the aniamtion
+     * @param frameDuration the duration in milliseconds for each frame to be played
+     * Constructor for gameobjects with no directional attribute */
     public Animation(List<PImage> frames, int frameCount, int frameDuration){
         this(frames, frameCount, frameDuration, Direction.NONE);
     }
@@ -48,7 +51,8 @@ public class Animation {
         return animationFrames.get(currFrameIndex++%frameLength);
     }
 
-    /**@return the frame at a particular index in the current animationsFrame list */
+    /**@param index the index of the frame in the list of frames
+     * @return the frame at a particular index in the current animationsFrame list */
     public PImage getFrameAtIndex(int index){
         if (index > frameLength){
             return null;

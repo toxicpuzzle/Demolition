@@ -1,8 +1,6 @@
 package demolition;
 
 import processing.core.PApplet;
-import processing.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -18,15 +16,10 @@ public class App extends PApplet {
     public PImage player;
     public PImage timer;
 
-
-    public App() {
-        
-    }
+    public App() {}
 
     /**Sets up the width and height of the window to play the game in */
-    public void settings() {
-        size(WIDTH, HEIGHT);
-    }
+    public void settings() {size(WIDTH, HEIGHT);}
 
     /**Loads in the levels from the config file and the UI icons */
     public void setup() {
@@ -37,19 +30,15 @@ public class App extends PApplet {
         this.timer = loadImage("src/main/resources/icons/clock.png");
     }
 
-    /**Changes the config file -> used during testing 
-     * @param name The name/directory of the config file
-    */
-    public void setConfig(String name){
-        configFileName = name;
-    }
+    /**Changes the config file, which is used during testing 
+     * @param name The name/directory of the config file*/
+    public void setConfig(String name){configFileName = name;}
 
     /**Writes a text on screen 
      * @param word the string/word to be written
      * @param x the x coord of the centre of the word
      * @param y the y coord of the centre of the word
-     * @param size font size
-     */
+     * @param size font size*/
     public void drawText(String word, int x, int y, int size){
         PFont text = createFont("src/main/resources/PressStart2P-Regular.ttf", 16);
         textFont(text, size);
@@ -60,15 +49,9 @@ public class App extends PApplet {
 
     /**Draws all elements onto the screen */
     public void draw(){
-        this.tick();
-    }
-
-    /**Handles all drawing, called by the draw() function */
-    public void tick() {
         background(255, 128, 0);
         Level currentLevel = game.getCurrentLevel();
-        // int m = millis();
-        // System.out.println(frameRate);
+
         if (!game.hasWonAll() && !game.hasGameOver()){
             for(GameObject object: currentLevel.getGameObjects()){
                 if (!object.isRemoved){
@@ -85,19 +68,13 @@ public class App extends PApplet {
             game.tick();
         }
     
-        if (game.hasWonAll()){
-            drawText("YOU WON", width/2, height/2, 30);
-        } else if (game.hasGameOver()){
-            drawText("GAME OVER", width/2, height/2, 30);
-        }
-           
+        if (game.hasWonAll()){ drawText("YOU WON", width/2, height/2, 30);} 
+        else if (game.hasGameOver()){ drawText("GAME OVER", width/2, height/2, 30);}
     }   
 
-    /**Sets the alreadyPressed attribute to false */
+    /**Sets the alreadyPressed attribute to false on key release */
     @Override
-    public void keyReleased() {
-        alreadyPressed = false;
-    }
+    public void keyReleased() {alreadyPressed = false;}
 
     /**Moves the player depending which keys has bene pressed, will not move the player until the key is released again. */
     @Override
@@ -111,16 +88,10 @@ public class App extends PApplet {
             else if (keyCode == RIGHT) {p.moveRight(); }
             else if (keyCode == LEFT) {p.moveLeft(); }
             else if (keyCode == 32) {p.placeBomb(this);}
-            // else if (keyCode == ENTER) {this.tick();}
         }
-        alreadyPressed = true;
-        
+        alreadyPressed = true;   
     }
 
-    /**Main method to run the app itself
-     * @param args the command line arguments for the app
-     */
-    public static void main(String[] args) {
-        PApplet.main("demolition.App");
-    }
+    /** @param args the command line arguments for the app*/
+    public static void main(String[] args) { PApplet.main("demolition.App");}
 }

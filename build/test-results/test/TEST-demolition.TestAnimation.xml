@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TestAnimation" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-01T08:57:57" hostname="DESKTOP-DBK8A4Q" time="0.051">
+<testsuite name="demolition.TestAnimation" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-01T12:24:03" hostname="DESKTOP-DBK8A4Q" time="0.04">
   <properties/>
-  <testcase name="gettingInvalidAnimationFrame()" classname="demolition.TestAnimation" time="0.049"/>
-  <testcase name="notNull()" classname="demolition.TestAnimation" time="0.001"/>
+  <testcase name="gettingInvalidAnimationFrame()" classname="demolition.TestAnimation" time="0.036"/>
+  <testcase name="notNull()" classname="demolition.TestAnimation" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

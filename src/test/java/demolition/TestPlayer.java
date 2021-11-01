@@ -184,7 +184,8 @@ public class TestPlayer extends AppTester {
     }
 
     // TODO: Potential edge cases
-    // Player walking into goal tile whilst hitting enemy/explosion
+    
+
     // Player walking into a broken tile after it has been borken -> can walk through
 
     @Test

@@ -35,7 +35,7 @@ public class SpriteFactory {
         return images;
     }
 
-    /**@param paths All image paths for the sprite -> found from getSpriteImageDirectories
+    /**@param paths All image paths for the sprite, found from getSpriteImageDirectories
      * @param app The app object to load the PImages
      * @return list of images for the sprite object to create an animation
      */
@@ -47,6 +47,7 @@ public class SpriteFactory {
 
     /**@param spriteName the name of the sprite used to search the directories (finding folder) 
      * @param animationName the name of the animation for the sprite e.g. up (file search)
+     * @param app The app object used to load the PImages 
      * @return An animation object containing the images for that animation
      */
     public static Animation createAnimation(String spriteName, String animationName, PApplet app){

@@ -13,7 +13,7 @@ public class Bomb extends MovingObject{
      * @param x x coord to create the object
      * @param y y coord to create the object
      * @param animations animations corresponding to each direction the directional object is moving
-     * @deprecated timeplaced is deprecated parameter
+     * @param timePlaced is deprecated parameter for when the bomb was placed
     */
     public Bomb(int x, int y, HashMap<Direction, Animation> animations, int timePlaced){
         super(x, y, animations);
@@ -38,7 +38,7 @@ public class Bomb extends MovingObject{
     //     super.draw(app);
     // }
 
-    /**Updates the bomb so that it will be removed & generate an explosion if all of its animation frames have been played */
+    /**Updates the bomb so that it will be removed and generate an explosion if all of its animation frames have been played */
     @Override
     public void tick() {
         if (this.isRemoved){

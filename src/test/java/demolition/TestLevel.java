@@ -93,13 +93,8 @@ public class TestLevel extends AppTester {
         assertEquals(0, this.level.getExplosionTiles().size());        
     }
 
-    // TODO: Fix jacoco testcase branching issue in both player and enemy class -> get to 90% branch coverage in addition to 90% normal code coverage.
-        // Offending line
-        // if (this.collisionWith(e) && !e.isRemoved){
-        //     return true;
-        // }
     
-    // TODO: Add testenemyyellow, testDirection, and optional: testexplosiontile
-    // @Test
+    
+   
     
 }

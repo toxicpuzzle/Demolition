@@ -52,8 +52,8 @@ public class Level {
         }
     }
 
-    /**Resets the time left for the level -> used when the level is restarted/initiated
-     * @param seconds seconds left fro the level
+    /**Resets the time left for the level, used when the level is restarted/initiated
+     * @param seconds seconds left for the level
      */
     public void setTimeLeft(int seconds){
         this.timeLeft = seconds;

@@ -8,11 +8,15 @@ public class ExplosionTile extends GameObject {
     private static final int duration = 500;
     private int timeSinceExplosion;
 
-
+    /**Construct explosion tiles 
+     * @param x coord 
+     * @param y y coord
+     * @param startingImage image for the explosion tile
+     */
     public ExplosionTile(int x, int y, PImage startingImage){
-<span class="fc" id="L13">        super(x, y, false, startingImage);</span>
+<span class="fc" id="L17">        super(x, y, false, startingImage);</span>
        
-<span class="fc" id="L15">    } </span>
+<span class="fc" id="L19">    } </span>
 
     // // TODO: Remove duplicate code -&gt; problem is that this is from moving object -&gt; problem with adding level attribute to gameobject is that not all gameobjects need to know level -&gt; null pointer
     // public boolean collideWithBroken(){
@@ -36,31 +40,31 @@ public class ExplosionTile extends GameObject {
     // }
 
     public boolean collideWithBroken(){
-<span class="fc" id="L39">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
-<span class="fc" id="L40">        return this.collideWithObjects(brokenWalls);</span>
+<span class="fc" id="L43">        List&lt;BrokenWall&gt; brokenWalls = currentLevel.getBrokenWalls();</span>
+<span class="fc" id="L44">        return this.collideWithObjects(brokenWalls);</span>
     }
 
     public boolean collideWithSolid(){
-<span class="fc" id="L44">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
-<span class="fc" id="L45">        return this.collideWithObjects(solidWalls);</span>
+<span class="fc" id="L48">        List&lt;SolidWall&gt; solidWalls = currentLevel.getSolidWalls();</span>
+<span class="fc" id="L49">        return this.collideWithObjects(solidWalls);</span>
     }
     
     public Level getCurrentLevel(){
-<span class="nc" id="L49">        return this.currentLevel;</span>
+<span class="nc" id="L53">        return this.currentLevel;</span>
     }
 
     public void setCurrentLevel(Level level){
-<span class="fc" id="L53">        this.currentLevel = level;</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L57">        this.currentLevel = level;</span>
+<span class="fc" id="L58">    }</span>
 
     @Override
     public void tick() {
-<span class="fc" id="L58">        timeSinceExplosion++;</span>
-<span class="fc" id="L59">        float secondsLasted = (float) duration/1000;</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
-<span class="fc" id="L61">            this.remove();</span>
+<span class="fc" id="L62">        timeSinceExplosion++;</span>
+<span class="fc" id="L63">        float secondsLasted = (float) duration/1000;</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (timeSinceExplosion &gt;= secondsLasted*App.FPS){</span>
+<span class="fc" id="L65">            this.remove();</span>
         } 
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L67">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

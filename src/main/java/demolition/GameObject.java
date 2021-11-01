@@ -31,7 +31,9 @@ public abstract class GameObject {
         this.isSolid = isSolid;
     }
 
-    /**Draws the object using the app object */
+    /**Draws the object using the app object
+     * @param app the app object used to load the image for the gameobject
+     */
     public void draw(PApplet app){
         app.image(currentFrame, xPos, yPos);
     }
@@ -53,12 +55,12 @@ public abstract class GameObject {
         return this.yPos;
     }
 
-    /**@return the x coord of the object */
+    /**@param x new x coord */
     public void setX(int x){
         this.xPos = x;
     }
 
-    /**@return the y coord of the object */
+    /**@param y new y coord */
     public void setY(int y){
         this.yPos = y;
     }

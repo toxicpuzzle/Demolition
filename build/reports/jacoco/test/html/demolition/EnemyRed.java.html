@@ -4,21 +4,26 @@ import java.util.HashMap;
 import java.util.List;
 
 public class EnemyRed extends Enemy {
-
+    
+    /**Construct red enemies
+     * @param x x coord 
+     * @param y y coord
+     * @param animations animation objects for the enemy
+     */
     public EnemyRed(int x, int y, HashMap&lt;Direction, Animation&gt; animations) {
-<span class="fc" id="L9">        super(x, y, animations);</span>
-<span class="fc" id="L10">    }</span>
+<span class="fc" id="L14">        super(x, y, animations);</span>
+<span class="fc" id="L15">    }</span>
 
     /**@return direction for the enemy to move in if the enemy collides with a solid object */
     public Direction getDirectionStrategy(){
-<span class="fc" id="L14">        return this.direction.random();</span>
+<span class="fc" id="L19">        return this.direction.random();</span>
     }
 
-    @Override
-    public void tick() {
-        // System.out.println(currentAnimation.getFrameNumber()); //TODO: Ensure there is not dodgy frame skipping
-<span class="fc" id="L20">        super.tick();</span>
-<span class="fc" id="L21">    }</span>
+    // @Override
+    // public void tick() {
+    //     // System.out.println(currentAnimation.getFrameNumber()); //TODO: Ensure there is not dodgy frame skipping
+    //     super.tick();
+    // }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
