@@ -9,7 +9,7 @@ public class Animation {
     private int currFrameIndex;
     private int frameLength;
     private int frameDuration;
-    private List<PImage> animationFrames; //Could change this to url of animation frames
+    private List<PImage> animationFrames; 
     private Direction direction;
 
     /**Constructor for all animation objects

@@ -10,7 +10,6 @@ public class Player extends MovingObject implements Movable {
     private int lives;
     private int xStarting;
     private int yStarting;
-    // private int timer; 
     
     /**Constructor for player objects
      * @param lives the number of lives 
@@ -19,23 +18,23 @@ public class Player extends MovingObject implements Movable {
      * @param animations animations corresponding to each direction the directional object is moving
     */
     public Player(int lives, int x, int y, HashMap&lt;Direction, Animation&gt; animations){
-<span class="fc" id="L22">        super(x, y, animations);</span>
-<span class="fc" id="L23">        this.lives = lives;</span>
-<span class="fc" id="L24">        this.width = 32; // WARNING: Hard code</span>
-<span class="fc" id="L25">        this.height = 32;</span>
-<span class="fc" id="L26">        this.xStarting = x;</span>
-<span class="fc" id="L27">        this.yStarting = y;</span>
+<span class="fc" id="L21">        super(x, y, animations);</span>
+<span class="fc" id="L22">        this.lives = lives;</span>
+<span class="fc" id="L23">        this.width = 32; // WARNING: Hard code</span>
+<span class="fc" id="L24">        this.height = 32;</span>
+<span class="fc" id="L25">        this.xStarting = x;</span>
+<span class="fc" id="L26">        this.yStarting = y;</span>
         // Need to find a way to load all of the animations in
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L28">    }</span>
     
     /**@return the object's X starting position i.e. when it was first constructed on screen. Used to restart levels */
     public int getXStarting(){
-<span class="fc" id="L33">        return this.xStarting;</span>
+<span class="fc" id="L32">        return this.xStarting;</span>
     }
 
     /**@return the object's Y starting position i.e. when it was first constructed on screen,used to restart levels */        
     public int getYStarting(){
-<span class="fc" id="L38">        return this.yStarting;</span>
+<span class="fc" id="L37">        return this.yStarting;</span>
     }
 
     /**Draws the object onto the screen but with an offset since the player object is larger than a normal tile 
@@ -43,151 +42,98 @@ public class Player extends MovingObject implements Movable {
     */
     @Override
     public void draw(PApplet app) {
-<span class="fc" id="L46">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L45">        app.image(currentFrame, xPos, yPos-yHeadOffset);</span>
+<span class="fc" id="L46">    }</span>
 
     /**@param lives The player's new lives*/
     public void setLives(int lives){
-<span class="fc" id="L51">        this.lives = lives;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L50">        this.lives = lives;</span>
+<span class="fc" id="L51">    }</span>
 
     /**@return the player's current lives count */
     public int getLives(){
-<span class="fc" id="L56">        return this.lives;</span>
+<span class="fc" id="L55">        return this.lives;</span>
     }
-
-    // //! Might be redundant so just remove
-    // @Override
-    // public void tick() {
-    //     this.timer++;
-    //     // Animate the object
-    //     float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
-    //     if ((this.timer &gt; (secondsBetweenFrames * App.FPS)) || justChangedDirection){
-    //         justChangedDirection = false;
-    //         this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.
-    //         this.timer = 0;
-    //     } 
-    // }
     
     /**@return true if the player is colliding with an enemy that has not been removed from the screen */
     public boolean collideWithEnemy() {
-<span class="fc" id="L74">        List&lt;Enemy&gt; enemies = this.currentLevel.getEnemies();</span>
-        // for (Enemy e: enemies){
-        //     if (this.collisionWith(e) &amp;&amp; !e.isRemoved){
-        //         return true;
-        //     }
-        // }
-<span class="fc" id="L80">        return this.collideWithObjects(enemies);</span>
+<span class="fc" id="L60">        List&lt;Enemy&gt; enemies = this.currentLevel.getEnemies();</span>
+<span class="fc" id="L61">        return this.collideWithObjects(enemies);</span>
     } 
-    
-    // /**@return true if the player is colliding with an explosion that has not yet expired */
-    // public boolean collideWithExplosion() {
-    //     List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();
-    //     for (ExplosionTile e: explosions){
-    //         if (this.collisionWith(e) &amp;&amp; !e.isRemoved){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // } 
-
-    
 
     private void handleCollision(int oldX, int oldY, Direction oldDirection){
-<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (collideWithSolid()){</span>
-<span class="fc" id="L98">            resetPosition(oldX, oldY, oldDirection);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (collideWithSolid()){</span>
+<span class="fc" id="L66">            resetPosition(oldX, oldY, oldDirection);</span>
         } else {
-<span class="fc bfc" id="L100" title="All 2 branches covered.">            justChangedDirection = !(this.direction == oldDirection);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">            justChangedDirection = !(this.direction == oldDirection);</span>
         }
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L70">    }</span>
 
     /**Places a bomb onto the level the player is in
      * @param app the applet that is used to load the game
      */
     public void placeBomb(PApplet app){
-<span class="fc" id="L108">        Bomb bomb = SpriteFactory.makeBomb(this.xPos, this.yPos, app);</span>
-<span class="fc" id="L109">        bomb.setCurrentLevel(this.currentLevel);</span>
-<span class="fc" id="L110">        bomb.setApp(app);</span>
-<span class="fc" id="L111">        currentLevel.addObject(bomb);</span>
-<span class="fc" id="L112">    }</span>
+<span class="fc" id="L76">        Bomb bomb = SpriteFactory.makeBomb(this.xPos, this.yPos, app);</span>
+<span class="fc" id="L77">        bomb.setCurrentLevel(this.currentLevel);</span>
+<span class="fc" id="L78">        bomb.setApp(app);</span>
+<span class="fc" id="L79">        currentLevel.addObject(bomb);</span>
+<span class="fc" id="L80">    }</span>
     
     /**Moves the player up and resets the player's current direction as well as animation */
     @Override
     public void moveUp() {
-<span class="fc" id="L117">        int oldY = this.yPos;</span>
-<span class="fc" id="L118">        int oldX = this.xPos;</span>
-<span class="fc" id="L119">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L85">        int oldY = this.yPos;</span>
+<span class="fc" id="L86">        int oldX = this.xPos;</span>
+<span class="fc" id="L87">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L121">        this.yPos -= 32;</span>
-<span class="fc" id="L122">        this.direction = Direction.UP;</span>
+<span class="fc" id="L89">        this.yPos -= 32;</span>
+<span class="fc" id="L90">        this.direction = Direction.UP;</span>
     
-        // if (collideWithSolid()){
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
-<span class="fc" id="L129">        handleCollision(oldX, oldY, oldDirection);</span>
-<span class="fc" id="L130">        updateCurrentAnimation();</span>
-<span class="fc" id="L131">    }</span>
+<span class="fc" id="L92">        handleCollision(oldX, oldY, oldDirection);</span>
+<span class="fc" id="L93">        updateCurrentAnimation();</span>
+<span class="fc" id="L94">    }</span>
 
     /**Moves the player right and resets the player's current direction as well as animation */
     @Override
     public void moveRight() {
-<span class="fc" id="L136">        int oldY = this.yPos;</span>
-<span class="fc" id="L137">        int oldX = this.xPos;</span>
-<span class="fc" id="L138">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L99">        int oldY = this.yPos;</span>
+<span class="fc" id="L100">        int oldX = this.xPos;</span>
+<span class="fc" id="L101">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L140">        this.xPos += 32;</span>
-<span class="fc" id="L141">        this.direction = Direction.RIGHT;</span>
+<span class="fc" id="L103">        this.xPos += 32;</span>
+<span class="fc" id="L104">        this.direction = Direction.RIGHT;</span>
 
-        // if (collideWithSolid()){
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-        //     this.direction = Direction.RIGHT;
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
-<span class="fc" id="L149">        handleCollision(oldX, oldY, oldDirection);</span>
-<span class="fc" id="L150">        updateCurrentAnimation();</span>
-<span class="fc" id="L151">    }</span>
+<span class="fc" id="L106">        handleCollision(oldX, oldY, oldDirection);</span>
+<span class="fc" id="L107">        updateCurrentAnimation();</span>
+<span class="fc" id="L108">    }</span>
     
     /**Moves the player down and resets the player's current direction as well as animation */
     @Override
     public void moveDown() {
-<span class="fc" id="L156">        int oldY = this.yPos;</span>
-<span class="fc" id="L157">        int oldX = this.xPos;</span>
-<span class="fc" id="L158">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L113">        int oldY = this.yPos;</span>
+<span class="fc" id="L114">        int oldX = this.xPos;</span>
+<span class="fc" id="L115">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L160">        this.yPos += 32;</span>
-<span class="fc" id="L161">        this.direction = Direction.DOWN;</span>
+<span class="fc" id="L117">        this.yPos += 32;</span>
+<span class="fc" id="L118">        this.direction = Direction.DOWN;</span>
 
-        // if (collideWithSolid()){
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-            
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
-<span class="fc" id="L169">        handleCollision(oldX, oldY, oldDirection);</span>
-<span class="fc" id="L170">        updateCurrentAnimation();</span>
-<span class="fc" id="L171">    }</span>
+<span class="fc" id="L120">        handleCollision(oldX, oldY, oldDirection);</span>
+<span class="fc" id="L121">        updateCurrentAnimation();</span>
+<span class="fc" id="L122">    }</span>
 
     /**Moves the player left and resets the player's current direction as well as animation */
     @Override
     public void moveLeft() {
-<span class="fc" id="L176">        int oldY = this.yPos;</span>
-<span class="fc" id="L177">        int oldX = this.xPos;</span>
-<span class="fc" id="L178">        Direction oldDirection = this.direction;</span>
+<span class="fc" id="L127">        int oldY = this.yPos;</span>
+<span class="fc" id="L128">        int oldX = this.xPos;</span>
+<span class="fc" id="L129">        Direction oldDirection = this.direction;</span>
         
-<span class="fc" id="L180">        this.xPos -= 32;</span>
-<span class="fc" id="L181">        this.direction = Direction.LEFT;</span>
+<span class="fc" id="L131">        this.xPos -= 32;</span>
+<span class="fc" id="L132">        this.direction = Direction.LEFT;</span>
 
-        // if (collideWithSolid()) {
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
-<span class="fc" id="L188">        handleCollision(oldX, oldY, oldDirection);</span>
-<span class="fc" id="L189">        updateCurrentAnimation();</span>
-<span class="fc" id="L190">    }</span>
+<span class="fc" id="L134">        handleCollision(oldX, oldY, oldDirection);</span>
+<span class="fc" id="L135">        updateCurrentAnimation();</span>
+<span class="fc" id="L136">    }</span>
 
     
 }

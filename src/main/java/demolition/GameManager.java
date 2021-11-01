@@ -111,6 +111,7 @@ public class GameManager {
         return this.currentLevel;
     }
 
+    /**@return the index (starts at 0) for the current level in the list of levels */
     public int getCurrentLevelIndex(){
         return this.currentLevelIndex;
     }

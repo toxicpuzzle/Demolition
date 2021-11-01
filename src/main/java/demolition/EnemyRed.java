@@ -19,10 +19,4 @@ public class EnemyRed extends Enemy {
         return this.direction.random();
     }
 
-    // @Override
-    // public void tick() {
-    //     // System.out.println(currentAnimation.getFrameNumber()); //TODO: Ensure there is not dodgy frame skipping
-    //     super.tick();
-    // }
-
 }

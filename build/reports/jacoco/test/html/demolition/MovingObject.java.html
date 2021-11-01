@@ -48,34 +48,21 @@ public abstract class MovingObject extends GameObject{
     public void setCurrentLevel(Level currentLevel){
 <span class="fc" id="L49">        this.currentLevel = currentLevel;</span>
 <span class="fc" id="L50">    }</span>
-    
-    /**Checks if the object has collided with an object that has the &quot;isSolid&quot; attribute equal to true and is not removed
-     * @return true if the object has collided with an object that is solid and is not removed else false
-     */
-    // public boolean collideWithSolid(){
-    //     List&lt;GameObject&gt; otherObjects = currentLevel.getGameObjects();
-    //     otherObjects.remove(this);
-    //     for (GameObject object: otherObjects){
-    //         if (this.collisionWith(object) &amp;&amp; !object.isRemoved &amp;&amp; object.isSolid){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
+
 
     /**Checks if the object has collided with an object that has the &quot;isSolid&quot; attribute equal to true and is not removed
      * @return true if the object has collided with an object that is solid and is not removed else false
      */
     public boolean collideWithSolid(){
-<span class="fc" id="L70">        List&lt;GameObject&gt; solids = this.currentLevel.getSolids();</span>
-<span class="fc" id="L71">        return this.collideWithObjects(solids);</span>
+<span class="fc" id="L57">        List&lt;GameObject&gt; solids = this.currentLevel.getSolids();</span>
+<span class="fc" id="L58">        return this.collideWithObjects(solids);</span>
     }
 
 
     /**@return true if the moving is colliding with an explosion that has not yet expired */
     public boolean collideWithExplosion() {
-<span class="fc" id="L77">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
-<span class="fc" id="L78">        return this.collideWithObjects(explosions);</span>
+<span class="fc" id="L64">        List&lt;ExplosionTile&gt; explosions = this.currentLevel.getExplosionTiles();</span>
+<span class="fc" id="L65">        return this.collideWithObjects(explosions);</span>
     } 
 
     /**Sets the object's position to an old X, old Y, old Direction
@@ -84,24 +71,24 @@ public abstract class MovingObject extends GameObject{
      * @param oldDirection the object's new Direction
      */
     public void resetPosition(int oldX, int oldY, Direction oldDirection){
-<span class="fc" id="L87">        this.xPos = oldX;</span>
-<span class="fc" id="L88">        this.yPos = oldY;</span>
-<span class="fc" id="L89">        this.direction = oldDirection;</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L74">        this.xPos = oldX;</span>
+<span class="fc" id="L75">        this.yPos = oldY;</span>
+<span class="fc" id="L76">        this.direction = oldDirection;</span>
+<span class="fc" id="L77">    }</span>
 
     /**@return the object's current direction */
-<span class="fc" id="L93">    public Direction getDirection() { return this.direction;}</span>
+<span class="fc" id="L80">    public Direction getDirection() { return this.direction;}</span>
 
     
     // Check animation has changed as a result of direction
     /**Updates the current animation to match the object's current direction */
     public void updateCurrentAnimation() {
-<span class="fc" id="L99">        this.currentAnimation = this.animations.get(direction);</span>
-<span class="fc" id="L100">    }</span>
+<span class="fc" id="L86">        this.currentAnimation = this.animations.get(direction);</span>
+<span class="fc" id="L87">    }</span>
 
     /**@return the current animation object that the object is playing on screen */
     public Animation getCurrentAnimation(){
-<span class="fc" id="L104">        return this.currentAnimation;</span>
+<span class="fc" id="L91">        return this.currentAnimation;</span>
     }
 
 }

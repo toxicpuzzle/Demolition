@@ -48,20 +48,7 @@ public abstract class MovingObject extends GameObject{
     public void setCurrentLevel(Level currentLevel){
         this.currentLevel = currentLevel;
     }
-    
-    /**Checks if the object has collided with an object that has the "isSolid" attribute equal to true and is not removed
-     * @return true if the object has collided with an object that is solid and is not removed else false
-     */
-    // public boolean collideWithSolid(){
-    //     List<GameObject> otherObjects = currentLevel.getGameObjects();
-    //     otherObjects.remove(this);
-    //     for (GameObject object: otherObjects){
-    //         if (this.collisionWith(object) && !object.isRemoved && object.isSolid){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
+
 
     /**Checks if the object has collided with an object that has the "isSolid" attribute equal to true and is not removed
      * @return true if the object has collided with an object that is solid and is not removed else false

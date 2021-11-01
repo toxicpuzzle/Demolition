@@ -10,7 +10,6 @@ public class Player extends MovingObject implements Movable {
     private int lives;
     private int xStarting;
     private int yStarting;
-    // private int timer; 
     
     /**Constructor for player objects
      * @param lives the number of lives 
@@ -55,43 +54,12 @@ public class Player extends MovingObject implements Movable {
     public int getLives(){
         return this.lives;
     }
-
-    // //! Might be redundant so just remove
-    // @Override
-    // public void tick() {
-    //     this.timer++;
-    //     // Animate the object
-    //     float secondsBetweenFrames = (float)currentAnimation.getFrameDuration()/1000;
-    //     if ((this.timer > (secondsBetweenFrames * App.FPS)) || justChangedDirection){
-    //         justChangedDirection = false;
-    //         this.currentFrame = currentAnimation.getNextFrame(); //TODO: Fix issue of skipping frames when changing directions.
-    //         this.timer = 0;
-    //     } 
-    // }
     
     /**@return true if the player is colliding with an enemy that has not been removed from the screen */
     public boolean collideWithEnemy() {
         List<Enemy> enemies = this.currentLevel.getEnemies();
-        // for (Enemy e: enemies){
-        //     if (this.collisionWith(e) && !e.isRemoved){
-        //         return true;
-        //     }
-        // }
         return this.collideWithObjects(enemies);
     } 
-    
-    // /**@return true if the player is colliding with an explosion that has not yet expired */
-    // public boolean collideWithExplosion() {
-    //     List<ExplosionTile> explosions = this.currentLevel.getExplosionTiles();
-    //     for (ExplosionTile e: explosions){
-    //         if (this.collisionWith(e) && !e.isRemoved){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // } 
-
-    
 
     private void handleCollision(int oldX, int oldY, Direction oldDirection){
         if (collideWithSolid()){
@@ -121,11 +89,6 @@ public class Player extends MovingObject implements Movable {
         this.yPos -= 32;
         this.direction = Direction.UP;
     
-        // if (collideWithSolid()){
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
         handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
@@ -140,12 +103,6 @@ public class Player extends MovingObject implements Movable {
         this.xPos += 32;
         this.direction = Direction.RIGHT;
 
-        // if (collideWithSolid()){
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-        //     this.direction = Direction.RIGHT;
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
         handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
@@ -160,12 +117,6 @@ public class Player extends MovingObject implements Movable {
         this.yPos += 32;
         this.direction = Direction.DOWN;
 
-        // if (collideWithSolid()){
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-            
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
         handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }
@@ -180,11 +131,6 @@ public class Player extends MovingObject implements Movable {
         this.xPos -= 32;
         this.direction = Direction.LEFT;
 
-        // if (collideWithSolid()) {
-        //     resetPosition(oldX, oldY, oldDirection);
-        // } else {
-        //     justChangedDirection = !(this.direction == oldDirection);
-        // }
         handleCollision(oldX, oldY, oldDirection);
         updateCurrentAnimation();
     }

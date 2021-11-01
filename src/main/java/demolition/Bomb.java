@@ -44,7 +44,6 @@ public class Bomb extends MovingObject{
         if (this.isRemoved){
             return;
         }
-        // System.out.println(this.currentAnimation.getFrameNumber());
         timeSincePlaced++;
 
         float secondsBetweenFrames = (float) currentAnimation.getFrameDuration()/1000;

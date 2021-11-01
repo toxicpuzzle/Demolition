@@ -78,7 +78,6 @@ public class TestEnemyRed extends AppTester {
         assertEquals(enemy.animations.get(Direction.LEFT), enemy.currentAnimation);
     }
 
-    // TODO: Test this testcase
     @Test
     // Check that the enemy changes direction after hitting obstacle (case where all enemyred could either go back up, left or right)
     public void checkMoveDownWithObstacles(){

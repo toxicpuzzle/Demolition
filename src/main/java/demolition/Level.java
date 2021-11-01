@@ -14,10 +14,7 @@ public class Level {
     private Player player;
     private List<ExplosionTile> explosionTiles;
     private int timeLeft;
-    // private int lastDrawn;
     private int timer;
-
-
     
     /**Constructor for level */
     public Level(){
@@ -72,13 +69,6 @@ public class Level {
             timer = 0;
         }
         return this.timeLeft;
-
-        // int oneSecond = 1000;
-        // if (millis >= this.lastDrawn + oneSecond){
-        //     this.timeLeft -= 1;
-        //     this.lastDrawn = millis;
-        // }
-        // return this.timeLeft;
     }
 
     /**@return all objects with the isSolid attribute true in the level */
@@ -92,15 +82,7 @@ public class Level {
         }
         return returned;
     }
-    // public GameObject getObjectAt(int x, int y){
-    //     List<GameObject> objects = this.getGameObjects();
-    //     for (GameObject object: objects){
-    //         if (object.xPos == x && object.yPos == y){
-    //             return object;
-    //         }
-    //     }
-    //     return null;
-    // }
+    
 
     /**@return all bombs that have been placed either removed or not removed in this level */
     public List<Bomb> getBombs(){
@@ -187,13 +169,9 @@ public class Level {
     /**Sets all gameobjects in current level to be isRemoved = true*/
     public void removeAllObjects(){
         List<GameObject> gameObjects = getGameObjects();
-        // if (gameObjects == null || gameObjects.size() < 0){
-        //     return false;
-        // }
         for (GameObject object: gameObjects){
             object.isRemoved = true;
         }
-        // return true;
     }
 
     /**Resets the current level by restoring all enemies, broken walls, and removing all explosion tiles and bombs, and also resetting the player's position/animation

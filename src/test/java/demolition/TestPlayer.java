@@ -183,11 +183,6 @@ public class TestPlayer extends AppTester {
         }
     }
 
-    // TODO: Potential edge cases
-    
-
-    // Player walking into a broken tile after it has been borken -> can walk through
-
     @Test
     // Check that the animation is being played at the correct speed and cycles back to original animation frame after all frames are played
     public void checkAnimationCycleNoDirectionMovement(){

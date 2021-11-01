@@ -18,45 +18,29 @@ public class ExplosionTile extends GameObject {
        
     } 
 
-    // // TODO: Remove duplicate code -> problem is that this is from moving object -> problem with adding level attribute to gameobject is that not all gameobjects need to know level -> null pointer
-    // public boolean collideWithBroken(){
-    //     List<BrokenWall> brokenWalls = currentLevel.getBrokenWalls();
-    //     for (GameObject object: brokenWalls){
-    //         if (this.collisionWith(object) && !object.isRemoved){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
-    // public boolean collideWithSolid(){
-    //     List<SolidWall> solidWalls = currentLevel.getSolidWalls();
-    //     for (GameObject object: solidWalls){
-    //         if (this.collisionWith(object) && !object.isRemoved){
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
+    /**@return true if the explosiontile is colliding with a broken tile */
     public boolean collideWithBroken(){
         List<BrokenWall> brokenWalls = currentLevel.getBrokenWalls();
         return this.collideWithObjects(brokenWalls);
     }
-
+    
+    /**@return true if the explosiontile is colliding with a solid unbreakable wall */
     public boolean collideWithSolid(){
         List<SolidWall> solidWalls = currentLevel.getSolidWalls();
         return this.collideWithObjects(solidWalls);
     }
     
+    /**@return the level object that the explosiontile resides in */
     public Level getCurrentLevel(){
         return this.currentLevel;
     }
 
+    /**@param level The level to set the current explosiontile to belong to */
     public void setCurrentLevel(Level level){
         this.currentLevel = level;
     }
 
+    /**Ticks the explosion tile so that it will disappear after 0.5 seconds */
     @Override
     public void tick() {
         timeSinceExplosion++;

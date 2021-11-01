@@ -6,9 +6,6 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 public abstract class Enemy extends MovingObject implements Movable {
 
-    
-    // protected int lastWalked;
-    // protected boolean justChangedDirection;
     protected static int yHeadOffset = 16;
     protected int yStarting;
     protected int xStarting;
@@ -94,7 +91,6 @@ public abstract class Enemy extends MovingObject implements Movable {
             
             if (directionsTried.size() >= 4){
                 this.direction = this.getCurrentAnimation().getDirection();
-                // System.out.println(this.direction);
                 justChangedDirection = false;
                 directionsTried.clear();
                 return;
@@ -125,9 +121,6 @@ public abstract class Enemy extends MovingObject implements Movable {
     public void tick() {
         walkTimer++;
         
-        
-        // System.out.println(this.currentAnimation.getFrameNumber());
-
         if (collideWithExplosion()){
             this.isRemoved = true;
         }
